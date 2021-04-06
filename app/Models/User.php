@@ -21,10 +21,10 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'studentApplication_id',
+        'student_application_id',
         
     ];
-  public function studentApp()
+  public function StudentApplication()
     {
         return $this->hasOne(StudentApplication::class);
     }

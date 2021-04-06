@@ -9,7 +9,7 @@
             </div>
 
             <div class="col">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_Name }}</div>
+                <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
             </div>
         </div>
     </x-slot>

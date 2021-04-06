@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => getenv('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'ky-fame'),
+            'database' => env('DB_DATABASE', 'kyfame'),
             'username' => env('DB_USERNAME', 'bsteinrock'),
             'password' => env('DB_PASSWORD', 'AdminPass!'),
             'unix_socket' => env('DB_SOCKET', ''),
