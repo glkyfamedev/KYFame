@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\SponsorController;
 
 
 /*
@@ -20,9 +21,22 @@ Route::view('/students', 'students');
 Route::view('/sponsors', 'sponsors'); 
 Route::view('/employers','employers');
 
+// Route::resource('ssponsors', SSponsorController::class);
+
 Route::get('/', function () {
     return view('home');
 });
+
+
+
+Route::get('/sponsors', [SponsorController::class, 'index'])
+    ->name('sponors');
+
+Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
+    ->name('sponsors.show');
+
+
+
 
 Route::get('/form', [ApplicationController::class, 'index'])
     ->name('form');
