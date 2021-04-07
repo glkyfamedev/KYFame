@@ -13,6 +13,6 @@ class HomePageLayout extends Component
      */
     public function render()
     {
-        return view('layouts.homepage');
+        return view('layouts.homePage');
     }
 }

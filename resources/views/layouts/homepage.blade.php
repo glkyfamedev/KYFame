@@ -26,7 +26,7 @@
 
     <body class="font-sans antialiased">
         <div class="min-h-screen">
-            @include('layouts.home-navigation')
+            @include('layouts.homeNavigation')
 
             <!-- Page Heading -->
 
