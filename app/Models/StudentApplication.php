@@ -29,10 +29,13 @@ class StudentApplication extends Model
     //   'id',
     //   'start_date',
     //   'complete_date',
+    //   'transcript_method',
     //   'transcript_path',
     //   'essay',
-    //   'current_section',   
-    //   'user_id'              
+    //   'current_section',
+    //   'completed_date,
+    //   'user_id' 
+                     
     // ];
 
     protected $guarded = [];

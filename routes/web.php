@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 
 Route::get('/sponsors', [SponsorController::class, 'index'])
-    ->name('sponors');
+    ->name('sponsors');
 
 Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
     ->name('sponsors.show');
@@ -47,7 +47,9 @@ Route::post('/formEmployment', [ApplicationController::class, 'formEmployment'])
 Route::post('/formAssesments', [ApplicationController::class, 'formAssesments'])->name('form.formAssesments');
 Route::post('/formEssay', [ApplicationController::class, 'formEssay'])->name('form.formEssay');
 Route::post('/formTranscript', [ApplicationController::class, 'formTranscript'])->name('form.formTranscript');
-   
+Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication'])->name('form.complete');
+ 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

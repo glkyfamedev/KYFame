@@ -29,12 +29,12 @@ class ContactApp extends Model
         'zip',
         'primaryPhone',
         'altPhone',       
-        'studentApplication_id',              
+        'student_application_id',              
     ];
     
     protected $guarded = [];
     
-     public function studentApplication()
+     public function StudentApplication()
     {
         return $this->belongsTo(StudentApplication::class);
     }
