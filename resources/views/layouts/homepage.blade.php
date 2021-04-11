@@ -24,7 +24,7 @@
         </script>
     </head>
 
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased m-0">
         <div class="min-h-screen">
             @include('layouts.homeNavigation')
 

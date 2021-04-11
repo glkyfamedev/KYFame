@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+  // $(".testScore").blur(function () {
+  //   if ($(this).val() != "") {
+  //     $(this).removeClass("errorBorder");
+  //   }
+  // });
+  $(".phone").mask("(999) 999-9999");
+  
   $("#startBtn").click(function (e) {
     e.preventDefault();
     $("#startBtn").hide();
@@ -15,25 +22,256 @@ $(document).ready(function () {
   
   addEmploymentSection();
      
-  $("#addField").click(function () {
-    addEmploymentSection();
-  });
+  $("#addField").click(addEmploymentSection);
                
   // function updateSection(routeUrl, dataToSave, sectionNum) {
- 
+
+  
+  //Status Section Conditionals
+  $('input[name=workForSponsor]').click(checkForEmployerSponsor);
+  
+  $('input[name=relativeSponsors]').click(checkForRelatedSponsor);
+  
+  //Assesment Section conditionals
+  $('input[name=ACT]').click(function () {
+    if ($("input[id='ACTyes']").is(":checked")) {
+      $("#ACTScoresContainer").show();
+      $(".ACT").addClass("score-input");
+    }
+    else {
+      $("#ACTScoresContainer").hide();
+      $(".ACT").removeClass("score-input");
+    }
+  });
+  
+  $('input[name=SAT]').click(function () {
+    if ($("input[id='SATyes']").is(":checked")) {
+      $("#SATScoresContainer").show();
+      $(".SAT").addClass("score-input");
+    }
+    else {
+      $("#SATScoresContainer").hide();
+      $(".SAT").removeClass("score-input");
+    }
+  });
+
+  $('input[name=KYOTE]').click(function () {
+    
+    if ($("input[id='KYOTEyes']").is(":checked")) {
+      $("#KYOTEscore").show();
+    }
+    else {
+      $("#KYOTEscore").hide();
+    }
+  });
+
   $("#contactBtn").click(function (e) {
+    e.preventDefault();
+    var sectionNum = $(this).data("section");
+    var hasErrors = false;
+    $(".contact-input").each(function () {
+      if ($(this).val() == "") {
+        hasErrors = true;
+        var formInputLabel = $(this).parents(".contact-required").find(".contact-label");
+        // formInputLabel.text("Required");
+        formInputLabel.css("color", "red");
+      }
+    })
+    if (hasErrors) {
+      return;
+    }
+    else {
+      saveContactData(e, sectionNum);
+    }
+  });
+ 
+  $("#statusBtn").click(function (e) {
+    e.preventDefault();
+    var sectionNum = $(this).data("section");
+
+    var hasErrors = false;
+    $(".status-input").each(function () {
+      if ($(this).val() == "") {
+        hasErrors = true;
+        var formInputLabel = $(this).parents(".status-required").find(".status-label");
+        formInputLabel.css("color", "red");
+          
+      }
+    })
+    if (hasErrors) {
+      return;
+    }
+    else {
+      saveStatusData(e, sectionNum);
+    }
+  });
+  
+  $("#employmentBtn").click(saveEmploymentData);
+
+  $("#assesmentBtn").click(saveAssessmentData);
+ 
+  $("#essayBtn").click(function (e) {
+    e.preventDefault();
+    var sectionNum = $(this).data("section");
+
+    var hasErrors = false;
+    $(".essay-input").each(function () {
+      if ($(this).val() == "") {
+        hasErrors = true;
+        var formInputLabel = $(this).parents("#essay-required").find(".essay-label");
+        formInputLabel.css("color", "red");
+      }
+    })
+    if (hasErrors) {
+      return;
+    }
+    else {
+      saveEssayData(e, sectionNum);
+    }
+  });
+
+  $("#transcriptBtn").click(function (e) {
+    e.preventDefault();
+    var sectionNum = $(this).data("section");
+    var hasErrors = false;
+    if (!$('input[name=transcriptMethod]:checked').length) {
+      hasErrors = true;
+      var transcriptLabel = $('.transcriptLabel');
+      transcriptLabel.css("color", "red");
+      transcriptLabel.text("You must pick a submission method for your transcripts");
+    }
+    if (hasErrors) {
+      return;
+    }
+    else {
+      saveTranscriptData(e, sectionNum);
+    }
+  });
+
+  $("#term1").click(function () {
+    if ($(this).is(":checked")) {
+      $(this).val('Accepted')
+    } else {
+    $(this).val("");
+    }
+  });
+  $("#term2").click(function () {
+    if ($(this).is(":checked")) {
+      $(this).val('Accepted')
+    } else {
+      $(this).val("");
+    }
+  });
+  $("#term3").click(function () {
+    if ($(this).is(":checked")) {
+      $(this).val('Accepted')
+    } else {
+      $(this).val("");
+    }
+  });
+
+  $("#term4").change(function () {
+    if ($(this).is(":checked")) {
+      $(this).val('Accepted')
+    } else {
+      $(this).val("");
+    }
+  });
+
+  $("#finishBtn").click(function (e) {
+    e.preventDefault();
+    var sectionNum = $(this).data("section");
+    var hasErrors = false;
+
+    $(".termCheck").each(function () {
+        if ($(this).val() == "") {
+          hasErrors = true;
+
+          var termLabel = $(this).parents(".form-check").find(".termLabel");
+          // formInputLabel.text("Required");
+          termLabel.show();
+          $(this).addClass("errorBorder");
+        }
+      })
+      if (hasErrors) {
+        return;
+      }
+      else {
+        completeApplication(e);
+      }     
+  });
+
+
+});
+
+
+function checkForRelatedSponsor() {
+    if ($("input[id='relativesYes']").is(":checked")) {    
+      $("#relativeSponsorInput").show();
+      $("#relativeSponsorNames").addClass("status-input");
+    $
+    }
+    else {
+      $("#relativeSponsorInput").hide();
+      $("#relativeSponsorNames").removeClass("status-input");
+    }
+}
+
+function checkForEmployerSponsor() {
+    if ($("input[id='workForSponsorYes']").is(":checked")) {
+      $("#employedSponsorInput").show();
+        $("#employedSponsorName").addClass("status-input");
+    }
+    else {
+      $("#employedSponsorInput").hide();
+       $("#employedSponsorName").removeClass("status-input");
+    }
+}
+
+function hasBlankScore(selector) {
+  for (var i = 0; i < $(selector).length; i++) {
+    var currentScore = $(selector).eq(i);
+
+    if (currentScore.val() == "") {
+      $([document.documentElement, document.body]).animate({
+          scrollTop: currentScore.offset().top,
+      }, 100, 'linear', function () {
+          currentScore.focus();
+          currentScore.addClass("errorBorder");
+    });
+
+      currentScore.change(function () {
+      currentScore.removeClass("errorBorder");      
+  })
+     return true;
+  }
+ }
+  return false;
+}
+
+function addEmploymentSection() {
+    var employmentTemplateHtml = $("#employerTemplate").html();
+
+    var currentEmployerCount = $(".employerName").length;
+  
+    $("#employmentContainer").append(employmentTemplateHtml);
+  
+    if (currentEmployerCount == 3) {
+      //disable button here
+    }
+}
+
+function saveContactData(e, sectionNum) {
     e.preventDefault();
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    var sectionNum = $(this).data("section");
     //   var contactModel = getContactInfo();
     //   updateSection(contactRouteUrl, contactModel, sectionNum);
     //  });
-     
-    $.ajax({
+      $.ajax({
       type: 'POST',
       url: contactRouteUrl,
       data: {
@@ -69,75 +307,66 @@ $(document).ready(function () {
       }
                
     });
-  });
+}
 
-  // }
-
-  $("#statusBtn").click(function (e) {
-    e.preventDefault();
+function saveStatusData(e, sectionNum) {
+  e.preventDefault();
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-              
-    var sectionNum = $(this).data("section");
+      // var streetAddress = $('#streetAddress').val();
+      // var address2 = $('#address2').val();
+      // var city = $('#city').val();
+      // var state = $('#state').val();
+      // var zip = $('#zip').val();
+      // var primaryPhone = $('#primaryPhone').val();
+      // var altPhone = $('#altPhone').val();
         
-    // var streetAddress = $('#streetAddress').val();
-    // var address2 = $('#address2').val();
-    // var city = $('#city').val();
-    // var state = $('#state').val();
-    // var zip = $('#zip').val();
-    // var primaryPhone = $('#primaryPhone').val();
-    // var altPhone = $('#altPhone').val();
+      // var contactModel = {
+      // streetAddress: streetAddress,
+      // address2: address2,
+      // city: city,
+      // state: state,
+      // zip: zip,
+      // primaryPhone: primaryPhone,
+      // altPhone: altPhone
+      // };       
+  $.ajax({
+    type: 'POST',
+    url: statusRouteUrl,
+    data: {
+      _token: $('#statusToken').val(),
+      // under_18 : $('#under_18').val(),
+      under_18: $('input[name=under_18]:checked').val(),
+      // authorizedInUS : $('#authorizedInUS').val(),
+      authorizedInUS: $('input[name=authorizedInUS]:checked').val(),
+      // levelOfEducation: $('#levelOfEducation').val(),
+      levelOfEducation: $('input[name=levelOfEducation]:checked').val(),
+      // RelativeSponsors: $('#RelativeSponsors').val(),
+      relativeSponsors: $('input[name=relativeSponsors]:checked').val(),
+      // WorkForSponsor: $('#WorkForSponsor').val(),
+      workForSponsor: $('input[name=workForSponsor]:checked').val(),          
+      relative_sponsor_names: $('#relativeSponsorNames').val(),
+      employed_sponsor_names: $('#employedSponsorName').val(),
         
-    // var contactModel = {
-    // streetAddress: streetAddress,
-    // address2: address2,
-    // city: city,
-    // state: state,
-    // zip: zip,
-    // primaryPhone: primaryPhone,
-    // altPhone: altPhone
-    // };       
-
-
-    $.ajax({
-      type: 'POST',
-      url: statusRouteUrl,
-      data: {
-        _token: $('#statusToken').val(),
-
-        // under_18 : $('#under_18').val(),
-        under_18: $('input[name=under_18]:checked').val(),
-        // authorizedInUS : $('#authorizedInUS').val(),
-        authorizedInUS: $('input[name=authorizedInUS]:checked').val(),
-        // levelOfEducation: $('#levelOfEducation').val(),
-        levelOfEducation: $('input[name=levelOfEducation]:checked').val(),
-        // RelativeSponsors: $('#RelativeSponsors').val(),
-        relativeSponsors: $('input[name=relativeSponsors]:checked').val(),
-        // WorkForSponsor: $('#WorkForSponsor').val(),
-        workForSponsor: $('input[name=workForSponsor]:checked').val(),
-          
-        sponsor_names: $('#sponsorNames').val(),
-        
-      },
-      dataType: 'json',
-      success: function (result) {
-        if (result) {
-          alert('Saved!');
-          $("#section" + sectionNum).hide();
-          $("#section" + (sectionNum + 1)).show();
-        }
-        else {
-          alert("data not saved!");
-        }
+    },
+    dataType: 'json',
+    success: function (result) {
+      if (result) {
+        alert('Saved!');
+        $("#section" + sectionNum).hide();
+        $("#section" + (sectionNum + 1)).show();
       }
-    });
+      else {
+        alert("data not saved!");
+      }
+    }
   });
-    
+} 
 
-  $("#employmentBtn").click(function (e) {
+function saveEmploymentData(e) {
     e.preventDefault();
     $.ajaxSetup({
       headers: {
@@ -168,8 +397,7 @@ $(document).ready(function () {
     //   employer.employmentEnd = $(".employmentEnd", container).val();
     //   employer.reasonForLeaving = $(".reasonForLeaving", container).val();
     //   employers.push(employer);
-    // }
-        
+    // }       
 
     $.ajax({
       type: 'POST',
@@ -182,7 +410,7 @@ $(document).ready(function () {
         workDuties: $(".workDuties").val(),
         employmentStart: $(".employmentStart").val(),
         employmentEnd: $(".employmentEnd").val(),
-        reasonForLeaving:  $(".reasonForLeaving").val(),
+        reasonForLeaving: $(".reasonForLeaving").val(),
       
         // employerArray: employers,
       },
@@ -198,16 +426,20 @@ $(document).ready(function () {
         }
       }
     });
-  });
+}
 
-
-  $("#assesmentBtn").click(function (e) {
+function saveAssessmentData(e, sectionNum) {
     e.preventDefault();
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-    });
+    });    
+    if (hasBlankScore(".score-input")) {
+
+      return false;
+    };
+
     var sectionNum = $(this).data("section");
          
     $.ajax({
@@ -258,33 +490,22 @@ $(document).ready(function () {
         }
       }
     });
-  });
-
-  $("#essayBtn").click(function (e) {
+}
+function saveEssayData(e, sectionNum) {
     e.preventDefault();
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-    });
-    var sectionNum = $(this).data("section");
-    //   var contactModel = getContactInfo();
-    //   updateSection(contactRouteUrl, contactModel, sectionNum);
-    //  });
-     
+    });     
     $.ajax({
       type: 'POST',
       url: essayRouteUrl,
       data: {
-        _token: $('#essayToken').val(),
-               
-        essay: $('#essay').val(),
-         
-                
-        // data: dataToSave
+        _token: $('#essayToken').val(),               
+        essay: $('#essay').val(),                      
       },
       dataType: 'json',
-      // contentType: 'application/json',
       success: function (result) {
         if (result) {
           alert('Saved!');
@@ -297,27 +518,22 @@ $(document).ready(function () {
       }
                
     });
-  });
+}
 
-
-  $("#transcriptBtn").click(function (e) {
+function saveTranscriptData(e, sectionNum) {
     e.preventDefault();
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-    });
-    var sectionNum = $(this).data("section");
-    //   var contactModel = getContactInfo();
-    //   updateSection(contactRouteUrl, contactModel, sectionNum);
-    //  });
-     
+    });     
     $.ajax({
       type: 'POST',
       url: transcriptRouteUrl,
       data: {
         _token: $('#transcriptToken').val(),
-        transcript: $('#transcript').val(),
+        transcript_method: $('input[name=transcriptMethod]:checked').val(),
+        transcript_path: $('#transcript_path').val(),
         // data: dataToSave
       },
       dataType: 'json',
@@ -331,27 +547,52 @@ $(document).ready(function () {
         else {
           alert("data not saved!");
         }
-      }
-               
-    });
+     }
   });
-  
-});
-
-function addEmploymentSection() {
-      var employmentTemplateHtml = $("#employerTemplate").html();
-
-      var currentEmployerCount = $(".employerName").length;
-  
-      $("#employmentContainer").append(employmentTemplateHtml);
-  
-      if (currentEmployerCount == 3) {
-        //disable button here
-      }
 }
+
+
+function GetTodayDate() {
+   var tdate = new Date();
+   var dd = tdate.getDate(); //yields day
+   var MM = tdate.getMonth(); //yields month
+   var yyyy = tdate.getFullYear(); //yields year
+   var currentDate= dd + "-" +( MM+1) + "-" + yyyy;
+
+   return currentDate;
+}
+function completeApplication(e) {
+    e.preventDefault();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var completedDate = GetTodayDate();
+  $.ajax({
+    type: 'POST',
+    url: completeRouteUrl,
+    data: {
+      _token: $('#completeToken').val(),
+      completed_date: completedDate
+      // data: dataToSave
+    },
+    dataType: 'json',
+       success: function (result) {
+        if (result) {
+          alert('Saved!');
+         
+        }
+        else {
+          alert("data not saved!");
+        }
+    }
+  });  
+}
+ 
      
 
-      // $("#contactBtn").click(function (e) {
+  // $("#contactBtn").click(function (e) {
   //   e.preventDefault();
   //   $.ajaxSetup({
   //     headers: {
@@ -366,23 +607,23 @@ function addEmploymentSection() {
   //   updateSection(contactRouteUrl, contactModel, sectionNum);
   // });
       
-// function getContactInfo() {
-//         var streetAddress = $('#streetAddress').val();
-//         var address2 = $('#address2').val();
-//         var city = $('#city').val();
-//         var state = $('#state').val();
-//         var zip = $('#zip').val();
-//         var primaryPhone = $('#primaryPhone').val();
-//         var altPhone = $('#altPhone').val();
+  // function getContactInfo() {
+  //         var streetAddress = $('#streetAddress').val();
+  //         var address2 = $('#address2').val();
+  //         var city = $('#city').val();
+  //         var state = $('#state').val();
+  //         var zip = $('#zip').val();
+  //         var primaryPhone = $('#primaryPhone').val();
+  //         var altPhone = $('#altPhone').val();
             
-//         var contactModel = {
-//           streetAddress: streetAddress,
-//           address2: address2,
-//           city: city,
-//           state: state,
-//           zip: zip,
-//           primaryPhone: primaryPhone,
-//           altPhone: altPhone
-//     };
+  //         var contactModel = {
+  //           streetAddress: streetAddress,
+  //           address2: address2,
+  //           city: city,
+  //           state: state,
+  //           zip: zip,
+  //           primaryPhone: primaryPhone,
+  //           altPhone: altPhone
+  //     };
   
-//   return contactModel;
+  //   return contactModel;
