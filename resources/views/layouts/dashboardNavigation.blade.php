@@ -19,7 +19,7 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('form')" :active="request()->routeIs('form')">
+                        <x-nav-link :href="route('application')" :active="request()->routeIs('application')">
                             {{ __('Application') }}
                         </x-nav-link>
                     </div>

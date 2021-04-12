@@ -17,18 +17,24 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        
         $current_date = new DateTime('NOW');
-        $application = StudentApplication::firstOrCreate(
+        try{
+            $application = StudentApplication::firstOrCreate(
             [
                 'user_id' => $user->id,
             ],
             [
                 'start_date' => $current_date,
-            ]);
-
-        session(['application' => $application]);
-
-        return view('application');
+            ]);           
+            
+            session(['application' => $application]);
+    
+            return json_encode($application);;
+        } 
+        catch (Exception $e) {
+            return null;
+        }
     }
 
     public function formSubmit(Request $request)
@@ -51,7 +57,8 @@ class ApplicationController extends Controller
                         'altPhone' => $request->get('altPhone'),
                         'student_application_id' => $student_application_id
                     ],                    
-                );           
+                ); 
+                
                 // $contactModel = new ContactApp();
                 // $contactModel->streetAddress = $request->streetAddress;
                 // $contactModel->address2 = $request->address2;
@@ -151,37 +158,7 @@ class ApplicationController extends Controller
 
         if ($request->ajax()) {
             try {
-                
-                // $storeData = $request->validate([
-                //     'ACT' => 'required|max:255',
-                //     'ACTenglishScore' => 'required|max:255',
-                //     'ACTreadingScore' => 'required|max:255',
-                //     'ACTmathScore' => 'required|max:255',
-                //     'ACTscienceScore' => 'required|max:255',
-                //     'ACTcompositeScore' => 'max:255',
-
-                //     'SAT' => 'required|max:255',
-                //     'SATmath' => 'required|max:255',
-                //     'SATCriticalThinking' => 'required|max:255',
-                //     'SATwriting' => 'required|max:255',
-                //     'SATcomposite' => 'required|max:255',
-
-                //     'KYOTE' => 'required|max:255',
-                //     'KYOTEarea' => 'required|max:255',
-                //     'KYOTEscore' => 'required|max:255',
-
-                //     'otherAssesments' => 'required|max:255',
-                //     'skillsUSA' => 'required|max:255',
-                //     'projectLeadTheWay' => 'required|max:255',
-                //     'manufacturingAcedemics' => 'required|max:255',
-                //     'awardsAndHonors' => 'required|max:255',
-                //     'highSchoolAttended' => 'required|max:255',
-                //     'GPA' => 'required|max:255',
-                //     'highSchoolActivities' => 'max:255',
-                //     'technicalPrograms' => 'max:255',
-                //     'additionalComments' => 'max:255',
-                // ]);
-
+                        
                 $assesments = new AssesmentApp();
                 $assesments->ACT = $request->ACT;
                 $assesments->ACTenglishScore = $request->ACTenglishScore;

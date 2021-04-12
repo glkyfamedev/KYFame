@@ -20,8 +20,8 @@ use App\Http\Controllers\SponsorController;
 Route::view('/students', 'students'); 
 Route::view('/sponsors', 'sponsors'); 
 Route::view('/employers','employers');
+// Route::view('/application','application');
 
-// Route::resource('ssponsors', SSponsorController::class);
 
 Route::get('/', function () {
     return view('home');
@@ -53,5 +53,10 @@ Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/application', function () {
+    return view('application');
+})->middleware(['auth'])->name('application');
+
 
 require __DIR__.'/auth.php';

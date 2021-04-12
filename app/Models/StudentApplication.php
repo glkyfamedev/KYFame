@@ -20,6 +20,8 @@ class StudentApplication extends Model
         $user_id = Auth::user()->id;
 
     }
+
+    protected $with = ['contactApp', 'employmentApp'];
     /**
      * The attributes that are mass assignable.
      *
@@ -44,7 +46,8 @@ class StudentApplication extends Model
     {
         return $this->belongsTo(user::class);
     }    
-        public function contactApp()
+    
+    public function contactApp()
     {
         return $this->hasOne(ContactApp::class);
     }
