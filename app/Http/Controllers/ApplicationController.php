@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Emailcontroller;
+use App\Mail\Gmail;
 use App\Models\AssesmentApp;
 use App\Models\ContactApp;
 use App\Models\EmploymentApp;
@@ -11,9 +12,17 @@ use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
+    public function __construct(Request $request)
+    {
+         $user = Auth::user();
+        //  $this->contact_Apps = $contactModel;
+        //  $this->status_Apps = $statusModel;
+    }
+    
     public function index(Request $request)
     {
         $user = Auth::user();
@@ -51,7 +60,9 @@ class ApplicationController extends Controller
                         'altPhone' => $request->get('altPhone'),
                         'student_application_id' => $student_application_id
                     ],                    
-                );           
+                );         
+                 $application->currentSection = $request->currentSection;
+  
                 // $contactModel = new ContactApp();
                 // $contactModel->streetAddress = $request->streetAddress;
                 // $contactModel->address2 = $request->address2;
@@ -101,6 +112,8 @@ class ApplicationController extends Controller
                 $status->student_application_id = $application->id;
 
                 $status->save();
+                $application->currentSection = $request->currentSection;
+
                 return response()->json(['success' => true]);
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
@@ -135,7 +148,7 @@ class ApplicationController extends Controller
                 $employmentModel->student_application_id = $application->id;
 
                 $employmentModel->save();
-
+                $application->currentSection = $request->currentSection;
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -150,38 +163,7 @@ class ApplicationController extends Controller
         $application = session('application');
 
         if ($request->ajax()) {
-            try {
-                
-                // $storeData = $request->validate([
-                //     'ACT' => 'required|max:255',
-                //     'ACTenglishScore' => 'required|max:255',
-                //     'ACTreadingScore' => 'required|max:255',
-                //     'ACTmathScore' => 'required|max:255',
-                //     'ACTscienceScore' => 'required|max:255',
-                //     'ACTcompositeScore' => 'max:255',
-
-                //     'SAT' => 'required|max:255',
-                //     'SATmath' => 'required|max:255',
-                //     'SATCriticalThinking' => 'required|max:255',
-                //     'SATwriting' => 'required|max:255',
-                //     'SATcomposite' => 'required|max:255',
-
-                //     'KYOTE' => 'required|max:255',
-                //     'KYOTEarea' => 'required|max:255',
-                //     'KYOTEscore' => 'required|max:255',
-
-                //     'otherAssesments' => 'required|max:255',
-                //     'skillsUSA' => 'required|max:255',
-                //     'projectLeadTheWay' => 'required|max:255',
-                //     'manufacturingAcedemics' => 'required|max:255',
-                //     'awardsAndHonors' => 'required|max:255',
-                //     'highSchoolAttended' => 'required|max:255',
-                //     'GPA' => 'required|max:255',
-                //     'highSchoolActivities' => 'max:255',
-                //     'technicalPrograms' => 'max:255',
-                //     'additionalComments' => 'max:255',
-                // ]);
-
+            try {                
                 $assesments = new AssesmentApp();
                 $assesments->ACT = $request->ACT;
                 $assesments->ACTenglishScore = $request->ACTenglishScore;
@@ -213,6 +195,11 @@ class ApplicationController extends Controller
                 $assesments->student_application_id = $application->id;
 
                 $assesments->save();
+
+                $application->application_action = $request->app_action;
+                $application->currentSection = $request->currentSection;
+                $application->save();
+                
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -234,6 +221,7 @@ class ApplicationController extends Controller
                 ]);
                 $application = StudentApplication::find(1);
                 $application->essay = $request->essay;
+                $application->currentSection = $request->currentSection;
 
                 $application->save();
                 return response()->json(['success' => true]);
@@ -268,22 +256,38 @@ class ApplicationController extends Controller
     public function CompleteApplication(Request $request)
     {
         $application = session('application');
-          
+        $user = Auth::user();        
         if ($request->ajax()) {
             try{                                        
-                $complete = StudentApplication::where('id', $application->id)->first();
-                
-                  $complete->completed_date = $request->completed_date;                 
-                               
-                // $complete->save();
-                        
-            return response()->json(['success' => true]);
+                $complete = StudentApplication::where('id', $application->id)->first();                
+                $complete->completed_date = $request->completed_date;               
+                             
+                $success = true ;  
 
-            } 
+                if($success){
+                    $emailController = new EmailController($user);
+                    $emailController-> AdminEmail($user);
+                    $action = $application->application_action;
+                    
+                    if( $action == 'approved')
+                    {
+                        $emailController->studentApprovedEmail($user);
+                    }
+                    else
+                    {
+                        $emailController-> StudentConfirmationEmail($user);
+                    }
+                }
+              return response()->json(['success' => true]);
+            }             
             catch (Exception $e) {
-                    return response()->json(['success' => false]);
+                $success = false;
+                return response()->json(['success' => false]);
             }
+        
+            
         }
+      
     }
 
 

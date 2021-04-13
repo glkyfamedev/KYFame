@@ -5,9 +5,14 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
                 <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
                     <div class="flex justify-start lg:w-0 lg:flex-1">
+                        <x-slot name="logo">
+                            <a href="/">
+                                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                            </a>
+                        </x-slot>
                         <a href="{{ URL('/') }}">
                             <span class="sr-only">KYFAME</span>
-                            <img class="h-8 w-auto sm:h-10" src="{{URL::to('/assets/logo.png') }}"
+                            <img class="h-8 w-auto sm:h-10" src="{{ URL::to('/assets/logo.png') }}"
                                 style="height: 50px;" />
                         </a>
                     </div><!-- Logo -->
@@ -18,6 +23,7 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     </div>
+
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('form')" :active="request()->routeIs('form')">
                             {{ __('Application') }}

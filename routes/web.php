@@ -52,6 +52,6 @@ Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->middleware('verified')->name('dashboard');
 
 require __DIR__.'/auth.php';
