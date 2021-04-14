@@ -21,7 +21,12 @@ class StudentApplication extends Model
         
     }
 
-    protected $with = ['contactApp', 'employmentApp'];
+    protected $with = [
+        'contactApp', 
+        'statusApp',
+        'employmentApp',
+        'assesmentApp',         
+    ];
     /**
      * The attributes that are mass assignable.
      *

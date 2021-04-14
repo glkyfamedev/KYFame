@@ -22,8 +22,6 @@
         </div>
     @endif
 
-
-
     <style>
         .btn-info,
         .btn-success {
@@ -43,18 +41,26 @@
             border: solid 2px red !important;
         }
 
+        .check {
+            color: green;
+            font-size: x-large;
+            margin: 5px;
+        }
+
     </style>
 
     <div class="row py-12 mx-auto align-content-center">
         <div class="col-7 p-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="bg-white border-gray-200">
-
-                <button type="button" class="btn" id="startBtn">Start new Application</button>
-
+                <div id="appDescription">
+                    <button type="button" class="btn" id="startBtn">Start new Application</button>
+                </div>
                 <div class="form-section toggle" id="section1" style="display:none;">
                     <h2>Contact Information</h2>
 
                     <div class="messages"></div>
+
+
                     <form class="contact-form row g-3" id="contact-Section" method="POST"
                         action="{{ route('form.formSubmit') }}">
                         <input type="hidden" id="token" name="_token" value="{{ Session::token() }}">
@@ -204,7 +210,8 @@
                         </div>
 
                         <div class="m-3 hide status-required" id="relativeSponsorInput">
-                            <label for="relativeSponsorNames" class="form-label status-label">If you answered yes to the
+                            <label for="relativeSponsorNames" class="form-label status-label">If you answered yes to
+                                the
                                 previous question please enter that sponor name here.<i
                                     class="bi bi-asterisk required"></i> </label>
                             <input id="relativeSponsorNames" class="form-control" type="text" name="" autofocus />
@@ -228,7 +235,8 @@
                         </div>
 
                         <div class="m-3 hide status-required" id="employedSponsorInput">
-                            <label for="employedSponsorNames" class="form-label status-label">If you answered yes to the
+                            <label for="employedSponsorNames" class="form-label status-label">If you answered yes to
+                                the
                                 previous question please enter that sponor name here.<i
                                     class="bi bi-asterisk required"></i> </label>
                             <input id="employedSponsorNames" class="form-control" type="text" name="" autofocus />
@@ -388,7 +396,8 @@
                         </div>
 
                         <div class="m-3">
-                            <h5 for="">If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
+                            <h5 for="">If You haven't taken the ACT, SAT or KYOTE, but have taken another
+                                assesment..
                             </h5>
                             <input type="text" class="form-control" id="otherAssesments" name="otherAssesments"
                                 placeholder="Other Assessments and scores">
@@ -425,7 +434,8 @@
                         </div>
 
                         <div class="m-3">
-                            <label for="manufacturingAcedemics">Have you completed any Manufacturing Acedemics?</label>
+                            <label for="manufacturingAcedemics">Have you completed any Manufacturing
+                                Acedemics?</label>
                             <input type="text" class="form-control" id="manufacturingAcedemics"
                                 name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
                         </div>
@@ -499,14 +509,16 @@
                     <h2> Transcripts</h2>
                     <form class="contact-form" method="post" action="{{ route('form.formTranscript') }}">
                         <input type="hidden" id="transcriptToken" name="_token" value="{{ Session::token() }}">
-                        <p> Select a method for submiting your transcripts. <i>Transcripts must be submited within 14
+                        <p> Select a method for submiting your transcripts. <i>Transcripts must be submited within
+                                14
                                 days of completeing the application</i></p>
 
                         <div class="transctiptMethod">
                             <label class="transcriptLabel"></label>
                             <div class="p-3">
                                 <div class="form-check">
-                                    <label class="form-check-label" for="sendEmail">Upload transcripts directly</label>
+                                    <label class="form-check-label" for="sendEmail">Upload transcripts
+                                        directly</label>
                                     <input class="form-check-input transcript" type="radio" id="sendEmail"
                                         name="transcriptMethod" value="uploadTranscripts">
                                 </div>
@@ -528,7 +540,8 @@
 
                             <div class="p-3">
                                 <div class="form-check">
-                                    <label class="form-check-label" for="sendLater">I will submit my transcripts within
+                                    <label class="form-check-label" for="sendLater">I will submit my transcripts
+                                        within
                                         14 days of submiting my application </label>
                                     <input class="form-check-input transcript" type="radio" id="sendLater"
                                         name="transcriptMethod" value="SendLater">
@@ -563,7 +576,8 @@
                                     class="bi bi-asterisk required "></i></label>
                             <input class="form-check-input termCheck" type="checkbox" value="" id="term2">
                             <label class="form-check-label termLabel d-inline" for="term2">
-                                To be considered for the program, I must work at the company which selects me through
+                                To be considered for the program, I must work at the company which selects me
+                                through
                                 the interview and draft process.
                                 You understand you do not get to choose your sponsoring companies.
                             </label>
@@ -573,13 +587,15 @@
                             <label for="term3" class="termLabel hide"><i class="bi bi-asterisk required "></i></label>
                             <input class="form-check-input termCheck" type="checkbox" value="" id="term3">
                             <label class="form-check-label termLabel d-inline" for="term3">
-                                To be considered at a sponsoring company, you will need to give your permission to share
+                                To be considered at a sponsoring company, you will need to give your permission to
+                                share
                                 the information in your
                                 application as well as any other documents or media that you submit with sponsoring
                                 companies. You understand that by
                                 submitting your application and supporting items, you are waiving your rights of
                                 nondisclosure of these records under
-                                federal law to KY Fame, Greater Louisville Chapter, and company sponsors. This release
+                                federal law to KY Fame, Greater Louisville Chapter, and company sponsors. This
+                                release
                                 does not permit the disclosure of
                                 these records to any other persons or entities without your written consent.
                             </label>
@@ -589,7 +605,8 @@
                             <label for="term4" class="termLabel hide"><i class="bi bi-asterisk required "></i></label>
                             <input class="form-check-input termCheck" type="checkbox" value="" id="term4">
                             <label class="form-check-label termLabel d-inline" for="term4">
-                                Participating in KY Fame, you recognize additional commitments outside of work or school
+                                Participating in KY Fame, you recognize additional commitments outside of work or
+                                school
                                 may be required where you will
                                 be acting as a program ambassador or contributing to community service projects.
                             </label>
@@ -635,7 +652,7 @@
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item" id="completedNav">
+                        <li class="list-group-item nav-item nav-item disabled" id="completedNav">
                             <a href="#section7">Finish</a><label class="hide" id="complete-check"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
@@ -684,6 +701,7 @@
 
 
     <script>
+        var startRouteUrl = "{{ route('form') }}";
         var contactRouteUrl = "{{ route('form.formSubmit') }}";
         var statusRouteUrl = "{{ route('form.formStatus') }}";
         var employmentRoutetUrl = "{{ route('form.formEmployment') }}";
@@ -692,6 +710,13 @@
         var transcriptRouteUrl = "{{ route('form.formTranscript') }}";
         var completeRouteUrl = "{{ route('form.complete') }}";
         var dashBoardRouteUrl = "{{ route('dashboard') }}";
+
+    </script>
+
+    <script>
+        function getApplication(application) {
+
+        }
 
     </script>
 

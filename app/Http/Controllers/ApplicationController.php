@@ -22,7 +22,7 @@ class ApplicationController extends Controller
         //  $this->contact_Apps = $contactModel;
         //  $this->status_Apps = $statusModel;
     }
-    
+    // return back()->withInput();
     public function index(Request $request)
     {
         $user = Auth::user();
@@ -55,34 +55,22 @@ class ApplicationController extends Controller
         // $studentAddress = $contact[0];
         if ($request->ajax()) {
             try {
-                $contactModel = ContactApp::updateOrCreate(
-                    [
-                        'streetAddress'=> $request->get('streetAddress'),
-                        'address2'=> $request->get('address2'),
-                        'city' => $request->get('city'),
-                        'state' => $request->get('state'),
-                        'zip' => $request->get('zip'),
-                        'primaryPhone'=> $request->get('primaryPhone'),
-                        'altPhone' => $request->get('altPhone'),
-                        'student_application_id' => $student_application_id
-                    ]                    
-                );         
-                 $application->currentSection = $request->currentSection;
-  
-                // $contactModel = new ContactApp();
-                // $contactModel->streetAddress = $request->streetAddress;
-                // $contactModel->address2 = $request->address2;
-                // $contactModel->city = $request->city;
-                // $contactModel->state = $request->state;
-                // $contactModel->zip = $request->zip;
-                // $contactModel->primaryPhone = $request->primaryPhone;
-                // $contactModel->altPhone = $request->altPhone;
-                // $contactModel->student_application_id = $application->id;
-
+                $contactModel = contactApp::where('student_application_id', $application->id)->firstOrCreate();
+                      
+                $contactModel->streetAddress = $request->streetAddress;
+                $contactModel->address2 = $request->address2;
+                $contactModel->city = $request->city;
+                $contactModel->state = $request->state;
+                $contactModel->zip = $request->zip;
+                $contactModel->primaryPhone = $request->primaryPhone;
+                $contactModel->altPhone = $request->altPhone;
+                $contactModel->student_application_id = $application->id;
+                                                   
+                $contactModel->save();
+                $application->currentSection = $request->currentSection;
+                $application->save();                           
                
-               
-              return response()->json(['success' => true]);
-            //   dd($contactModel);
+              return response()->json(['success' => true]);          
             } 
             catch (Exception $e) {
                 return response()->json(['success' => false]);
@@ -97,29 +85,23 @@ class ApplicationController extends Controller
 
         if ($request->ajax()) {
             try {
-                $status = $request->validate([
-                    'under_18' => 'required|max:255',
-                    'authorizedInUS' => 'required|max:255',
-                    'levelOfEducation' => 'required|max:255',
-                    'relativeSponsors' => 'required|max:255',
-                    'workForSponsor' => 'required|max:255',
-                    'relative_sponsor_names' => 'max:100',
-                    'employed_sponsor_names'=> 'max:100',
+            
+                $status = statusApp::where('student_application_id',$application->id)->firstOrCreate();
 
-                ]);
-                $status = new StatusApp();
                 $status->under_18 = $request->under_18;
                 $status->authorizedInUS = $request->authorizedInUS;
                 $status->levelOfEducation = $request->levelOfEducation;
                 $status->relativeSponsors = $request->relativeSponsors;
                 $status->workForSponsor = $request->workForSponsor;
-                $status->relative_sponsor_names = $request->employed_sponsor_names;
-                $status->employed_sponsor_names = $request->relative_sponsor_names;
+                $status->relative_sponsor_names = $request->relative_sponsor_names;
+                $status->employed_sponsor_names = $request->employed_sponsor_names;
                 $status->student_application_id = $application->id;
 
                 $status->save();
                 $application->currentSection = $request->currentSection;
+                $application->save();
 
+                
                 return response()->json(['success' => true]);
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
@@ -134,17 +116,9 @@ class ApplicationController extends Controller
         if ($request->ajax()) {
             try {
 
-                $employmentModel = $request->validate([
-                    'employerName' => 'max:255',
-                    'employerPhone' => 'max:255',
-                    'workDuties' => 'max:255',
-                    'employmentStart' => 'max:255',
-                    'employmentEnd' => 'required|max:255',
-                    'reasonForLeaving' => 'max:255',
+                             // foreach ($request->all as $req) {
+             $employmentModel = EmploymentApp::where('student_application_id',$application->id)->firstOrCreate();
 
-                ]);
-                // foreach ($request->all as $req) {
-                $employmentModel = new EmploymentApp();
                 $employmentModel->employerName = $request->employerName;
                 $employmentModel->employerPhone = $request->employerPhone;
                 $employmentModel->workDuties = $request->workDuties;
@@ -155,6 +129,7 @@ class ApplicationController extends Controller
 
                 $employmentModel->save();
                 $application->currentSection = $request->currentSection;
+                $application->save();
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -170,7 +145,8 @@ class ApplicationController extends Controller
 
         if ($request->ajax()) {
             try {                
-                $assesments = new AssesmentApp();
+            $assesments = AssesmentApp::where('student_application_id',$application->id)->firstOrCreate();
+
                 $assesments->ACT = $request->ACT;
                 $assesments->ACTenglishScore = $request->ACTenglishScore;
                 $assesments->ACTreadingScore = $request->ACTreadingScore;
@@ -244,12 +220,13 @@ class ApplicationController extends Controller
 
         if ($request->ajax()) {
             try {
-                $transcript = StudentApplication::where('id', $application->id)->first();
+                $application = StudentApplication::where('id', $application->id)->first();
                  
-                 $transcript->transcript_method = $request->transcript_method;
-                 $transcript->transcriptPath = $request->transcriptPath;
-                 
-                $transcript->save();
+                $application->transcript_method = $request->transcript_method;
+                $application->transcriptPath = $request->transcriptPath;
+                $application->currentSection = $request->currentSection;
+
+                $application->save();
                 
                 return response()->json(['success' => true]);
 
@@ -265,11 +242,11 @@ class ApplicationController extends Controller
         $user = Auth::user();        
         if ($request->ajax()) {
             try{                                        
-                $complete = StudentApplication::where('id', $application->id)->first();                
+                $complete = StudentApplication::find(1);
                 $complete->completed_date = $request->completed_date;               
-                             
-                $success = true ;  
+                $complete->save();  
 
+                $success = true;   
                 if($success){
                     $emailController = new EmailController($user);
                     $emailController-> AdminEmail($user);
