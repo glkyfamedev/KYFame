@@ -43,48 +43,27 @@
             border: solid 2px red !important;
         }
 
-        .check {
-            color: green;
-            font-size: x-large;
-            margin-left: 5px;
-        }
-
     </style>
 
     <div class="row py-12 mx-auto align-content-center">
         <div class="col-7 p-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="bg-white border-gray-200">
-                <div class="col" id="app-description">
-                    <p>
-                        While completing the application you'll need access to your highschool transscripts
-                        as well as collage transcripts if you've attened college.
-                        You will also be required to submit an essay explaining why you're interested in this
-                        program and why you're a good candidate.
 
-                        You will be able to leave the application and come back later if you need to.
-                        The application is divided into six sections, when you've finished a section click next
-                        to submit it and it will show the next section.
-                        once a section has been completed it will be unlocked in the application
-                        menu to the right and you can go back if you need to edit any fields.
-                    </p>
-                    <form>
-                        <input type="hidden" id="Token" name="_token" value="{{ Session::token() }}">
-                        <button type="button" class="btn" id="startBtn">Start new Application</button>
-                    </form>
-                </div>
+                <button type="button" class="btn" id="startBtn">Start new Application</button>
 
                 <div class="form-section toggle" id="section1" style="display:none;">
                     <h2>Contact Information</h2>
 
-                    <form class="contact-form row g-3" id="contact-Section">
+                    <div class="messages"></div>
+                    <form class="contact-form row g-3" id="contact-Section" method="POST"
+                        action="{{ route('form.formSubmit') }}">
                         <input type="hidden" id="token" name="_token" value="{{ Session::token() }}">
 
                         <div class="col-8 contact-required">
-                            {{-- {{ $application->ContactApp }} --}}
                             <label class="form-label contact-label" for="streetAddress">Street address <i
                                     class="bi bi-asterisk required"></i></label>
                             <input id="streetAddress" class="form-control contact-input" type="text"
-                                name="streetAddress" autofocus />
+                                name="streetAddress" required autofocus />
                         </div>
 
                         <div class="col">
@@ -135,7 +114,7 @@
                 <!-- FORM ROW 1 -->
                 <div class="form-section toggle" id="section2" style="display:none;">
                     <h2>Legal status </h2>
-                    <form class="Contact-form">
+                    <form class="Contact-form" method="POST" action="{{ route('form.formStatus') }}">
                         <input type="hidden" id="statusToken" name="_token" value="{{ Session::token() }}">
 
                         <h5 for="over18">Will you be 18 before June 1? <i class="bi bi-asterisk required"></i> </h5>
@@ -705,7 +684,6 @@
 
 
     <script>
-        var startRouteUrl = "{{ route('form') }}";
         var contactRouteUrl = "{{ route('form.formSubmit') }}";
         var statusRouteUrl = "{{ route('form.formStatus') }}";
         var employmentRoutetUrl = "{{ route('form.formEmployment') }}";
@@ -713,6 +691,7 @@
         var essayRouteUrl = "{{ route('form.formEssay') }}";
         var transcriptRouteUrl = "{{ route('form.formTranscript') }}";
         var completeRouteUrl = "{{ route('form.complete') }}";
+        var dashBoardRouteUrl = "{{ route('dashboard') }}";
 
     </script>
 

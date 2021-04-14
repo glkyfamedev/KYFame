@@ -18,7 +18,7 @@ class StudentApplication extends Model
     
     function StudentApplication() {
         $user_id = Auth::user()->id;
-
+        
     }
 
     protected $with = ['contactApp', 'employmentApp'];
@@ -34,6 +34,7 @@ class StudentApplication extends Model
     //   'transcript_method',
     //   'transcript_path',
     //   'essay',
+    //   'app_action',
     //   'current_section',
     //   'completed_date,
     //   'user_id' 

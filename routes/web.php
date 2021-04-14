@@ -52,7 +52,7 @@ Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->middleware('verified')->name('dashboard');
 
 Route::get('/application', function () {
     return view('application');

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Emailcontroller;
+use App\Mail\Gmail;
 use App\Models\AssesmentApp;
 use App\Models\ContactApp;
 use App\Models\EmploymentApp;
@@ -11,9 +12,17 @@ use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
+    public function __construct(Request $request)
+    {
+         $user = Auth::user();
+        //  $this->contact_Apps = $contactModel;
+        //  $this->status_Apps = $statusModel;
+    }
+    
     public function index(Request $request)
     {
         $user = Auth::user();
@@ -56,9 +65,10 @@ class ApplicationController extends Controller
                         'primaryPhone'=> $request->get('primaryPhone'),
                         'altPhone' => $request->get('altPhone'),
                         'student_application_id' => $student_application_id
-                    ],                    
-                ); 
-                
+                    ]                    
+                );         
+                 $application->currentSection = $request->currentSection;
+  
                 // $contactModel = new ContactApp();
                 // $contactModel->streetAddress = $request->streetAddress;
                 // $contactModel->address2 = $request->address2;
@@ -108,6 +118,8 @@ class ApplicationController extends Controller
                 $status->student_application_id = $application->id;
 
                 $status->save();
+                $application->currentSection = $request->currentSection;
+
                 return response()->json(['success' => true]);
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
@@ -142,7 +154,7 @@ class ApplicationController extends Controller
                 $employmentModel->student_application_id = $application->id;
 
                 $employmentModel->save();
-
+                $application->currentSection = $request->currentSection;
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -157,8 +169,7 @@ class ApplicationController extends Controller
         $application = session('application');
 
         if ($request->ajax()) {
-            try {
-                        
+            try {                
                 $assesments = new AssesmentApp();
                 $assesments->ACT = $request->ACT;
                 $assesments->ACTenglishScore = $request->ACTenglishScore;
@@ -190,6 +201,11 @@ class ApplicationController extends Controller
                 $assesments->student_application_id = $application->id;
 
                 $assesments->save();
+
+                $application->application_action = $request->app_action;
+                $application->currentSection = $request->currentSection;
+                $application->save();
+                
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -211,6 +227,7 @@ class ApplicationController extends Controller
                 ]);
                 $application = StudentApplication::find(1);
                 $application->essay = $request->essay;
+                $application->currentSection = $request->currentSection;
 
                 $application->save();
                 return response()->json(['success' => true]);
@@ -245,22 +262,38 @@ class ApplicationController extends Controller
     public function CompleteApplication(Request $request)
     {
         $application = session('application');
-          
+        $user = Auth::user();        
         if ($request->ajax()) {
             try{                                        
-                $complete = StudentApplication::where('id', $application->id)->first();
-                
-                  $complete->completed_date = $request->completed_date;                 
-                               
-                // $complete->save();
-                        
-            return response()->json(['success' => true]);
+                $complete = StudentApplication::where('id', $application->id)->first();                
+                $complete->completed_date = $request->completed_date;               
+                             
+                $success = true ;  
 
-            } 
+                if($success){
+                    $emailController = new EmailController($user);
+                    $emailController-> AdminEmail($user);
+                    $action = $application->application_action;
+                    
+                    if( $action == 'approved')
+                    {
+                        $emailController->studentApprovedEmail($user);
+                    }
+                    else
+                    {
+                        $emailController-> StudentConfirmationEmail($user);
+                    }
+                }
+              return response()->json(['success' => true]);
+            }             
             catch (Exception $e) {
-                    return response()->json(['success' => false]);
+                $success = false;
+                return response()->json(['success' => false]);
             }
+        
+            
         }
+      
     }
 
 

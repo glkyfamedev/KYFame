@@ -405,7 +405,8 @@ function saveEmploymentData (e) {
             workDuties: $('.workDuties').val(),
             employmentStart: $('.employmentStart').val(),
             employmentEnd: $('.employmentEnd').val(),
-            reasonForLeaving: $('.reasonForLeaving').val()
+            reasonForLeaving: $('.reasonForLeaving').val(),
+            currentSection: sectionNum + 1
 
             // employerArray: employers,
         },
@@ -414,8 +415,6 @@ function saveEmploymentData (e) {
             if (result) {
                 alert('Saved!')
                 $('#section' + sectionNum).hide()
-                $('#employmentNav').removeClass('disabled')
-                $('#e-check').show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -433,6 +432,12 @@ function saveAssessmentData (e, sectionNum) {
     })
     if (hasBlankScore('.score-input')) {
         return false
+    }
+    var app_action
+    if ($('#ACTenglishScore').val() >= 18 && $('#ACTmathScore').val() >= 19) {
+        app_action = 'approved'
+    } else {
+        app_action = 'needs review'
     }
 
     var sectionNum = $(this).data('section')
@@ -471,7 +476,9 @@ function saveAssessmentData (e, sectionNum) {
             GPA: $('#GPA').val(),
             highSchoolActivities: $('#highSchoolActivities').val(),
             technicalPrograms: $('#technicalPrograms').val(),
-            additionalComments: $('#additionalComments').val()
+            additionalComments: $('#additionalComments').val(),
+            currentSection: sectionNum + 1,
+            app_action: app_action
         },
         dataType: 'json',
         success: function (result) {
@@ -487,7 +494,6 @@ function saveAssessmentData (e, sectionNum) {
         }
     })
 }
-
 function saveEssayData (e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
@@ -500,7 +506,8 @@ function saveEssayData (e, sectionNum) {
         url: essayRouteUrl,
         data: {
             _token: $('#essayToken').val(),
-            essay: $('#essay').val()
+            essay: $('#essay').val(),
+            currentSection: sectionNum + 1
         },
         dataType: 'json',
         success: function (result) {
@@ -530,7 +537,8 @@ function saveTranscriptData (e, sectionNum) {
         data: {
             _token: $('#transcriptToken').val(),
             transcript_method: $('input[name=transcriptMethod]:checked').val(),
-            transcript_path: $('#transcript_path').val()
+            transcript_path: $('#transcript_path').val(),
+            currentSection: sectionNum + 1
             // data: dataToSave
         },
         dataType: 'json',
@@ -571,7 +579,8 @@ function completeApplication (e) {
         url: completeRouteUrl,
         data: {
             _token: $('#completeToken').val(),
-            completed_date: completedDate
+            completed_date: completedDate,
+            currentSection: 1
             // data: dataToSave
         },
         dataType: 'json',

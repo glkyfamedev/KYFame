@@ -25,6 +25,9 @@
 .bg-navy {
     background-color: #1A4173;
 }
+.btn-navy{
+      background-color: #1A4173 !important;
+}
 
 .border-navy {
     border-color: #1A4173;
