@@ -26,18 +26,24 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        
         $current_date = new DateTime('NOW');
-        $application = StudentApplication::firstOrCreate(
+        try{
+            $application = StudentApplication::firstOrCreate(
             [
                 'user_id' => $user->id,
             ],
             [
                 'start_date' => $current_date,
-            ]);
-
-        session(['application' => $application]);
-
-        return view('application');
+            ]);           
+            
+            session(['application' => $application]);
+    
+            return json_encode($application);;
+        } 
+        catch (Exception $e) {
+            return null;
+        }
     }
 
     public function formSubmit(Request $request)
@@ -59,7 +65,7 @@ class ApplicationController extends Controller
                         'primaryPhone'=> $request->get('primaryPhone'),
                         'altPhone' => $request->get('altPhone'),
                         'student_application_id' => $student_application_id
-                    ],                    
+                    ]                    
                 );         
                  $application->currentSection = $request->currentSection;
   

@@ -37,7 +37,6 @@
         .required {
             color: red;
             font-size: x-small;
-
         }
 
         .errorBorder {
@@ -606,26 +605,39 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group list-group-flush nav nav-tabs flex-column" id="appNav" role="tablist">
-                        <li class="list-group-item nav-item" role="presentation">
-                            <a href="#section1">Contact Info</a>
+                        <li class="list-group-item nav-item disabled" id="contactNav">
+                            <a href="#section1">Contact Info</a><label class="hide" id="c-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
-                        <li class="list-group-item nav-item nav-item" role="presentation">
-                            <a href="#section2">Legal Status</a>
+
+                        <li class="list-group-item nav-item nav-item disabled" id="statusNav">
+                            <a href="#section2">Legal Status</a><label class="hide" id="s-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
-                        <li class="list-group-item nav-item nav-item" role="presentation">
-                            <a href="#section3">Employment History</a>
+
+                        <li class="list-group-item nav-item nav-item disabled" id="employmentNav">
+                            <a href="#section3">Employment History</a><label class="hide" id="e-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
-                        <li class="list-group-item nav-item nav-item" role="presentation">
-                            <a href="#section4">Assessments</a>
+
+                        <li class="list-group-item nav-item nav-item disabled" id="assessmentNav">
+                            <a href="#section4">Assessments</a><label class="hide" id="a-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
-                        <li class="list-group-item nav-item nav-item" role="presentation">
-                            <a href="#section5">Essay</a>
+
+                        <li class="list-group-item nav-item nav-item disabled" id="essayNav">
+                            <a href="#section5">Essay</a><label class="hide" id="essay-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
-                        <li class="list-group-item nav-item nav-item" role="presentation">
-                            <a href="#section6">Transcripts</a>
+
+                        <li class="list-group-item nav-item nav-item disabled" id="transcriptNav">
+                            <a href="#section6">Transcripts</a><label class="hide" id="t-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
-                        <li class="list-group-item nav-item nav-item" role="presentation">
-                            <a href="#section7">Finish</a>
+
+                        <li class="list-group-item nav-item nav-item" id="completedNav">
+                            <a href="#section7">Finish</a><label class="hide" id="complete-check"><i
+                                    class="bi bi-check2 check"></i></label>
                         </li>
                     </ul>
                 </div>

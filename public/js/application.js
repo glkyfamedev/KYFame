@@ -1,15 +1,42 @@
 $(document).ready(function () {
-    // $(".testScore").blur(function () {
-    //   if ($(this).val() != "") {
-    //     $(this).removeClass("errorBorder");
-    //   }
-    // });
     $('.phone').mask('(999) 999-9999')
+
+    $('.termCheck').change(function () {
+        if ($(this).is(':checked')) {
+            $(this).removeClass('errorBorder')
+        }
+    })
 
     $('#startBtn').click(function (e) {
         e.preventDefault()
-        $('#startBtn').hide()
-        $('#section1').show()
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        $.ajax({
+            type: 'GET',
+            url: startRouteUrl,
+            data: {
+                _token: $('#token').val()
+            },
+            dataType: 'json',
+            success: function (application) {
+                if (application != null) {
+                    if (application.completed_date != '') {
+                        $('#app-description').hide()
+                        $('#section1').show()
+                        enableMenuItems(7)
+                    } else {
+                        $('#section' + application.current_section).show()
+                        fillCurrentSection($application)
+                        enableMenuItems(application.current_section)
+                    }
+                } else {
+                    alert('Could not create application')
+                }
+            }
+        })
     })
 
     $('#appNav a').click(function (e) {
@@ -85,15 +112,19 @@ $(document).ready(function () {
         var sectionNum = $(this).data('section')
 
         var hasErrors = false
+
         $('.status-input').each(function () {
+            var formInputLabel = $(this)
+                .parents('.status-required')
+                .find('.status-label')
             if ($(this).val() == '') {
                 hasErrors = true
-                var formInputLabel = $(this)
-                    .parents('.status-required')
-                    .find('.status-label')
                 formInputLabel.css('color', 'red')
+            } else {
+                formInputLabel.css('color', 'black')
             }
         })
+
         if (hasErrors) {
             return
         } else {
@@ -119,6 +150,7 @@ $(document).ready(function () {
                 formInputLabel.css('color', 'red')
             }
         })
+
         if (hasErrors) {
             return
         } else {
@@ -145,53 +177,18 @@ $(document).ready(function () {
         }
     })
 
-    $('#term1').click(function () {
-        if ($(this).is(':checked')) {
-            $(this).val('Accepted')
-        } else {
-            $(this).val('')
-        }
-    })
-    $('#term2').click(function () {
-        if ($(this).is(':checked')) {
-            $(this).val('Accepted')
-        } else {
-            $(this).val('')
-        }
-    })
-    $('#term3').click(function () {
-        if ($(this).is(':checked')) {
-            $(this).val('Accepted')
-        } else {
-            $(this).val('')
-        }
-    })
-
-    $('#term4').change(function () {
-        if ($(this).is(':checked')) {
-            $(this).val('Accepted')
-        } else {
-            $(this).val('')
-        }
-    })
-
     $('#finishBtn').click(function (e) {
         e.preventDefault()
         var sectionNum = $(this).data('section')
         var hasErrors = false
 
         $('.termCheck').each(function () {
-            if ($(this).val() == '') {
+            if (!$(this).is(':checked')) {
                 hasErrors = true
-
-                var termLabel = $(this)
-                    .parents('.form-check')
-                    .find('.termLabel')
-                // formInputLabel.text("Required");
-                termLabel.show()
                 $(this).addClass('errorBorder')
             }
         })
+
         if (hasErrors) {
             return
         } else {
@@ -214,10 +211,10 @@ function checkForRelatedSponsor () {
 function checkForEmployerSponsor () {
     if ($("input[id='workForSponsorYes']").is(':checked')) {
         $('#employedSponsorInput').show()
-        $('#employedSponsorName').addClass('status-input')
+        $('#employedSponsorNames').addClass('status-input')
     } else {
         $('#employedSponsorInput').hide()
-        $('#employedSponsorName').removeClass('status-input')
+        $('#employedSponsorNames').removeClass('status-input')
     }
 }
 
@@ -266,6 +263,9 @@ function saveContactData (e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
+    //   var contactModel = getContactInfo();
+    //   updateSection(contactRouteUrl, contactModel, sectionNum);
+    //  });
     $.ajax({
         type: 'POST',
         url: contactRouteUrl,
@@ -278,8 +278,9 @@ function saveContactData (e, sectionNum) {
             state: $('#state').val(),
             zip: $('#zip').val(),
             primaryPhone: $('#primaryPhone').val(),
-            altPhone: $('#altPhone').val(),
-            currentSection: sectionNum + 1
+            altPhone: $('#altPhone').val()
+
+            // data: dataToSave
         },
         dataType: 'json',
         // contentType: 'application/json',
@@ -287,6 +288,8 @@ function saveContactData (e, sectionNum) {
             if (result) {
                 alert('Saved!')
                 $('#section' + sectionNum).hide()
+                $('#contactNav').removeClass('disabled')
+                $('#c-check').show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -308,6 +311,23 @@ function saveStatusData (e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
+    // var streetAddress = $('#streetAddress').val();
+    // var address2 = $('#address2').val();
+    // var city = $('#city').val();
+    // var state = $('#state').val();
+    // var zip = $('#zip').val();
+    // var primaryPhone = $('#primaryPhone').val();
+    // var altPhone = $('#altPhone').val();
+
+    // var contactModel = {
+    // streetAddress: streetAddress,
+    // address2: address2,
+    // city: city,
+    // state: state,
+    // zip: zip,
+    // primaryPhone: primaryPhone,
+    // altPhone: altPhone
+    // };
     $.ajax({
         type: 'POST',
         url: statusRouteUrl,
@@ -324,14 +344,15 @@ function saveStatusData (e, sectionNum) {
             // WorkForSponsor: $('#WorkForSponsor').val(),
             workForSponsor: $('input[name=workForSponsor]:checked').val(),
             relative_sponsor_names: $('#relativeSponsorNames').val(),
-            employed_sponsor_names: $('#employedSponsorName').val(),
-            currentSection: sectionNum + 1
+            employed_sponsor_names: $('#employedSponsorName').val()
         },
         dataType: 'json',
         success: function (result) {
             if (result) {
                 alert('Saved!')
                 $('#section' + sectionNum).hide()
+                $('#statusNav').removeClass('disabled')
+                $('#s-check').show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -464,6 +485,8 @@ function saveAssessmentData (e, sectionNum) {
             if (result) {
                 alert('Saved!')
                 $('#section' + sectionNum).hide()
+                $('#assessmentNav').removeClass('disabled')
+                $('#a-check').show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -491,6 +514,8 @@ function saveEssayData (e, sectionNum) {
             if (result) {
                 alert('Saved!')
                 $('#section' + sectionNum).hide()
+                $('essayNav').removeClass('disabled')
+                $('#essay-check').show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -522,6 +547,8 @@ function saveTranscriptData (e, sectionNum) {
             if (result) {
                 alert('Saved!')
                 $('#section' + sectionNum).hide()
+                $('#transcriptNav').removeClass('disabled')
+                $('#t-check').show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -559,12 +586,21 @@ function completeApplication (e) {
         dataType: 'json',
         success: function (result) {
             if (result) {
-                location.replace(dashBoardRouteUrl)
+                alert('Saved!')
+                $('#completedNav').removeClass('disabled')
+                $('#complete-check').show()
             } else {
                 alert('data not saved!')
             }
         }
     })
+}
+
+function fillCurrentSection (application) {
+    if (application.current_section == '1') {
+        //contact section
+        $('#contactName').val(application.contactApp.contact_name)
+    }
 }
 
 // $("#contactBtn").click(function (e) {
