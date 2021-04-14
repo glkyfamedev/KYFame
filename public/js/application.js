@@ -22,23 +22,26 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (application) {
+                var currentSection = application.currentSection;
                 if (application != null) {
-                    if (application.completed_date != '') {
-                        $('#app-description').hide()
+                    $('#appDescription').hide()
+                    if (application.completed_date != null) {
                         $('#section1').show()
                         enableMenuItems(7)
                     } else {
-                        $('#section' + application.current_section).show()
-                        fillCurrentSection($application)
-                        enableMenuItems(application.current_section)
+                        $('#section' + (currentSection + 1)).show()
+                        enableMenuItems(currentSection)
                     }
+                    fillCurrentSection(application)
                 } else {
                     alert('Could not create application')
                 }
             }
         })
     })
+    function getApplication() {
 
+    }
     $('#appNav a').click(function (e) {
         e.preventDefault()
         $('.toggle').hide()
@@ -197,7 +200,7 @@ $(document).ready(function () {
     })
 })
 
-function checkForRelatedSponsor () {
+function checkForRelatedSponsor() {
     if ($("input[id='relativesYes']").is(':checked')) {
         $('#relativeSponsorInput').show()
         $('#relativeSponsorNames').addClass('status-input')
@@ -208,7 +211,7 @@ function checkForRelatedSponsor () {
     }
 }
 
-function checkForEmployerSponsor () {
+function checkForEmployerSponsor() {
     if ($("input[id='workForSponsorYes']").is(':checked')) {
         $('#employedSponsorInput').show()
         $('#employedSponsorNames').addClass('status-input')
@@ -218,7 +221,7 @@ function checkForEmployerSponsor () {
     }
 }
 
-function hasBlankScore (selector) {
+function hasBlankScore(selector) {
     for (var i = 0; i < $(selector).length; i++) {
         var currentScore = $(selector).eq(i)
 
@@ -244,7 +247,7 @@ function hasBlankScore (selector) {
     return false
 }
 
-function addEmploymentSection () {
+function addEmploymentSection() {
     var employmentTemplateHtml = $('#employerTemplate').html()
 
     var currentEmployerCount = $('.employerName').length
@@ -256,7 +259,7 @@ function addEmploymentSection () {
     }
 }
 
-function saveContactData (e, sectionNum) {
+function saveContactData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -278,7 +281,9 @@ function saveContactData (e, sectionNum) {
             state: $('#state').val(),
             zip: $('#zip').val(),
             primaryPhone: $('#primaryPhone').val(),
-            altPhone: $('#altPhone').val()
+            altPhone: $('#altPhone').val(),
+            currentSection: sectionNum + 1
+
 
             // data: dataToSave
         },
@@ -304,7 +309,7 @@ function saveContactData (e, sectionNum) {
     })
 }
 
-function saveStatusData (e, sectionNum) {
+function saveStatusData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -344,7 +349,8 @@ function saveStatusData (e, sectionNum) {
             // WorkForSponsor: $('#WorkForSponsor').val(),
             workForSponsor: $('input[name=workForSponsor]:checked').val(),
             relative_sponsor_names: $('#relativeSponsorNames').val(),
-            employed_sponsor_names: $('#employedSponsorName').val()
+            employed_sponsor_names: $('#employedSponsorNames').val(),
+            currentSection: sectionNum + 1
         },
         dataType: 'json',
         success: function (result) {
@@ -361,7 +367,7 @@ function saveStatusData (e, sectionNum) {
     })
 }
 
-function saveEmploymentData (e) {
+function saveEmploymentData(e) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -423,7 +429,7 @@ function saveEmploymentData (e) {
     })
 }
 
-function saveAssessmentData (e, sectionNum) {
+function saveAssessmentData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -494,7 +500,7 @@ function saveAssessmentData (e, sectionNum) {
         }
     })
 }
-function saveEssayData (e, sectionNum) {
+function saveEssayData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -524,7 +530,7 @@ function saveEssayData (e, sectionNum) {
     })
 }
 
-function saveTranscriptData (e, sectionNum) {
+function saveTranscriptData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -557,7 +563,7 @@ function saveTranscriptData (e, sectionNum) {
     })
 }
 
-function GetTodayDate () {
+function GetTodayDate() {
     var tdate = new Date()
     var dd = tdate.getDate() //yields day
     var MM = tdate.getMonth() //yields month
@@ -566,7 +572,7 @@ function GetTodayDate () {
 
     return currentDate
 }
-function completeApplication (e) {
+function completeApplication(e) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -586,20 +592,123 @@ function completeApplication (e) {
         dataType: 'json',
         success: function (result) {
             if (result) {
-                alert('Saved!')
                 $('#completedNav').removeClass('disabled')
                 $('#complete-check').show()
+                location.replace(dashBoardRouteUrl);
             } else {
                 alert('data not saved!')
             }
         }
     })
 }
+function enableMenuItems(currentSection) {
+    if (currentSection >= '1') {
+        $('#contactNav').removeClass('disabled')
+        $('#c-check').removeClass('hide')
+    }
+    if (currentSection >= '2') {
+        $('#s-check').removeClass('hide')
+        $('#statusNav').removeClass('disabled')
+    }
+    if (currentSection >= '3') {
+        // $('#contactNav').removeClass('disabled')
+        // $('#statusNav').removeClass('disabled')
+        $('#employmentNav').removeClass('disabled')
+        $('#e-check').removeClass('hide')
+    }
+    if (currentSection >= '4') {
+        // $('#contactNav').removeClass('disabled')
+        // $('#statusNav').removeClass('disabled')
+        // $('#employmentNav').removeClass('disabled')
+        $('#assessmentNav').removeClass('disabled')
+        $('#a-check').removeClass('hide')
+    }
+    if (currentSection >= '5') {
+        // $('#contactNav').removeClass('disabled')
+        // $('#statusNav').removeClass('disabled')
+        // $('#employmentNav').removeClass('disabled')
+        // $('#assessmentNav').removeClass('disabled')
+        $('#essayNav').removeClass('disabled')
+        $('#essay-check').removeClass('hide')
+    }
+    if (currentSection > '6') {
+        // $('#contactNav').removeClass('disabled');
+        // $('#statusNav').removeClass('disabled')
+        // $('#employmentNav').removeClass('disabled')
+        // $('#assessmentNav').removeClass('disabled')
+        // $('#essayNav').removeClass('disabled')
+        $('#transcriptNav').removeClass('disabled')
+        $('#t-check').removeClass('hide')
+        // $('#complete-check').removeClass('hide')
+    }
+    if (7) {
+        $('#complete-check').removeClass('hide')
+    }
 
-function fillCurrentSection (application) {
-    if (application.current_section == '1') {
+
+
+
+}
+
+function fillCurrentSection(application) {
+    if (application.currentSection >= '1') {
         //contact section
-        $('#contactName').val(application.contactApp.contact_name)
+        $('#streetAddress').val(application.contact_app.streetAddress);
+        $('#address2').val(application.contact_app.address2);
+        $('#city').val(application.contact_app.city);
+        $('#state').val(application.contact_app.state);
+        $('#zip').val(application.contact_app.zip);
+        $('#primaryPhone').val(application.contact_app.primaryPhone);
+        $('#altPhone').val(application.contact_app.altPhone);
+
+        //status Section
+
+        //Employment Section
+
+        //Assessments Section
+        // $('input[name=ACT]:checked').val(application.assesment_app.ACT),
+        if (application.assesment_app.ACT != 0) {
+
+            $('#ACTenglishScore').val(application.assesment_app.ACTenglishScore),
+                $('#ACTreadingScore').val(application.assesment_app.ACTreadingScore),
+                $('#ACTmathScore').val(application.assesment_app.ACTmathScore),
+                $('#ACTscienceScore').val(application.assesment_app.ACTscienceScore),
+                $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore)
+            $('#ACTScoresContainer').show();
+        }
+
+        if (application.assesment_app.SAT != 0) {
+            $('input[id=SATyes]:checked'),
+                $('#SATmath').val(application.assesment_app.SATmath),
+                $('#SATCriticalThinking').val(application.assesment_app.SATCriticalThinking),
+                $('#SATwriting').val(application.assesment_app.SATwriting),
+                $('#SATcomposite').val(application.assesment_app.SATcomposite),
+                $('#SATScoresContainer').show()
+        }
+        if (application.assesment_app.KYOTE != 0) {
+            // $('input[name=KYOTE]:checked').val(application.assesment_app.KYOTE),
+            $('#KYOTEarea').val(application.assesment_app.KYOTEarea),
+                $('#KYOTEscore').val(application.assesment_app.KYOTEscore)
+        }
+
+        $('#otherAssesments').val(application.assesment_app.otherAssesments),
+
+            $('input[name=skillsUSA]:checked').val(application.assesment_app.skillsUSA),
+            $('input[name=projectLeadTheWay]:checked').val(application.assesment_app.projectLeadTheWay),
+
+            $('#manufacturingAcedemics').val(application.assesment_app.manufacturingAcedemics),
+            $('#awardsAndHonors').val(application.assesment_app.awardsAndHonors),
+            $('#highSchoolAttended').val(application.assesment_app.highSchoolAttended),
+            $('#GPA').val(application.assesment_app.GPA),
+            $('#highSchoolActivities').val(application.assesment_app.highSchoolActivities),
+            $('#technicalPrograms').val(application.assesment_app.technicalPrograms),
+            $('#additionalComments').val(application.assesment_app.additionalComments)
+
+
+        //essay Section
+        $('#essay').val(application.essay)
+
+        //transcript Section
     }
 }
 
