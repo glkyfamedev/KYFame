@@ -535,7 +535,7 @@
                                 </div>
                                 <div class="" id="transciptUpload">
                                     <div class="input-group m-3">
-                                        <input type="file" class="form-control" placeholder="" name="transcript" />
+                                        <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
                                     </div>
                                 </div>
                             </div>

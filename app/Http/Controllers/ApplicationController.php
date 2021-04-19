@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Emailcontroller;
+use App\Http\Controllers\EmailController;
 use App\Mail\Gmail;
 use App\Models\AssesmentApp;
 use App\Models\ContactApp;
@@ -72,7 +72,7 @@ class ApplicationController extends Controller
                 $contactModel->save();
                 $application->currentSection = $request->currentSection;
                 
-                if ($application.start_date == null){
+                if ($application->start_date == null){
                     $application->start_date = new DateTime('NOW');
                 }
                 
@@ -224,20 +224,30 @@ class ApplicationController extends Controller
 
     public function formTranscript(Request $request)
     {
+        $user = Auth::user();
         $application = session('application');
-            
 
+        $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
+        $request->file->move(public_path('transcripts'), $fileName);
+        
+        // $test = $_FILES['file']['tmp_name'];
+        // $test2 = move_uploaded_file($_FILES['file']['tmp_name'], 'transcripts/' . $_FILES['file']['name']);
+        
         if ($request->ajax()) {
-            try {
-                $application = StudentApplication::where('id', $application->id)->first();
-                 
+            try {                
+                $application = StudentApplication::where('id', $application->id)->first();                
                 $application->transcript_method = $request->transcript_method;
-                $application->transcriptPath = $request->transcriptPath;
-                $application->currentSection = $request->currentSection;
+                $application->currentSection = $request->currentSection;                
+                $application->transcriptPath = $fileName;
+                
+                //This line isnt working, file saves 
+                //to folder but needs to set path and save in database. // 
 
                 $application->save();
                 
                 return response()->json(['success' => true]);
+
+                  
 
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
