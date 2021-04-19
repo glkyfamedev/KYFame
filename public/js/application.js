@@ -520,18 +520,55 @@ function saveTranscriptData(e, sectionNum) {
         }
     });
 
+    // $.ajax({
+    //     type: 'POST',
+    //     url: transcriptRouteUrl,
+    //     data: {
+    //         _token: $('#transcriptToken').val(),
+    //         transcript_method: $('input[name=transcriptMethod]:checked').val(),
+    //         transcript_path: $('#transcript_path').val(),
+    //         currentSection: sectionNum + 1
+    //     },
+    //     dataType: 'json',
+    //     success: function (result) {
+    //         if (result) {
+    //             alert('Saved!')
+    //             $('#section' + sectionNum).hide()
+    //             $('#transcriptNav').removeClass('disabled')
+    //             $('#t-check').show()
+    //             $('#section' + (sectionNum + 1)).show()
+    //         } else {
+    //             alert('data not saved!')
+    //         }
+    //     }
+    // });
+}
+function saveTranscriptData(e, sectionNum) {
+    e.preventDefault()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var transcriptMethod = $('input[name=transcriptMethod]:checked').val();
+
+    var file_data = $('#transcriptFile').prop('files')[0];
+
+    var transcriptUpload = new FormData();
+
+    transcriptUpload.append('file', file_data);
+    transcriptUpload.append('currentSection', sectionNum + 1);
+    transcriptUpload.append('transcriptMethod', transcriptMethod);
+
+    // alert(transcriptUpload);
+
     $.ajax({
+        url: transcriptRouteUrl, // point to server-side PHP script
+        cache: false,
         type: 'POST',
-        url: transcriptRouteUrl,
-        data: {
-            _token: $('#transcriptToken').val(),
-            transcript_method: $('input[name=transcriptMethod]:checked').val(),
-            transcript_path: $('#transcript_path').val(),
-            currentSection: sectionNum + 1
-            // data: dataToSave
-        },
-        dataType: 'json',
-        // contentType: 'application/json',
+        contentType: false,
+        processData: false,
+        data: transcriptUpload,
         success: function (result) {
             if (result) {
                 alert('Saved!')
@@ -545,6 +582,7 @@ function saveTranscriptData(e, sectionNum) {
         }
     });
 }
+
 
 function GetTodayDate() {
     var tdate = new Date()
@@ -596,50 +634,7 @@ function enableMenuItems(currentSection) {
         }
     }
 
-    // if (currentSection == '1') {
-    //     $('#contactNav').removeClass('disabled')
-    //     $('#c-check').removeClass('hide')
-    // }
-    // if (currentSection >= '2') {
-    //     $('#contactNav').removeClass('disabled')
-    //     $('#c-check').removeClass('hide')
-    //     $('#s-check').removeClass('hide')
-    //     $('#statusNav').removeClass('disabled')
-    // }
-    // if (currentSection >= '3') {
-    //     // $('#contactNav').removeClass('disabled')
-    //     // $('#statusNav').removeClass('disabled')
-    //     $('#employmentNav').removeClass('disabled')
-    //     $('#e-check').removeClass('hide')
-    // }
-    // if (currentSection >= '4') {
-    //     // $('#contactNav').removeClass('disabled')
-    //     // $('#statusNav').removeClass('disabled')
-    //     // $('#employmentNav').removeClass('disabled')
-    //     $('#assessmentNav').removeClass('disabled')
-    //     $('#a-check').removeClass('hide')
-    // }
-    // if (currentSection >= '5') {
-    //     // $('#contactNav').removeClass('disabled')
-    //     // $('#statusNav').removeClass('disabled')
-    //     // $('#employmentNav').removeClass('disabled')
-    //     // $('#assessmentNav').removeClass('disabled')
-    //     $('#essayNav').removeClass('disabled')
-    //     $('#essay-check').removeClass('hide')
-    // }
-    // if (currentSection > '6') {
-    //     // $('#contactNav').removeClass('disabled');
-    //     // $('#statusNav').removeClass('disabled')
-    //     // $('#employmentNav').removeClass('disabled')
-    //     // $('#assessmentNav').removeClass('disabled')
-    //     // $('#essayNav').removeClass('disabled')
-    //     $('#transcriptNav').removeClass('disabled')
-    //     $('#t-check').removeClass('hide')
-    //     // $('#complete-check').removeClass('hide')
-    // }
-    // if (currentSection == '7') {
-    //     $('#complete-check').removeClass('hide')
-    // }
+
 }
 
 function fillCurrentSection(application) {
