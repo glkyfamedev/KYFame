@@ -10,6 +10,12 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable; // implements MustVerifyEmail -- Add later for email vaerification
 
+
+
+    protected $with = [
+       'studentApplication',
+    ];
+ 
     /**
      * The attributes that are mass assignable.
      *

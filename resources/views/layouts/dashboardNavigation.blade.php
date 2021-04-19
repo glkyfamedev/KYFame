@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('application')" :active="request()->routeIs('application')">
+                        <x-nav-link :href="route('form')" :active="request()->routeIs('form')">
                             {{ __('Application') }}
                         </x-nav-link>
                     </div>
@@ -92,3 +92,6 @@
         </div>
     </nav>
 </div>
+
+{{-- <script src="{{ asset('js/application.js') }}" type="text/javascript"></script> --}}
+{{-- <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script> --}}

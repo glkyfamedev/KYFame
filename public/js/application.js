@@ -8,57 +8,39 @@ $(document).ready(function () {
     })
 
     $('#startBtn').click(function (e) {
-        e.preventDefault()
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
-        $.ajax({
-            type: 'GET',
-            url: startRouteUrl,
-            data: {
-                _token: $('#token').val()
-            },
-            dataType: 'json',
-            success: function (application) {
-                var currentSection = application.currentSection;
-                if (application != null) {
-                    $('#appDescription').hide()
-                    if (application.completed_date != null) {
-                        $('#section1').show()
-                        enableMenuItems(7)
-                    } else {
-                        $('#section' + (currentSection + 1)).show()
-                        enableMenuItems(currentSection)
-                    }
-                    fillCurrentSection(application)
-                } else {
-                    alert('Could not create application')
-                }
-            }
-        })
-    })
-    function getApplication() {
+        e.preventDefault();
+        $('#appDescription').hide();
 
-    }
+        fillCurrentSection(application);
+
+        if (application.completed_date != null) {
+            $('#section1').show();
+            application.currentSection = 7;
+            enableMenuItems(currentSection);
+        }
+        else {
+            $('#section' + (currentSection + 1)).show();
+            enableMenuItems(currentSection);
+        }
+    });
+
     $('#appNav a').click(function (e) {
         e.preventDefault()
         $('.toggle').hide()
         var toShow = $(this).attr('href')
         $(toShow).show()
-    })
+    });
 
-    addEmploymentSection()
+    addEmploymentSection();
 
-    $('#addField').click(addEmploymentSection)
+    $('#addField').click(addEmploymentSection);
 
     // function updateSection(routeUrl, dataToSave, sectionNum) {
 
     //Status Section Conditionals
-    $('input[name=workForSponsor]').click(checkForEmployerSponsor)
+    $('input[name=workForSponsor]').click(checkForEmployerSponsor);
 
-    $('input[name=relativeSponsors]').click(checkForRelatedSponsor)
+    $('input[name=relativeSponsors]').click(checkForRelatedSponsor);
 
     //Assesment Section conditionals
     $('input[name=ACT]').click(function () {
@@ -69,7 +51,7 @@ $(document).ready(function () {
             $('#ACTScoresContainer').hide()
             $('.ACT').removeClass('score-input')
         }
-    })
+    });
 
     $('input[name=SAT]').click(function () {
         if ($("input[id='SATyes']").is(':checked')) {
@@ -79,7 +61,7 @@ $(document).ready(function () {
             $('#SATScoresContainer').hide()
             $('.SAT').removeClass('score-input')
         }
-    })
+    });
 
     $('input[name=KYOTE]').click(function () {
         if ($("input[id='KYOTEyes']").is(':checked')) {
@@ -87,7 +69,7 @@ $(document).ready(function () {
         } else {
             $('#KYOTEscore').hide()
         }
-    })
+    });
 
     $('#contactBtn').click(function (e) {
         e.preventDefault()
@@ -108,7 +90,7 @@ $(document).ready(function () {
         } else {
             saveContactData(e, sectionNum)
         }
-    })
+    });
 
     $('#statusBtn').click(function (e) {
         e.preventDefault()
@@ -121,7 +103,7 @@ $(document).ready(function () {
                 .parents('.status-required')
                 .find('.status-label')
             if ($(this).val() == '') {
-                hasErrors = true
+                hasErrors = true;
                 formInputLabel.css('color', 'red')
             } else {
                 formInputLabel.css('color', 'black')
@@ -133,7 +115,7 @@ $(document).ready(function () {
         } else {
             saveStatusData(e, sectionNum)
         }
-    })
+    });
 
     $('#employmentBtn').click(saveEmploymentData)
 
@@ -159,7 +141,7 @@ $(document).ready(function () {
         } else {
             saveEssayData(e, sectionNum)
         }
-    })
+    });
 
     $('#transcriptBtn').click(function (e) {
         e.preventDefault()
@@ -178,7 +160,7 @@ $(document).ready(function () {
         } else {
             saveTranscriptData(e, sectionNum)
         }
-    })
+    });
 
     $('#finishBtn').click(function (e) {
         e.preventDefault()
@@ -198,7 +180,9 @@ $(document).ready(function () {
             completeApplication(e)
         }
     })
-})
+});
+
+
 
 function checkForRelatedSponsor() {
     if ($("input[id='relativesYes']").is(':checked')) {
@@ -251,9 +235,7 @@ function addEmploymentSection() {
     var employmentTemplateHtml = $('#employerTemplate').html()
 
     var currentEmployerCount = $('.employerName').length
-
-    $('#employmentContainer').append(employmentTemplateHtml)
-
+    $('#employmentContainer').append(employmentTemplateHtml);
     if (currentEmployerCount == 3) {
         //disable button here
     }
@@ -265,10 +247,12 @@ function saveContactData(e, sectionNum) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    })
+    });
+
     //   var contactModel = getContactInfo();
     //   updateSection(contactRouteUrl, contactModel, sectionNum);
     //  });
+
     $.ajax({
         type: 'POST',
         url: contactRouteUrl,
@@ -282,9 +266,7 @@ function saveContactData(e, sectionNum) {
             zip: $('#zip').val(),
             primaryPhone: $('#primaryPhone').val(),
             altPhone: $('#altPhone').val(),
-            currentSection: sectionNum + 1
-
-
+            currentSection: sectionNum + 1,
             // data: dataToSave
         },
         dataType: 'json',
@@ -536,7 +518,8 @@ function saveTranscriptData(e, sectionNum) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    })
+    });
+
     $.ajax({
         type: 'POST',
         url: transcriptRouteUrl,
@@ -560,7 +543,7 @@ function saveTranscriptData(e, sectionNum) {
                 alert('data not saved!')
             }
         }
-    })
+    });
 }
 
 function GetTodayDate() {
@@ -601,53 +584,62 @@ function completeApplication(e) {
         }
     })
 }
+
 function enableMenuItems(currentSection) {
-    if (currentSection >= '1') {
-        $('#contactNav').removeClass('disabled')
-        $('#c-check').removeClass('hide')
-    }
-    if (currentSection >= '2') {
-        $('#s-check').removeClass('hide')
-        $('#statusNav').removeClass('disabled')
-    }
-    if (currentSection >= '3') {
-        // $('#contactNav').removeClass('disabled')
-        // $('#statusNav').removeClass('disabled')
-        $('#employmentNav').removeClass('disabled')
-        $('#e-check').removeClass('hide')
-    }
-    if (currentSection >= '4') {
-        // $('#contactNav').removeClass('disabled')
-        // $('#statusNav').removeClass('disabled')
-        // $('#employmentNav').removeClass('disabled')
-        $('#assessmentNav').removeClass('disabled')
-        $('#a-check').removeClass('hide')
-    }
-    if (currentSection >= '5') {
-        // $('#contactNav').removeClass('disabled')
-        // $('#statusNav').removeClass('disabled')
-        // $('#employmentNav').removeClass('disabled')
-        // $('#assessmentNav').removeClass('disabled')
-        $('#essayNav').removeClass('disabled')
-        $('#essay-check').removeClass('hide')
-    }
-    if (currentSection > '6') {
-        // $('#contactNav').removeClass('disabled');
-        // $('#statusNav').removeClass('disabled')
-        // $('#employmentNav').removeClass('disabled')
-        // $('#assessmentNav').removeClass('disabled')
-        // $('#essayNav').removeClass('disabled')
-        $('#transcriptNav').removeClass('disabled')
-        $('#t-check').removeClass('hide')
-        // $('#complete-check').removeClass('hide')
-    }
-    if (7) {
-        $('#complete-check').removeClass('hide')
+    for (var i = currentSection; i > 0; i--) {
+        if (i < 7) {
+            $("#sectionNav" + i).removeClass('disabled');
+            $("#sectionCheck" + i).removeClass('hide');
+        }
+        else {
+            $("#sectionCheck" + i).removeClass('hide');
+        }
     }
 
-
-
-
+    // if (currentSection == '1') {
+    //     $('#contactNav').removeClass('disabled')
+    //     $('#c-check').removeClass('hide')
+    // }
+    // if (currentSection >= '2') {
+    //     $('#contactNav').removeClass('disabled')
+    //     $('#c-check').removeClass('hide')
+    //     $('#s-check').removeClass('hide')
+    //     $('#statusNav').removeClass('disabled')
+    // }
+    // if (currentSection >= '3') {
+    //     // $('#contactNav').removeClass('disabled')
+    //     // $('#statusNav').removeClass('disabled')
+    //     $('#employmentNav').removeClass('disabled')
+    //     $('#e-check').removeClass('hide')
+    // }
+    // if (currentSection >= '4') {
+    //     // $('#contactNav').removeClass('disabled')
+    //     // $('#statusNav').removeClass('disabled')
+    //     // $('#employmentNav').removeClass('disabled')
+    //     $('#assessmentNav').removeClass('disabled')
+    //     $('#a-check').removeClass('hide')
+    // }
+    // if (currentSection >= '5') {
+    //     // $('#contactNav').removeClass('disabled')
+    //     // $('#statusNav').removeClass('disabled')
+    //     // $('#employmentNav').removeClass('disabled')
+    //     // $('#assessmentNav').removeClass('disabled')
+    //     $('#essayNav').removeClass('disabled')
+    //     $('#essay-check').removeClass('hide')
+    // }
+    // if (currentSection > '6') {
+    //     // $('#contactNav').removeClass('disabled');
+    //     // $('#statusNav').removeClass('disabled')
+    //     // $('#employmentNav').removeClass('disabled')
+    //     // $('#assessmentNav').removeClass('disabled')
+    //     // $('#essayNav').removeClass('disabled')
+    //     $('#transcriptNav').removeClass('disabled')
+    //     $('#t-check').removeClass('hide')
+    //     // $('#complete-check').removeClass('hide')
+    // }
+    // if (currentSection == '7') {
+    //     $('#complete-check').removeClass('hide')
+    // }
 }
 
 function fillCurrentSection(application) {
@@ -669,44 +661,45 @@ function fillCurrentSection(application) {
         // $('input[name=ACT]:checked').val(application.assesment_app.ACT),
         if (application.assesment_app.ACT != 0) {
 
-            $('#ACTenglishScore').val(application.assesment_app.ACTenglishScore),
-                $('#ACTreadingScore').val(application.assesment_app.ACTreadingScore),
-                $('#ACTmathScore').val(application.assesment_app.ACTmathScore),
-                $('#ACTscienceScore').val(application.assesment_app.ACTscienceScore),
-                $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore)
+            $('#ACTenglishScore').val(application.assesment_app.ACTenglishScore);
+            $('#ACTreadingScore').val(application.assesment_app.ACTreadingScore);
+            $('#ACTmathScore').val(application.assesment_app.ACTmathScore);
+            $('#ACTscienceScore').val(application.assesment_app.ACTscienceScore);
+            $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore);
             $('#ACTScoresContainer').show();
         }
 
         if (application.assesment_app.SAT != 0) {
-            $('input[id=SATyes]:checked'),
-                $('#SATmath').val(application.assesment_app.SATmath),
-                $('#SATCriticalThinking').val(application.assesment_app.SATCriticalThinking),
-                $('#SATwriting').val(application.assesment_app.SATwriting),
-                $('#SATcomposite').val(application.assesment_app.SATcomposite),
-                $('#SATScoresContainer').show()
+            $('input[id=SATyes]:checked');
+            $('#SATmath').val(application.assesment_app.SATmath);
+            $('#SATCriticalThinking').val(application.assesment_app.SATCriticalThinking);
+            $('#SATwriting').val(application.assesment_app.SATwriting);
+            $('#SATcomposite').val(application.assesment_app.SATcomposite);
+            $('#SATScoresContainer').show();
         }
+
         if (application.assesment_app.KYOTE != 0) {
             // $('input[name=KYOTE]:checked').val(application.assesment_app.KYOTE),
-            $('#KYOTEarea').val(application.assesment_app.KYOTEarea),
-                $('#KYOTEscore').val(application.assesment_app.KYOTEscore)
+            $('#KYOTEarea').val(application.assesment_app.KYOTEarea);
+            $('#KYOTEscore').val(application.assesment_app.KYOTEscore);
         }
 
-        $('#otherAssesments').val(application.assesment_app.otherAssesments),
+        $('#otherAssesments').val(application.assesment_app.otherAssesments);
 
-            $('input[name=skillsUSA]:checked').val(application.assesment_app.skillsUSA),
-            $('input[name=projectLeadTheWay]:checked').val(application.assesment_app.projectLeadTheWay),
+        $('input[name=skillsUSA]:checked').val(application.assesment_app.skillsUSA);
+        $('input[name=projectLeadTheWay]:checked').val(application.assesment_app.projectLeadTheWay);
 
-            $('#manufacturingAcedemics').val(application.assesment_app.manufacturingAcedemics),
-            $('#awardsAndHonors').val(application.assesment_app.awardsAndHonors),
-            $('#highSchoolAttended').val(application.assesment_app.highSchoolAttended),
-            $('#GPA').val(application.assesment_app.GPA),
-            $('#highSchoolActivities').val(application.assesment_app.highSchoolActivities),
-            $('#technicalPrograms').val(application.assesment_app.technicalPrograms),
-            $('#additionalComments').val(application.assesment_app.additionalComments)
+        $('#manufacturingAcedemics').val(application.assesment_app.manufacturingAcedemics);
+        $('#awardsAndHonors').val(application.assesment_app.awardsAndHonors);
+        $('#highSchoolAttended').val(application.assesment_app.highSchoolAttended);
+        $('#GPA').val(application.assesment_app.GPA);
+        $('#highSchoolActivities').val(application.assesment_app.highSchoolActivities);
+        $('#technicalPrograms').val(application.assesment_app.technicalPrograms);
+        $('#additionalComments').val(application.assesment_app.additionalComments);
 
 
         //essay Section
-        $('#essay').val(application.essay)
+        $('#essay').val(application.essay);
 
         //transcript Section
     }

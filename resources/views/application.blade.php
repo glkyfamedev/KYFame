@@ -52,20 +52,31 @@
     <div class="row py-12 mx-auto align-content-center">
         <div class="col-7 p-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="bg-white border-gray-200">
+
                 <div id="appDescription">
-                    <button type="button" class="btn" id="startBtn">Start new Application</button>
+                    @if ($application->start_date == null)
+                        <button type="button" class="btn btn-pink fw-bolder" id="startBtn">Start Application</button>
+                    @elseif ($application->start_date != null && $application->completed_date == null)
+                        <button type="button" class=" btn btn-navy" id="startBtn">Continue Application</button>
+                    @else
+                        <button type="button" class="btn btn-pink " id="startBtn">Edit/Update Application</button>
+                    @endif
+
+
+
                 </div>
+
                 <div class="form-section toggle" id="section1" style="display:none;">
                     <h2>Contact Information</h2>
 
                     <div class="messages"></div>
 
 
-                    <form class="contact-form row g-3" id="contact-Section" method="POST"
-                        action="{{ route('form.formSubmit') }}">
+                    <form class="contact-form row g-3" id="contact-Section">
                         <input type="hidden" id="token" name="_token" value="{{ Session::token() }}">
 
                         <div class="col-8 contact-required">
+                            {{-- {{ contact_app->streetAddress }} --}}
                             <label class="form-label contact-label" for="streetAddress">Street address <i
                                     class="bi bi-asterisk required"></i></label>
                             <input id="streetAddress" class="form-control contact-input" type="text"
@@ -558,7 +569,7 @@
 
                 <!-- Agreement and submit -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle termsCheck" id="section7" style="display:none" ;>
+                <div class="form-section toggle termsCheck sectionContainer" id="section7" style="display:none" ;>
                     <h2>Terms and Complete</h2>
                     <form class="contact-form">
                         <input type="hidden" id="completeToken" name="_token" value="{{ Session::token() }}">
@@ -622,38 +633,38 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group list-group-flush nav nav-tabs flex-column" id="appNav" role="tablist">
-                        <li class="list-group-item nav-item disabled" id="contactNav">
-                            <a href="#section1">Contact Info</a><label class="hide" id="c-check"><i
+                        <li class="list-group-item nav-item disabled" id="sectionNav1">
+                            <a href="#section1">Contact Info</a><label class="hide" id="sectionCheck1"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item disabled" id="statusNav">
-                            <a href="#section2">Legal Status</a><label class="hide" id="s-check"><i
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav2">
+                            <a href="#section2">Legal Status</a><label class="hide" id="sectionCheck2"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item disabled" id="employmentNav">
-                            <a href="#section3">Employment History</a><label class="hide" id="e-check"><i
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav3">
+                            <a href="#section3">Employment History</a><label class="hide" id="sectionCheck3"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item disabled" id="assessmentNav">
-                            <a href="#section4">Assessments</a><label class="hide" id="a-check"><i
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav4">
+                            <a href="#section4">Assessments</a><label class="hide" id="sectionCheck4"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item disabled" id="essayNav">
-                            <a href="#section5">Essay</a><label class="hide" id="essay-check"><i
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav5">
+                            <a href="#section5">Essay</a><label class="hide" id="sectionCheck5"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item disabled" id="transcriptNav">
-                            <a href="#section6">Transcripts</a><label class="hide" id="t-check"><i
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav6">
+                            <a href="#section6">Transcripts</a><label class="hide" id="sectionCheck6"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
 
-                        <li class="list-group-item nav-item nav-item disabled" id="completedNav">
-                            <a href="#section7">Finish</a><label class="hide" id="complete-check"><i
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav7">
+                            <a href="#section7">Finish</a><label class="hide" id="sectionCheck7"><i
                                     class="bi bi-check2 check"></i></label>
                         </li>
                     </ul>
@@ -701,7 +712,6 @@
 
 
     <script>
-        var startRouteUrl = "{{ route('form') }}";
         var contactRouteUrl = "{{ route('form.formSubmit') }}";
         var statusRouteUrl = "{{ route('form.formStatus') }}";
         var employmentRoutetUrl = "{{ route('form.formEmployment') }}";
@@ -713,10 +723,13 @@
 
     </script>
 
-    <script>
-        function getApplication(application) {
+    {{-- <script src="{{ asset('js/utility.js') }}" type="text/javascript"></script> --}}
 
-        }
+    <script>
+        var status = "{{ $application->status }}";
+        var currentSection = {{ $application->currentSection }};
+
+        var application = $.parseJSON('@json($application)');
 
     </script>
 

@@ -16,32 +16,35 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
-    public function __construct(Request $request)
+    public function __construct()
     {
-         $user = Auth::user();
-        //  $this->contact_Apps = $contactModel;
-        //  $this->status_Apps = $statusModel;
+         $this->middleware('auth');
     }
-    // return back()->withInput();
+
+  
     public function index(Request $request)
     {
         $user = Auth::user();
+    //   $current_date = new DateTime('NOW');
         
-        $current_date = new DateTime('NOW');
         try{
-            $application = StudentApplication::firstOrCreate(
+            $application = StudentApplication::where('user_id', $user->id)->with(
+                'contactApp',
+                'statusApp',
+                'employmentApp',
+                'assesmentApp')->firstOrCreate(
             [
-                'user_id' => $user->id,
+                'user_id' => $user->id
             ],
             [
-                'start_date' => $current_date,
-            ]);           
+                'start_date' => null
+            ]);
             
             session(['application' => $application]);
-    
-            return json_encode($application);;
-        } 
-        catch (Exception $e) {
+            
+            return view('application', ['application'=> $application]);
+        }
+        catch(Exception $e) {
             return null;
         }
     }
@@ -68,9 +71,15 @@ class ApplicationController extends Controller
                                                    
                 $contactModel->save();
                 $application->currentSection = $request->currentSection;
+                
+                if ($application.start_date == null){
+                    $application->start_date = new DateTime('NOW');
+                }
+                
                 $application->save();                           
-               
-              return response()->json(['success' => true]);          
+                $application->refresh();
+                
+                return response()->json(['success' => true]);          
             } 
             catch (Exception $e) {
                 return response()->json(['success' => false]);

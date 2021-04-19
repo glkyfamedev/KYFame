@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\ApplicationController;
+use App\Models\StudentApplication;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -33,9 +34,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+       
+        
         return redirect()->intended(RouteServiceProvider::DASHBOARD);
     }
-
+    
     /**
      * Destroy an authenticated session.
      *
