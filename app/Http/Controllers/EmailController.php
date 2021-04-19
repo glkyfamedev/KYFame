@@ -18,11 +18,14 @@ class EmailController extends Controller
     }
 
     public function AdminEmail($user)
-    {        
+    {   
+         $format = "A new application has been submitted by %s %s.";
+        
          $email = 'kyfame.dev@gmail.com';
          $details= [
          'title' => 'New Applicant',
-         'body' => 'A new application has been submitted by'.' ' .' '. $user->first_name .' ' .' '. $user->last_name . '.'
+        //  'body' => 'A new application has been submitted by'.' ' .' '. $user->first_name .' ' .' '. $user->last_name . '.'
+         'body' => sprintf($format, $user->first_name, $user->last_name)
          ];
          Mail::to($email)->send(new Gmail($details));
     }
@@ -37,16 +40,16 @@ class EmailController extends Controller
         Mail::to($email)->send(new Gmail($details));
     }
 
-       public function studentApprovedEmail($user)
-       {
-       $email = $user->email;
-       $details= [
-       'title' => 'Application Received!',
-       'body' => 'Conratulations ' .' '.' '. $user->first_name .'! '.' '.'Thank you for applying to GLKYfame. We will be in touch with
-       you soon with details on joining our program.'
-       ];
-       Mail::to($email)->send(new Gmail($details));
-       }
+    public function studentApprovedEmail($user)
+    {
+        $email = $user->email;
+        $details= [
+        'title' => 'Application Received!',
+        'body' => 'Conratulations ' .' '.' '. $user->first_name .'! '.' '.'Thank you for applying to GLKYfame. We will be in touch with
+        you soon with details on joining our program.'
+        ];
+        Mail::to($email)->send(new Gmail($details));
+    }
   
 
 

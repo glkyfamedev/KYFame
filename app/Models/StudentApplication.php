@@ -20,13 +20,14 @@ class StudentApplication extends Model
         $user_id = Auth::user()->id;
         
     }
-
-    protected $with = [
-        'contactApp', 
-        'statusApp',
-        'employmentApp',
-        'assesmentApp',         
-    ];
+    
+    // protected $with = [
+    //     'contactApp', 
+    //     'statusApp',
+    //     'employmentApp',
+    //     'assesmentApp',         
+    // ];
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -41,6 +42,7 @@ class StudentApplication extends Model
     //   'essay',
     //   'app_action',
     //   'current_section',
+    //   'status'
     //   'completed_date,
     //   'user_id' 
                      

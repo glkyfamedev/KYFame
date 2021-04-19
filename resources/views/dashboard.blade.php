@@ -4,7 +4,8 @@
             <div class="col">
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Dashboard') }}
+                    Dashboard - {{ $application->essay }}
+                    {{ $application->contactApp->state }}
                 </h2>
             </div>
             <div class="col">
@@ -13,7 +14,7 @@
                         <x-slot name="trigger">
                             <button
                                 class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                              
+
                                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -47,9 +48,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    Welcome!
+
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
 </x-app-layout>

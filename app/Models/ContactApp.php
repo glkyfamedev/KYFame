@@ -36,7 +36,7 @@ class ContactApp extends Model
     
      public function StudentApplication()
     {
-        return $this->belongsTo(StudentApplication::class);
+        return $this->belongsTo(StudentApplication::class)->all();
     }
   
     /**
