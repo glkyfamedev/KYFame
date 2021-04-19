@@ -236,7 +236,7 @@ class ApplicationController extends Controller
         if ($request->ajax()) {
             try {                
                 $application = StudentApplication::where('id', $application->id)->first();                
-                $application->transcript_method = $request->transcript_method;
+                $application->transcript_method = $request->transcriptMethod;
                 $application->currentSection = $request->currentSection;                
                 $application->transcriptPath = $fileName;
                 

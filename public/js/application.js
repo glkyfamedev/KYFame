@@ -550,13 +550,15 @@ function saveTranscriptData(e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    var transcriptMethod = $('input[name=transcriptMethod]:checked').val();
 
     var file_data = $('#transcriptFile').prop('files')[0];
 
     var transcriptUpload = new FormData();
 
     transcriptUpload.append('file', file_data);
-    transcriptUpload.append('currentSection', currentSection + 1);
+    transcriptUpload.append('currentSection', sectionNum + 1);
+    transcriptUpload.append('transcriptMethod', transcriptMethod);
 
     // alert(transcriptUpload);
 
