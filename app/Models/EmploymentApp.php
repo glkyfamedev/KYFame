@@ -10,16 +10,17 @@ class EmploymentApp extends Model
     use HasFactory;
     public $timestamps = false;
     protected $guarded = [];
-    //        protected $fillable = [
+    
+    protected $fillable = [
                
-    //   'employerName',
-    //   'employerPhone',
-    //   'employmentStart',
-    //   'employmentEnd',
-    //   'reasonForLeaving',
-    //   'completedDate',
-    //   'studentApplication_id',
-    // ];
+      'employerName',
+      'employerPhone',
+      'employmentStart',
+      'employmentEnd',
+      'reasonForLeaving',
+      'completedDate',
+      'student_application_id',
+    ];
 
          public function Student_application()
     {

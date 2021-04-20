@@ -535,7 +535,8 @@
                                 </div>
                                 <div class="" id="transciptUpload">
                                     <div class="input-group m-3">
-                                        <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
+                                        <input type="file" id="transcriptFile" class="form-control" placeholder=""
+                                            name="transcript" />
                                     </div>
                                 </div>
                             </div>
@@ -726,9 +727,6 @@
     {{-- <script src="{{ asset('js/utility.js') }}" type="text/javascript"></script> --}}
 
     <script>
-        var status = "{{ $application->status }}";
-        var currentSection = {{ $application->currentSection }};
-
         var application = $.parseJSON('@json($application)');
 
     </script>

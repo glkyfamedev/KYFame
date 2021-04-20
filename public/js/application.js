@@ -10,7 +10,7 @@ $(document).ready(function () {
     $('#startBtn').click(function (e) {
         e.preventDefault();
         $('#appDescription').hide();
-
+        var currentSection = application.currentSection;
         fillCurrentSection(application);
 
         if (application.completed_date != null) {
@@ -237,7 +237,7 @@ function addEmploymentSection() {
     var currentEmployerCount = $('.employerName').length
     $('#employmentContainer').append(employmentTemplateHtml);
     if (currentEmployerCount == 3) {
-        //disable button here
+        $('#addField').addClass('disabled')
     }
 }
 
@@ -349,6 +349,16 @@ function saveStatusData(e, sectionNum) {
     })
 }
 
+function getEmployerPrototype() {
+    return {
+        name: "",
+        phone: "",
+        workDuties: "",
+        employmentStart: "",
+        employmentEnd: "",
+        reasonForLeaving: "",
+    };
+}
 function saveEmploymentData(e) {
     e.preventDefault()
     $.ajaxSetup({
@@ -358,29 +368,20 @@ function saveEmploymentData(e) {
     })
     var sectionNum = $(this).data('section')
 
-    // var employers = [];
-    // var employerCount = $(".employer").length;
+    var employers = [];
+    var employerCount = $(".employer").length - 1;
 
-    // var employer = {
-    //   Name: "",
-    //   Phone: "",
-    //   WorkDuties: "",
-    //   employmentStart: "",
-    //   employmentEnd: "",
-    //   reasonForLeaving: "",
-    // };
-
-    // for (var i = 0; i < employerCount; i++) {
-    //   var container = $(".employer").eq(i);
-
-    //   employer.Name = $(".employerName", container).val();
-    //   employer.Phone = $(".employerPhone", container).val();
-    //   employer.WorkDuties = $(".workDuties", container).val();
-    //   employer.employmentStart = $(".employmentStart", container).val();
-    //   employer.employmentEnd = $(".employmentEnd", container).val();
-    //   employer.reasonForLeaving = $(".reasonForLeaving", container).val();
-    //   employers.push(employer);
-    // }
+    for (var i = 0; i < employerCount; i++) {
+        var container = $(".employer").eq(i);
+        employer = getEmployerPrototype();
+        employer.name = $(".employerName", container).val();
+        employer.phone = $(".employerPhone", container).val();
+        employer.workDuties = $(".workDuties", container).val();
+        employer.employmentStart = $(".employmentStart", container).val();
+        employer.employmentEnd = $(".employmentEnd", container).val();
+        employer.reasonForLeaving = $(".reasonForLeaving", container).val();
+        employers.push(employer);
+    }
 
     $.ajax({
         type: 'POST',
@@ -388,15 +389,15 @@ function saveEmploymentData(e) {
         data: {
             _token: $('#employmentToken').val(),
 
-            employerName: $('.employerName').val(),
-            employerPhone: $('.employerPhone').val(),
-            workDuties: $('.workDuties').val(),
-            employmentStart: $('.employmentStart').val(),
-            employmentEnd: $('.employmentEnd').val(),
-            reasonForLeaving: $('.reasonForLeaving').val(),
-            currentSection: sectionNum + 1
+            // employerName: $('.employerName').val(),
+            // employerPhone: $('.employerPhone').val(),
+            // workDuties: $('.workDuties').val(),
+            // employmentStart: $('.employmentStart').val(),
+            // employmentEnd: $('.employmentEnd').val(),
+            // reasonForLeaving: $('.reasonForLeaving').val(),
+            // currentSection: sectionNum + 1
 
-            // employerArray: employers,
+            employerArray: employers
         },
         dataType: 'json',
         success: function (result) {
@@ -512,37 +513,7 @@ function saveEssayData(e, sectionNum) {
     })
 }
 
-function saveTranscriptData(e, sectionNum) {
-    e.preventDefault()
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
-    // $.ajax({
-    //     type: 'POST',
-    //     url: transcriptRouteUrl,
-    //     data: {
-    //         _token: $('#transcriptToken').val(),
-    //         transcript_method: $('input[name=transcriptMethod]:checked').val(),
-    //         transcript_path: $('#transcript_path').val(),
-    //         currentSection: sectionNum + 1
-    //     },
-    //     dataType: 'json',
-    //     success: function (result) {
-    //         if (result) {
-    //             alert('Saved!')
-    //             $('#section' + sectionNum).hide()
-    //             $('#transcriptNav').removeClass('disabled')
-    //             $('#t-check').show()
-    //             $('#section' + (sectionNum + 1)).show()
-    //         } else {
-    //             alert('data not saved!')
-    //         }
-    //     }
-    // });
-}
 function saveTranscriptData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({

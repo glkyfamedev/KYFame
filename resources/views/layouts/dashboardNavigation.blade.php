@@ -93,5 +93,3 @@
     </nav>
 </div>
 
-{{-- <script src="{{ asset('js/application.js') }}" type="text/javascript"></script> --}}
-{{-- <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script> --}}
