@@ -120,25 +120,48 @@ class ApplicationController extends Controller
 
     public function formEmployment(Request $request)
     {
+       $employerArrays = $request->employerArray;
+
+
         $application = session('application');
 
         if ($request->ajax()) {
             try {
+                $employmentModel = EmploymentApp::where('student_application_id',$application->id)->find($application->id);
 
-                             // foreach ($request->all as $req) {
-             $employmentModel = EmploymentApp::where('student_application_id',$application->id)->firstOrCreate();
+                foreach($employerArrays as $employerArray)
+                {
+                    $employmentModel = new $employmentModel;
+                    
+                    $employmentModel['employerName'] = $employerArray['name'];
+                    $employmentModel['employerPhone'] = $employerArray['phone'];
+                    $employmentModel ['workDuties'] = $employerArray['workDuties'];
+                    $employmentModel ['employmentStart'] = $employerArray['employmentStart'];
+                    $employmentModel ['employmentEnd'] = $employerArray['employmentEnd'];
+                    $employmentModel ['reasonForLeaving'] = $employerArray['reasonForLeaving'];
+    
+                        // $employmentModel->workDuties = $request->workDuties;
+                        // $employmentModel->employmentStart = $request->employmentStart;
+                        // $employmentModel->employmentEnd = $request->employmentEnd;
+                        // $employmentModel->reasonForLeaving = $request->reasonForLeaving;
 
-                $employmentModel->employerName = $request->employerName;
-                $employmentModel->employerPhone = $request->employerPhone;
-                $employmentModel->workDuties = $request->workDuties;
-                $employmentModel->employmentStart = $request->employmentStart;
-                $employmentModel->employmentEnd = $request->employmentEnd;
-                $employmentModel->reasonForLeaving = $request->reasonForLeaving;
-                $employmentModel->student_application_id = $application->id;
 
-                $employmentModel->save();
+
+
+                    $employmentModel->student_application_id = $application->id;
+                    $employmentModel->save(); 
+                   
+
+                }
+               
+                // $employmentModel->workDuties = $request->workDuties;
+                // $employmentModel->employmentStart = $request->employmentStart;
+                // $employmentModel->employmentEnd = $request->employmentEnd;
+                // $employmentModel->reasonForLeaving = $request->reasonForLeaving;
+
+              
                 $application->currentSection = $request->currentSection;
-                $application->save();
+                $application->save();              
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
