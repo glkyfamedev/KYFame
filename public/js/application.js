@@ -625,45 +625,48 @@ function fillCurrentSection(application) {
 
         //Assessments Section
         // $('input[name=ACT]:checked').val(application.assesment_app.ACT),
-        if (application.assesment_app.ACT != 0) {
+        if (application.assesment_app) {
+            if (application.assesment_app.ACT != 0) {
 
-            $('#ACTenglishScore').val(application.assesment_app.ACTenglishScore);
-            $('#ACTreadingScore').val(application.assesment_app.ACTreadingScore);
-            $('#ACTmathScore').val(application.assesment_app.ACTmathScore);
-            $('#ACTscienceScore').val(application.assesment_app.ACTscienceScore);
-            $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore);
-            $('#ACTScoresContainer').show();
+                $('#ACTenglishScore').val(application.assesment_app.ACTenglishScore);
+                $('#ACTreadingScore').val(application.assesment_app.ACTreadingScore);
+                $('#ACTmathScore').val(application.assesment_app.ACTmathScore);
+                $('#ACTscienceScore').val(application.assesment_app.ACTscienceScore);
+                $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore);
+                $('#ACTScoresContainer').show();
+            }
+
+
+
+            if (application.assesment_app.SAT != 0) {
+                $('input[id=SATyes]:checked');
+                $('#SATmath').val(application.assesment_app.SATmath);
+                $('#SATCriticalThinking').val(application.assesment_app.SATCriticalThinking);
+                $('#SATwriting').val(application.assesment_app.SATwriting);
+                $('#SATcomposite').val(application.assesment_app.SATcomposite);
+                $('#SATScoresContainer').show();
+            }
+
+            if (application.assesment_app.KYOTE != 0) {
+                // $('input[name=KYOTE]:checked').val(application.assesment_app.KYOTE),
+                $('#KYOTEarea').val(application.assesment_app.KYOTEarea);
+                $('#KYOTEscore').val(application.assesment_app.KYOTEscore);
+            }
+
+            $('#otherAssesments').val(application.assesment_app.otherAssesments);
+
+            $('input[name=skillsUSA]:checked').val(application.assesment_app.skillsUSA);
+            $('input[name=projectLeadTheWay]:checked').val(application.assesment_app.projectLeadTheWay);
+
+            $('#manufacturingAcedemics').val(application.assesment_app.manufacturingAcedemics);
+            $('#awardsAndHonors').val(application.assesment_app.awardsAndHonors);
+            $('#highSchoolAttended').val(application.assesment_app.highSchoolAttended);
+            $('#GPA').val(application.assesment_app.GPA);
+            $('#highSchoolActivities').val(application.assesment_app.highSchoolActivities);
+            $('#technicalPrograms').val(application.assesment_app.technicalPrograms);
+            $('#additionalComments').val(application.assesment_app.additionalComments);
+
         }
-
-        if (application.assesment_app.SAT != 0) {
-            $('input[id=SATyes]:checked');
-            $('#SATmath').val(application.assesment_app.SATmath);
-            $('#SATCriticalThinking').val(application.assesment_app.SATCriticalThinking);
-            $('#SATwriting').val(application.assesment_app.SATwriting);
-            $('#SATcomposite').val(application.assesment_app.SATcomposite);
-            $('#SATScoresContainer').show();
-        }
-
-        if (application.assesment_app.KYOTE != 0) {
-            // $('input[name=KYOTE]:checked').val(application.assesment_app.KYOTE),
-            $('#KYOTEarea').val(application.assesment_app.KYOTEarea);
-            $('#KYOTEscore').val(application.assesment_app.KYOTEscore);
-        }
-
-        $('#otherAssesments').val(application.assesment_app.otherAssesments);
-
-        $('input[name=skillsUSA]:checked').val(application.assesment_app.skillsUSA);
-        $('input[name=projectLeadTheWay]:checked').val(application.assesment_app.projectLeadTheWay);
-
-        $('#manufacturingAcedemics').val(application.assesment_app.manufacturingAcedemics);
-        $('#awardsAndHonors').val(application.assesment_app.awardsAndHonors);
-        $('#highSchoolAttended').val(application.assesment_app.highSchoolAttended);
-        $('#GPA').val(application.assesment_app.GPA);
-        $('#highSchoolActivities').val(application.assesment_app.highSchoolActivities);
-        $('#technicalPrograms').val(application.assesment_app.technicalPrograms);
-        $('#additionalComments').val(application.assesment_app.additionalComments);
-
-
         //essay Section
         $('#essay').val(application.essay);
 

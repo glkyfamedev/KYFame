@@ -42,24 +42,24 @@
               <div class="card-text p-3">
                 <p>{{ $comments }}.</p>
               </div>
-            <hr>
-              <div class="row justify-content-center">
-                          {{ $contact_name }}
-                        </div>
-                        <div class="row justify-content-center">
-                          <a href="mailto: {{ $contact_email }}">{{ $contact_email }}</a>
-              </div>
-                
-              <div class="row justify-content-center">
-                          <address>
-                            <center>
-                              {{ $contact_street_addr1 }}<br>
-                              {{ $contact_street_addr2 }}<br>
-                              {{ $contact_city }}<br>
-                              {{ $contact_state }}&nbsp;{{ $contact_zip }}
-                            </center>
-                          </address>
-              </div>
+              <hr>
+                <div class="row justify-content-center">
+                            {{ $contact_name }}
+                          </div>
+                          <div class="row justify-content-center">
+                            <a href="mailto: {{ $contact_email }}">{{ $contact_email }}</a>
+                </div>
+                  
+                <div class="row justify-content-center">
+                            <address>
+                              <center>
+                                {{ $contact_street_addr1 }}<br>
+                                {{ $contact_street_addr2 }}<br>
+                                {{ $contact_city }}<br>
+                                {{ $contact_state }}&nbsp;{{ $contact_zip }}
+                              </center>
+                            </address>
+                </div>
             </div>
             <div class="card-footer text-muted">
               <x-nav-link :href="URL('sponsors')" :active="request()->routeIs('sponsors')">
@@ -68,7 +68,7 @@
             </div>
           </div>
       </div>
-    </div>
+  </div>
   </div>
 
 

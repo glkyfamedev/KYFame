@@ -1,11 +1,11 @@
 <x-app-layout>
+
     <x-slot name="header">
         <div class="row">
             <div class="col">
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard - {{ $application->essay }}
-
+                    {{ __('Dashboard') }}
                 </h2>
             </div>
             <div class="col">
@@ -33,7 +33,7 @@
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
+                                                                this.closest('form').submit();">
                                     {{ __('Log out') }}
                                 </x-dropdown-link>
                             </form>
@@ -43,18 +43,29 @@
             </div>
         </div>
     </x-slot>
-    </div>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
 
+    <div class="row row-cols-1 row-cols-md-3">
+        @foreach ($sponsors as $sponsor)
+            <div class="col mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                        <a href="">
+                            <img src="{{ asset($sponsor['pic_path']) }}" />
+                        </a>
 
+                        <p class="card-text">
+                            <center>{{ $sponsor['comments'] }}</center>
+                        </p>
+                        <form method="get" action="{{ route('manageSponsors', $sponsor->id) }}">
+                            @csrf
+                            @method('PATCH')
+                            <input type="submit" value="{{ $sponsor['sponsor_name'] }}"/>
+                        </form>
+
+                       
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
-
-
-
 </x-app-layout>

@@ -1,11 +1,11 @@
 <x-app-layout>
+
     <x-slot name="header">
         <div class="row">
             <div class="col">
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard - {{ $application->essay }}
-
+                    {{ __('Dashboard') }}
                 </h2>
             </div>
             <div class="col">
@@ -33,7 +33,7 @@
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
+                                                                this.closest('form').submit();">
                                     {{ __('Log out') }}
                                 </x-dropdown-link>
                             </form>
@@ -43,18 +43,30 @@
             </div>
         </div>
     </x-slot>
-    </div>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+    <div class="row row-cols-1 row-cols-md-3">
+        @foreach ($applications as $key => $application)
+            <div class="col m-3">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">                   
+                        <p> {{ $application->id }}</p><br>
+                        <p>{{ $application->user_id }}</p>
+                        <p class="card-text">                        
+                            <center>{{  $application->first_name}}</center>
+                        </p>
 
-
+                        <p class="card-text">
+                            <center>{{ $application->start_date}}</center>
+                        </p>
+                         <p class="card-text">
+                            <center>{{ $application->application_action}}</center>
+                        </p>
+                        <form method="get" action="{{ route('application.show', $application->id) }}">
+                            @csrf
+                            <input type="submit" value="View Application"/>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
-
-
-
 </x-app-layout>

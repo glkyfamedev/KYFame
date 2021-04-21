@@ -33,20 +33,20 @@ class StudentApplication extends Model
      *
      * @var array
      */
-    // protected $fillable = [
-    //   'id',
-    //   'start_date',
-    //   'complete_date',
-    //   'transcript_method',
-    //   'transcript_path',
-    //   'essay',
-    //   'app_action',
-    //   'current_section',
-    //   'status'
-    //   'completed_date,
-    //   'user_id' 
+    protected $fillable = [
+      'id',
+      'start_date',
+      'complete_date',
+      'transcript_method',
+      'transcript_path',
+      'essay',
+      'app_action',
+      'current_section',
+      'status',
+      'completed_date',
+      'user_id',
                      
-    // ];
+    ];
 
     protected $guarded = [];
     
