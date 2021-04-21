@@ -25,7 +25,6 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-    //   $current_date = new DateTime('NOW');
         
         try{
             $application = StudentApplication::where('user_id', $user->id)->with(
@@ -38,8 +37,8 @@ class ApplicationController extends Controller
             ],
             [
                 'start_date' => null
-            ]);
-            
+            ]);        
+                       
             session(['application' => $application]);
             
             return view('application', ['application'=> $application]);
@@ -91,6 +90,8 @@ class ApplicationController extends Controller
     public function formStatus(Request $request)
     {
         $application = session('application');
+        
+          $student_application_id = $application->id;
 
         if ($request->ajax()) {
             try {
@@ -120,14 +121,14 @@ class ApplicationController extends Controller
 
     public function formEmployment(Request $request)
     {
-       $employerArrays = $request->employerArray;
-
-
-        $application = session('application');
-
+       $application = session('application');
+       $student_application_id = $application->id;
+       $employerArrays = $request->employerArray;                
+      
         if ($request->ajax()) {
             try {
-                $employmentModel = EmploymentApp::where('student_application_id',$application->id)->find($application->id);
+                $employmentModel =
+                EmploymentApp::where('student_application_id',$application->id)->firstOrCreate();
 
                 foreach($employerArrays as $employerArray)
                 {
@@ -139,27 +140,11 @@ class ApplicationController extends Controller
                     $employmentModel ['employmentStart'] = $employerArray['employmentStart'];
                     $employmentModel ['employmentEnd'] = $employerArray['employmentEnd'];
                     $employmentModel ['reasonForLeaving'] = $employerArray['reasonForLeaving'];
-    
-                        // $employmentModel->workDuties = $request->workDuties;
-                        // $employmentModel->employmentStart = $request->employmentStart;
-                        // $employmentModel->employmentEnd = $request->employmentEnd;
-                        // $employmentModel->reasonForLeaving = $request->reasonForLeaving;
-
-
-
-
-                    $employmentModel->student_application_id = $application->id;
-                    $employmentModel->save(); 
-                   
-
-                }
-               
-                // $employmentModel->workDuties = $request->workDuties;
-                // $employmentModel->employmentStart = $request->employmentStart;
-                // $employmentModel->employmentEnd = $request->employmentEnd;
-                // $employmentModel->reasonForLeaving = $request->reasonForLeaving;
-
-              
+                    $employmentModel->student_application_id = $application->id;                
+                                       
+                    $employmentModel->save();              
+                }            
+                      
                 $application->currentSection = $request->currentSection;
                 $application->save();              
                 return response()->json(['success' => true]);
@@ -174,7 +159,7 @@ class ApplicationController extends Controller
     public function formAssesments(Request $request)
     {
         $application = session('application');
-
+        $student_application_id = $application->id;
         if ($request->ajax()) {
             try {                
             $assesments = AssesmentApp::where('student_application_id',$application->id)->firstOrCreate();
@@ -252,25 +237,17 @@ class ApplicationController extends Controller
 
         $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
         $request->file->move(public_path('transcripts'), $fileName);
-        
-        // $test = $_FILES['file']['tmp_name'];
-        // $test2 = move_uploaded_file($_FILES['file']['tmp_name'], 'transcripts/' . $_FILES['file']['name']);
-        
+                
         if ($request->ajax()) {
             try {                
                 $application = StudentApplication::where('id', $application->id)->first();                
                 $application->transcript_method = $request->transcriptMethod;
                 $application->currentSection = $request->currentSection;                
-                $application->transcriptPath = $fileName;
-                
-                //This line isnt working, file saves 
-                //to folder but needs to set path and save in database. // 
+                $application->transcriptPath = $fileName;                
 
                 $application->save();
                 
-                return response()->json(['success' => true]);
-
-                  
+                return response()->json(['success' => true]);                  
 
             } catch (Exception $e) {
                 return response()->json(['success' => false]);

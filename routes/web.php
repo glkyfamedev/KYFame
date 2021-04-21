@@ -6,6 +6,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\SponsorController;
 use App\Models\StudentApplication;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -37,9 +38,8 @@ Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
 
 
 
-
+//Student Application routes 
 Route::get('/form', [ApplicationController::class, 'index'])->name('form');
-
 Route::post('/form', [ApplicationController::class, 'formSubmit'])->name('form.formSubmit');
 Route::post('/formStatus', [ApplicationController::class, 'formStatus'])->name('form.formStatus');
 Route::post('/formEmployment', [ApplicationController::class, 'formEmployment'])->name('form.formEmployment');
@@ -50,21 +50,17 @@ Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Route::get('/application', [ApplicationController::class, 'getApplication'])->name('application');
+//Admin routes
+Route::get('admin/manageApplications', [AdminController::class, 'viewApplications'])->name('applications');
 
-// Route::get('/dashboard', function (Request $request) {
-
-// return view('dashboard');
-// })->middleware(['auth'])->middleware('verified')->name('dashboard');
-
+Route::get('admin/viewSponsors', [AdminController::class, 'viewSponsors'])->name('viewSponsors');
+Route::get('admin/manageSponsors/{id}', [AdminController::class, 'manageSponsors'])->name('manageSponsors');
+Route::get('admin/updateSponor/{id}', [AdminController::class, 'updateSponsor'])->name('updateSponsor');
 
 
-// Route::get('/application', function (Request $request) {   
-//         $application = new ApplicationController();
-//         $user = Auth::user();
-//         $app = $application->index($request);
-//     return view('application', $application);
-// })->middleware(['auth'])->name('application');
+Route::get('admin/applicationSelected/{id}', [AdminController::class, 'selectApplication'])
+->name('application.show');
+
 
 
 require __DIR__.'/auth.php';

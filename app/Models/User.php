@@ -14,6 +14,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $with = [
        'studentApplication',
+       
     ];
  
     /**
@@ -26,9 +27,23 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_name',
         'email',
         'password',
-        'student_application_id',
+        'role',
+        // 'student_application_id',
         
     ];
+    public function StudentRole()
+    { 
+        $students = User::where('role', 'Student')->get();    
+        return $students; 
+    }
+     public function AdminRole()
+     {
+     $admin = User::where('role', 'Admin')->get();
+     return $admin;
+     }
+  
+
+
   public function StudentApplication()
     {
         return $this->hasOne(StudentApplication::class);
