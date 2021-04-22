@@ -25,7 +25,14 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 
               
-                return redirect(RouteServiceProvider::DASHBOARD);
+                $user = Auth::user();
+
+                if($user->role == 'Admin'){
+                    return redirect()->route(RouteServiceProvider::ADMINDASHBOARD);
+                }
+                else{
+                    return redirect()->route(RouteServiceProvider::DASHBOARD);
+                }
             }
         }
 

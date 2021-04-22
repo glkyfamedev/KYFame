@@ -36,8 +36,6 @@ Route::get('/sponsors', [SponsorController::class, 'index'])
 Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
     ->name('sponsors.show');
 
-
-
 //Student Application routes 
 Route::get('/form', [ApplicationController::class, 'index'])->name('form');
 Route::post('/form', [ApplicationController::class, 'formSubmit'])->name('form.formSubmit');
@@ -48,10 +46,13 @@ Route::post('/formEssay', [ApplicationController::class, 'formEssay'])->name('fo
 Route::post('/formTranscript', [ApplicationController::class, 'formTranscript'])->name('form.formTranscript');
 Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication'])->name('form.complete');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
+
+Route::get('/signIn', function () {})->middleware(['auth'])->name('signIn');
 
 //Admin routes
 Route::get('admin/manageApplications', [AdminController::class, 'viewApplications'])->name('applications');
+Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard');
 
 Route::get('admin/viewSponsors', [AdminController::class, 'viewSponsors'])->name('viewSponsors');
 Route::get('admin/manageSponsors/{id}', [AdminController::class, 'manageSponsors'])->name('manageSponsors');

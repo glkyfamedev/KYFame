@@ -34,11 +34,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-       
-        
-        return redirect()->intended(RouteServiceProvider::DASHBOARD);
+        $user = Auth::user();
+
+        if($user->Role == 'Admin'){
+           return redirect()->route(RouteServiceProvider::ADMINDASHBOARD);
+        }
+        else{
+           return redirect()->route(RouteServiceProvider::DASHBOARD);
+        }
     }
-    
     /**
      * Destroy an authenticated session.
      *
