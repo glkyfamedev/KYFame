@@ -1,0 +1,265 @@
+.dark {
+    color: #031e31 !important;
+}
+
+.text-dark {
+    color: #031e31 !important;
+}
+
+.bg-dark {
+    background-color: #031e31 !important;
+}
+
+.btn-dark {
+    background-color: #031e31 !important;
+}
+
+.btn-dark:hover {
+    color: #89E1D4 !important;
+}
+
+.border-dark {
+    border: solid 1px;
+    border-color: #031e31 !important;
+
+}
+
+/*classes for the navy color*/
+.navy {
+    color: #1A4173 !important;
+}
+
+.text-navy {
+    color: #1A4173 !important;
+}
+
+.bg-navy {
+    background-color: #1A4173 !important;
+}
+
+.btn-navy {
+    background-color: #1A4173 !important;
+    color:#fff !important;
+}
+
+.btn-navy:hover {
+    color: #d32d69 !important;
+}
+
+.border-navy {
+    border: solid 1px;
+    border-color: #1A4173 !important;
+}
+
+/*classes for the blue color*/
+.blue {
+    color: #4c6a89 !important;
+}
+
+.text-blue {
+    color: #4c6a89 !important;
+}
+
+.bg-blue {
+    background-color: #4c6a89 !important;
+}
+
+.btn-blue {
+    background-color: #4c6a89 !important;
+}
+
+.btn-blue:hover {
+    color: #d32d69 !important;
+}
+
+.border-blue {
+    border: solid 1px;
+    border-color: #4c6a89 !important;
+}
+
+/*classes for the mint color*/
+.mint {
+    color: #89E1D4 !important;
+}
+
+.text-mint {
+    color: #89E1D4 !important;
+}
+
+.bg-mint {
+    background-color: #89E1D4 !important;
+}
+
+.btn-mint {
+    background-color: #89E1D4 !important;
+}
+
+.btn-mint:hover {
+    color: #d32d69 !important;
+}
+
+.border-mint {
+    border: solid 1px;
+    border-color: #89E1D4 !important;
+}
+
+/*classes for the pink color*/
+.pink {
+    color: #d32d69 !important;
+}
+.pink-hover:hover{
+    color:#d32d69 !important;
+}
+.text-pink {
+    color: #d32d69 !important;
+}
+
+.bg-pink {
+    background-color: #d32d69 !important;
+}
+
+.btn-pink {
+    background-color: #d32d69 !important;
+    color: #fff;
+
+}
+
+.btn-pink:hover {
+    color: #1A4173 !important;
+}
+
+.border-pink {
+    border: solid 1px;
+    border-color: #d32d69 !important;
+}
+
+/*classes for the light grey color*/
+.light-grey {
+    color: #F0F3F8 !important;
+}
+
+.text-light-grey {
+    color: #F0F3F8 !important;
+}
+
+.bg-light-grey {
+    background-color: #F0F3F8 !important;
+}
+
+.btn-light-grey {
+    background-color: #F0F3F8 !important;
+}
+
+.border-light-grey {
+    border-color: #F0F3F8 !important;
+}
+
+/*classes for the Yellow color*/
+.yellow {
+
+    color: #F59E0B !important;
+}
+
+.text-yellow {
+    color: #F59E0B !important;
+}
+
+.bg-yellow {
+    background-color: #F59E0B !important;
+}
+
+.btn-yellow {
+    background-color: #F59E0B !important;
+}
+
+.btn-yellow:hover {
+    color: #d32d69 !important;
+}
+
+.border-yellow {
+    border: solid 1px;
+    border-color: #F59E0B !important;
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel.pointer-event {
+    touch-action: pan-y;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item {
+        transition: none;
+    }
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+    display: block;
+}
+
+/* rtl:begin:ignore */
+.carousel-item-next:not(.carousel-item-start),
+.active.carousel-item-end {
+    transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-end),
+.active.carousel-item-start {
+    transform: translateX(-100%);
+}
+
+/* rtl:end:ignore */
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-property: opacity;
+    transform: none;
+}
+
+.carousel-fade .carousel-item.active,
+.carousel-fade .carousel-item-next.carousel-item-start,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+    z-index: 1;
+    opacity: 1;
+}
+
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0s 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .carousel-fade .active.carousel-item-start,
+    .carousel-fade .active.carousel-item-end {
+        transition: none;
+    }
+}

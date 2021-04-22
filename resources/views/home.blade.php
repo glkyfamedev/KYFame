@@ -5,7 +5,7 @@
             {{ __('home') }}
         </h2>
     </x-slot>
-    <div class="container border-b p-4">
+    <div class="container border-bottom p-4">
         <div class="row justify-content-center ">
             <div class=" col-sm">
                 <div class="card-body">
@@ -50,9 +50,9 @@
         </div>
     </div>
 
-    <div class="container mt-5">
+    <div class="container mt-4 border-bottom p-4">
         <div class="row">
-            <div class="col-9">
+            <div class="col-lg col-sm-8">
                 <h1 class="navy">FAME</h1>
 
                 <p>KY FAME is a unique two-year program that combines college education with paid training. KY FAME’s
@@ -66,10 +66,12 @@
 
                 <p>Greater Louisville is one chapter of thirteen chapters in Kentucky. FAME originated in Kentucky but
                     now has chapters in twelve states.
+                    <div class="m-2">
                     <x-nav-link :href=" route('register')"
                         class="btn ml-3 whitespace-nowrap inline-flex items-center justify-center border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-pink hover:bg-mint hover:text-white">
                         {{ __('Apply') }}
                     </x-nav-link>
+                    </div>
                 </p>
             </div>
             <div class="col">
@@ -77,106 +79,104 @@
             </div>
         </div>
     </div>
-
-    <section class="bg-light-grey p-5 mt-5">
-        <div class="container">
-            <div class="row ">
-                <div class="col">
-                    <h1 style="text-align: center" class="navy" ;>Training Offered</h1>
-                </div>
-                <div class="col yellow">
-                    <h4> Along with core subjects the program also includes:
-                    </h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm text-center ">
-                    <div class="d-inline-flex p-3">
-                        <ul class=" navy">
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Electricity</li>
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Robotics</li>
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Fluid Power</li>
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Mechanics</li>
-                        </ul>
-                    </div>
-
-                    <div class="d-inline-flex p-3">
-                        <ul class="navy">
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Fabrication</li>
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Welding</li>
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Hydraulics</li>
-                            <li class="mb-1"><i class="bi bi-tools mint"></i> Pneumatics</li>
-                        </ul>
-                    </div>
+   
+   
+    <div class="container p-4">
+        <div class="row">                    
+            <div class="col-sm mt-2">
+                <h1 class="navy text-center">Training Offered</h1>
+            </div>                       
+            <div class="row text-center">
+          
+                <div class="col text-center mb-2 ">                      
+                        <ul class="navy list-group list-group-flush">
+                            <li class="list-group-item "><i class="bi bi-tools mint"></i> Electricity</li>
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Robotics</li>
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Fluid Power</li>
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Mechanics</li>
+                        </ul>                          
                 </div>
 
-                <div class="col-sm navy">
-                    <ul>
-                        <li class="mb-1">
-                            <i class="bi bi-cone-striped yellow"></i> Safety
-                        </li>
-                        <li class="mb-1">
-                            <i class="bi bi-cone-striped yellow"></i> Visual workplace organization
-                        </li>
-                        <li class="mb-1">
-                            <i class="bi bi-cone-striped yellow"></i> Lean Manufacturing
-                        </li>
-                        <li class="mb-1">
-                            <i class="bi bi-cone-striped yellow"></i> Problem Solving
-                        </li>
-                    </ul>
+                <div class="col text-center mb-2">                     
+                        <ul class="navy list-group list-group-flush">
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Fabrication</li>
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Welding</li>
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Hydraulics</li>
+                            <li class="list-group-item"><i class="bi bi-tools mint"></i> Pneumatics</li>
+                        </ul>                         
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="bg-white  border-b-2 border-dark">
+                <div class="col-md">
+                    <p>The Fame program offers many training oppurtunities for participants, 
+
+
+                    </p>
+
+
+                </div>
+            </div>                
+        </div>    
+    </div>
+
+
+    <section class="bg-white ">
         <div class="container p-3">
-            {{-- <p><a href="sponsers" class="font-bold mt-2">Our Sponsers:</a></p> --}}
-            <div id="carouselSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
+            {{-- <div id="carouselSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+
                     <div class="carousel-item active mx-auto">
-                        <div class="p-3 d-inline-flex ">
-
-                            <a href=""> <img src=" assets/sponsor_logos/Macro-Plastics-logo-w-IPL-smaller.png"
-                                    class="mr-5 d-block w-100"></a>
-
-
-                            <a href=""> <img src="assets/sponsor_logos/Alliant Technologiessmaller.png"
-                                    class="mr-5 d-block w-100"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/Clariant Logo Clearsmaller.jpg" class="mr-5"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/DDWsmaller.png" class="mr-5" style="height: 50px"
-                                    ;></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/GE Appliances_Profile Photosmaller.jpg"
-                                    class="mr-5"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/Jones Plasticssmaller.jpg" class="mr-5"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/Kentuky Kingdomsmaller.png" class="mr-5"></a>
-                            <!-- slider animation to show sponser logos -->
+                        <div class="d-inline-flex">
+                     
+                                <img src=" assets/sponsor_logos/Macro-Plastics-logo-w-IPL-smaller.png" class="d-block w-100 "/>
+                      
+                                <img src="assets/sponsor_logos/Alliant Technologiessmaller.png" class=" d-block w-100 "/>
+                        
+                               <img src="assets/sponsor_logos/Clariant Logo Clearsmaller.jpg" class=" d-block w-100 "/>
+                        
+                              <img src="assets/sponsor_logos/DDWsmaller.png" class=" d-block w-100 "/>           
+                  
                         </div>
                     </div>
-                    <div class="carousel-item ">
-                        <div class="p-3 d-inline-flex">
-                            <a href=""> <img src="assets/sponsor_logos/Lantech PMS287smaller.jpg"
-                                    class="mr-3 d-block w-100"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/Linaksmller.png" class="mr-5 d-block w-100"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/Nucorsmaller.png" class="mr-5 d-block w-100"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/ONealsmaller.jpg" class="mr-5 d-block w-100"></a>
-
-                            <a href=""> <img src="assets/sponsor_logos/paradiseTsmaller.png"
-                                    class="mr-3 d-block w-100"></a>
-
+               
+                    <div class="carousel-item  mx-auto">
+                            <div class="d-inline-flex ">
+                      
+                             
+                                    <img src="assets/sponsor_logos/GE Appliances_Profile Photosmaller.jpg" class=" d-block w-100 "/>
+                              
+                                <img src="assets/sponsor_logos/Jones Plasticssmaller.jpg" class="d-block w-100  "/>
+                        
+                                <img src="assets/sponsor_logos/ONealsmaller.jpg" class=" d-block w-100 "/>
+                          
+                         
+                                <img src="assets/sponsor_logos/paradiseTsmaller.png" class=" d-block w-100 "/>
+                        
+                                
+                            </div>
+                    </div>
+                 
+                    <div class="carousel-item mx-auto ">
+                        <div class="d-inline-flex">
+                       
+                            <img src="assets/sponsor_logos/Lantech PMS287smaller.new.jpg" class="d-block w-100 "/>
+                          
+                             
+                            <img src="assets/sponsor_logos/Linaksmller.png" class="d-block w-100 "/>
+                          
+                             
+                            <img src="assets/sponsor_logos/Nucorsmaller.png" class="d-block w-100 "/>
+                         
+                              
+                            <img src="assets/sponsor_logos/Kentuky Kingdomsmaller.png" class="d-block w-100 "/>
+                              
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    </div>
+
+                </div> --}}
+
+           </div>
         </div>
     </section>
 </x-homepage-layout>
