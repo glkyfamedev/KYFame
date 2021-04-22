@@ -25,18 +25,18 @@
                     </div>
 
                     @if (Auth::user()->role == 'Admin')
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex .pink-hover">
                             <x-nav-link :href="route('applications')" :active="request()->routeIs('applications')">
                                 {{ __('Applications') }}
                             </x-nav-link>
                         </div>
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex .pink-hover">
                             <x-nav-link :href="route('viewSponsors')" :active="request()->routeIs('viewSponsors')">
                                 {{ __('Sponsors') }}
                             </x-nav-link>
                         </div>
                     @else
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex .pink-hover">
                             <x-nav-link :href="route('form')" :active="request()->routeIs('form')">
                                 {{ __('Application') }}
                             </x-nav-link>
