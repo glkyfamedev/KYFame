@@ -21,6 +21,10 @@ class AdminController extends Controller{
         $this->middleware('verified');
     }
     
+    public function index(Request $request){
+       return view('admin/dashboard'); 
+    }
+
 
     public function viewApplications(){    
         
@@ -39,7 +43,18 @@ class AdminController extends Controller{
          return view('admin\manageApplications', compact('applications'));      
         
     }
-    public function selectApplication($id){  
+    public function selectApplication($id){
+        
+
+        $applicationTest = StudentApplication::where('id', $id)->with(
+            'contactApp',
+            'statusApp',
+            'employmentApp',
+            'assesmentApp',
+            'user')->firstOrFail();
+            
+    //    $applicationsTest = StudentApplication::all()->with('contactApp')->with('statusApp');
+        
           $applications = DB::table('student_applications')
              ->join ('users', 'users.id', '=', 'student_applications.user_id')
               ->join('contact_apps', function ($join) {

@@ -20,7 +20,6 @@ class ApplicationController extends Controller
     {
          $this->middleware('auth');
     }
-
   
     public function index(Request $request)
     {
@@ -31,13 +30,7 @@ class ApplicationController extends Controller
                 'contactApp',
                 'statusApp',
                 'employmentApp',
-                'assesmentApp')->firstOrCreate(
-            [
-                'user_id' => $user->id
-            ],
-            [
-                'start_date' => null
-            ]);        
+                'assesmentApp')->firstOrFail();
                        
             session(['application' => $application]);
             
@@ -51,8 +44,8 @@ class ApplicationController extends Controller
     public function formSubmit(Request $request)
     {
         $application = session('application');
+        
         // $contactModel = ContactApp->
-        $student_application_id = $application->id;
 
         // $studentAddress = $contact[0];
         if ($request->ajax()) {

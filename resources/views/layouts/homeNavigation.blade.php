@@ -36,7 +36,7 @@
                                  
                         <ul class="navbar-nav mr-5">                                   
                             <li class="nav-item"> 
-                                <x-nav-link :href="route('dashboard')" class="nav-link text-pink fw-bold" :active="request()->routeIs('dashboard')">
+                                <x-nav-link :href="route('signIn')" class="nav-link text-pink fw-bold" :active="request()->routeIs('signIn')">
                                         {{ __('Sign In') }}
                                 </x-nav-link>
                             </li>

@@ -12,27 +12,24 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('verified');
+        // $this->middleware('auth');
+        // $this->middleware('verified');
     }
           
     public function index()
     {
-      $user = Auth::user();
-      $id = Auth::user()->id;
-      $role = $user->role;
-         
-
-          if($role == 'Admin'){
-             return view ('admin\dashboard', $user);
-         }else{          
-           $application = StudentApplication::where('user_id', $user->id)
-           ->with('contactApp')
-           ->firstOrCreate();
-           return view('dashboard', ['application'=>$application]);
-
-         }
-       
+        $user = Auth::user();    
+        $application = StudentApplication::where('user_id', $user->id)
+        ->with('contactApp')
+        ->firstOrCreate(
+        [
+        'user_id' => $user->id
+        ],
+        [
+        'start_date' => null
+        ]);
+        
+        return view('dashboard', ['application'=>$application]);       
     }
 
      
