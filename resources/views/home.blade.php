@@ -66,16 +66,23 @@
 
                 <p>Greater Louisville is one chapter of thirteen chapters in Kentucky. FAME originated in Kentucky but
                     now has chapters in twelve states.
-                    <div class="m-2">
+                   
+                </p>  
+                <div class="m-2 col-2">
                     <x-nav-link :href=" route('register')"
-                        class="btn ml-3 whitespace-nowrap inline-flex items-center justify-center border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-pink hover:bg-mint hover:text-white">
+                        class="btn btn-pink btn-sm">
                         {{ __('Apply') }}
                     </x-nav-link>
                     </div>
-                </p>
+                
             </div>
-            <div class="col">
-                <img src="assets/gearguy200.png" style="height: 300px" ;></img>
+           
+            <div class="col p-2">
+             <img src="https://via.placeholder.com/400.png">
+
+
+
+                 
             </div>
         </div>
     </div>
@@ -83,12 +90,12 @@
    
     <div class="container p-4">
         <div class="row">                    
-            <div class="col-sm mt-2">
-                <h1 class="navy text-center">Training Offered</h1>
+            <div class="col-sm m-3">
+                <h1 class="mint text-center">Training Offered </h1> 
             </div>                       
             <div class="row text-center">
           
-                <div class="col text-center mb-2 ">                      
+                <div class="col-md-3 text-center mb-2 ">                      
                         <ul class="navy list-group list-group-flush">
                             <li class="list-group-item "><i class="bi bi-tools mint"></i> Electricity</li>
                             <li class="list-group-item"><i class="bi bi-tools mint"></i> Robotics</li>
@@ -97,7 +104,7 @@
                         </ul>                          
                 </div>
 
-                <div class="col text-center mb-2">                     
+                <div class="col-md-3 text-center mb-2">                     
                         <ul class="navy list-group list-group-flush">
                             <li class="list-group-item"><i class="bi bi-tools mint"></i> Fabrication</li>
                             <li class="list-group-item"><i class="bi bi-tools mint"></i> Welding</li>
@@ -106,9 +113,10 @@
                         </ul>                         
                 </div>
 
-                <div class="col-md">
-                    <p>The Fame program offers many training oppurtunities for participants, 
-
+                <div class="col-md mb-2">
+                    <p class="mt-2">The Fame program offers many training oppurtunities for participants, 
+                    You'll engage in Manufacturing Core Exercises like Safety Culture, Visual Workplace Organization, Lean
+                    Manufacturing, Problem Solving and Machine Reliability, as well as Professional Behaviors.
 
                     </p>
 

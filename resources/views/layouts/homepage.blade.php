@@ -29,21 +29,40 @@
         <div class="min-h-screen">
             @include('layouts.homeNavigation')
 
-            <!-- Page Heading -->
-
-
             <!-- Page Content -->
 
             <main>
                 {{ $slot }}
             </main>
         </div>
-        <footer class=" bg-light-grey" ;>
-            <div class="container p-4 navy">
-                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4">
-                     
-                    <div class="col text-center">
-                        <h4>External Links</h4>
+        
+        <footer class="bg-light-grey" ;>
+            <div class="container-fluid navy">
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3">
+                          <div class="col">
+                       <div class="row">
+                          
+                            <div class="col">
+                                <h4>Contact Us</h4>
+                                <address>
+                                    6661 Dixie Hwy Box 194</br>
+                                    
+                                    Louisville, KY 40258</br>
+
+                                    502.552.3755<br>
+                                    <br>
+                                    contact name<br>
+                                </address>
+                            </div>
+                               <div class="col">
+                                  {{-- <img src="assets/gearguy200.png"></img> --}}
+                            </div>
+                            
+                          </div>
+                    
+                     </div>
+                    <div class="col-md-2 text-center">
+                   
                         <ul class="list-group list-group-flush bg-light-grey">
 
                             <li class="list-group-item bg-light-grey">
@@ -58,8 +77,8 @@
                         </ul>
                     </div>
 
-                    <div class="col text-center">
-                        <h4>Site Links</h4>
+                    <div class="col-md-2 text-center">
+                 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-light-grey"><a href="students">For Students</a></li>
                             <li class="list-group-item bg-light-grey"><a href="sponsers">For Sponsers</a></li>
@@ -67,19 +86,10 @@
                         </ul>
                     </div>
                     
-                   <div class="col-4">
-                        <h4>Contact Us</h4>
-                        <address>
-                            123 street</br>
-                            city, state, zip</br>
-                            Phone<br>
-                            <br>
-                            contact name<br>
-                        </address>
-                    </div>
-                </div>
+              
 
             </div>
+
             <div class="p-2 bg-dark">
                 <p class="text-white text-center">&copy; Copyright 2021 GLKYFAME</p>
             </div>

@@ -1,60 +1,122 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="row">
-            <div class="col">
 
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard - {{ $application->essay }}
+<style>
+.hide {
+  display: none;
+}
+.required {
+    color: red;
+   font-size: x-small;
+}
+</style>
 
-                </h2>
-            </div>
-            <div class="col">
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-
-                                <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
-                                <div class="ml-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
-
-                        <x-slot name="content">
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-
-                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
-                                    {{ __('Log out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-                    </x-dropdown>
-                </div>
-            </div>
-        </div>
-    </x-slot>
-    </div>
+  <div class="container p-4">
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <h3>Welcome  {{ Auth::user()->first_name }}!</h3>
+                        <div class="row">
+                            <div class="col" id="contentDiv">
+                                <div id="placeHolder">
+                                <p>Content placeholder</p>        
+                                </div>
+                                    <div class="hide" id="contactDiv">
+                                        <form class="contact-form row g-3" id="contact-Section">
+                                            <input type="hidden" id="token" name="_token" value="{{ Session::token() }}">
 
+                                            <div class="col-8 contact-required">          
+                                                <label class="form-label contact-label" for="streetAddress">Street address <i
+                                                        class="bi bi-asterisk required"></i></label>
+                                                <input id="streetAddress" class="form-control contact-input" type="text" value="{{$application->streetAddress}}"
+                                                    name="streetAddress" autofocus />
+                                            </div>
 
+                                            <div class="col">
+                                                <label class="form-label contact-label" for="address2">Apt or Suite number </label>
+                                                <input id="address2" class="form-control" type="text" name="address2" autofocus />
+                                            </div>
+
+                                            <div class="col-md-6 contact-required">
+                                                <label class="form-label contact-label" for="city">City <i
+                                                        class="bi bi-asterisk required"></i></label>
+                                                <input id="city" class="form-control contact-input" type="text" name="city" required
+                                                    autofocus />
+                                            </div>
+
+                                            <div class="col-md-4 contact-required">
+                                                <label class="form-label contact-label" for="state">State <i
+                                                        class="bi bi-asterisk required"></i></label>
+                                                <input id="state" class="form-control contact-input" type="text" name="state" required
+                                                    autofocus />
+                                            </div>
+
+                                            <div class="col-md-2 contact-required">
+                                                <label class="form-label contact-label" for="zip">Zip <i
+                                                        class="bi bi-asterisk required"></i></label>
+                                                <input id="zip" class="form-control contact-input" type="text" name="zip" required
+                                                    autofocus />
+                                            </div>
+
+                                            <div class="col contact-required">
+                                                <label class="form-label contact-label" for="phone">Primary Phone <i
+                                                        class="bi bi-asterisk required"></i></label>
+                                                <input id="primaryPhone" class="form-control contact-input phone" type="text"
+                                                    name="primaryPhone" required autofocus />
+                                            </div>
+                                            <div class="col">
+                                                <label class="form-label contact-label" for="altPhone">Alt Phone</label>
+                                                <input id="altPhone" class="form-control phone" type="text" name="altPhone" autofocus />
+                                            </div>
+                                            <div class="form-nav">
+                                                <button type="submit" id="contactBtn" class="nextBtn btn btn-info float-right"
+                                                    data-section="1">Update</button>
+
+                                                <button id="cancelBtn" class="btn btn-yellow">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="hide" id="transcriptDiv">
+                                        <div class="" id="transciptUpload">
+                                            <div class="input-group m-3">
+                                                <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
+                                            </div>
+                                              <div class="form-nav">
+                                                <button type="submit" id="transcriptBtn" class="nextBtn btn btn-info float-right"
+                                                    data-section="1">upload</button>
+
+                                                <button id="cancelBtn" class="btn btn-yellow">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>                            
+
+                            <div class="col-4 text-center">
+                                <h4>What do you need to do?</h4>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item bg-light-grey"><a id="showContact" href="#">Update Contact Info</a></li>
+                                    <li class="list-group-item bg-light-grey"><a id="showTranscript" href="#">Upload Transcripts</a></li>
+                                    <li class="list-group-item bg-light-grey"><a href="#">Application Status</a></li>
+                                </ul>
+                            </div>
+                        </div>                  
                 </div>
             </div>
         </div>
     </div>
+  </div>
+
+      
+ 
 
 
+    <script>
+        var contactRouteUrl = "{{ route('form.formSubmit') }}";       
+        var transcriptRouteUrl = "{{ route('form.formTranscript') }}";
+        var application = $.parseJSON('@json($application)');
+    </script>
 
+  <script src="{{ asset('js/application.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script>
 </x-app-layout>

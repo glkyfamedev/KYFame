@@ -40,7 +40,19 @@ class Authenticate implements AuthenticatesRequests
     public function handle($request, Closure $next, ...$guards)
     {
         $this->authenticate($request, $guards);
+        
+        // $user = $this->auth;
 
+        // if ($user != null){
+        //     if ($user->Role == "Admin"){
+        //         $request->pathInfo = "/adminDashboard";
+        //         $request->requestUri = "/adminDashboard";
+        //     }
+        //     else{
+        //         $request->pathInfo = "/dashboard";
+        //         $request->requestUri = "/dashboard"; 
+        //     }
+        // }
         return $next($request);
     }
 

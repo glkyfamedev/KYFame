@@ -48,7 +48,16 @@ Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
 
-Route::get('/signIn', function () {})->middleware(['auth'])->name('signIn');
+Route::get('/signIn', function () {
+    $user = Auth::user();
+
+    if ($user->Role == "Admin"){
+        return redirect()->route('adminDashboard');
+    }
+    else{
+        return redirect()->route('dashboard');
+    }   
+})->middleware(['auth'])->name('signIn');
 
 //Admin routes
 Route::get('admin/manageApplications', [AdminController::class, 'viewApplications'])->name('applications');
