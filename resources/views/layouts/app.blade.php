@@ -6,93 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'KYFAME') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/utils.css') }}"> --}}
-
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery.js') }}">
-    </script>
+    <script src="{{ asset('js/jquery.js') }}"> </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
-    {{-- <script src="{{ asset('js/application.js')}}"></script> --}}
-    <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
-
-
-
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+  
 </head>
 
-<body class="font-sans antialiased">
-    <div class="container">
-        <div class="">
-            @include('layouts.dashboardNavigation')
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+<body class="font-sans antialiased m-0">
+   <div class="min-h-screen">
+         @include('layouts.dashboardNavigation')
+
 
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
         </div>
-    </div>
+  
 
 
-    <footer class="">
-        <div class="container p-4">
-            <div class="row">
-                <div class="col-5">
-                    <h4>External Links</h4>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a
-                                href="https://jefferson.kctcs.edu/education-training/program-finder/kyfame.aspx">JCTC
-                                FAME</a></li>
-                        <li class="list-group-item"><a href="https://fame-usa.com/">USA FAME</a></li>
-                        <li class="list-group-item"><a href="">Extern Link</a></li>
+        <footer class=" bg-light-grey" ;>
+            <div class="container p-4 navy">
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4">
+                     
+                    <div class="col text-center">
+                        <h4>External Links</h4>
+                        <ul class="list-group list-group-flush bg-light-grey">
 
-                    </ul>
+                            <li class="list-group-item bg-light-grey">
+                                 <a href="https://jefferson.kctcs.edu/education-training/program-finder/kyfame.aspx">JCTC FAME</a>
+                            </li>
+                            <li class="list-group-item bg-light-grey"> 
+                                <a href="https://students.kctcs.edu/psc/stdsaprd/EMPLOYEE/SA/c/COMMUNITY_ACCESS.K_OLA_LANDING_FL.GBL?&Campus=JFC&">Apply
+                                    to JCTC</a>
+                                </li>
+                            <li class="list-group-item bg-light-grey"> <a href="https://fame-usa.com/">USA FAME</a></li>
+                         
+                        </ul>
+                    </div>
+
+                    <div class="col text-center">
+                        <h4>Site Links</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-light-grey"><a href="students">For Students</a></li>
+                            <li class="list-group-item bg-light-grey"><a href="sponsers">For Sponsers</a></li>
+                            <li class="list-group-item bg-light-grey"><a href="employers">For Employers</a></li>
+                        </ul>
+                    </div>
+                    
+                   <div class="col-4">
+                        <h4>Contact Us</h4>
+                        <address>
+                            123 street</br>
+                            city, state, zip</br>
+                            Phone<br>
+                            <br>
+                            contact name<br>
+                        </address>
+                    </div>
                 </div>
 
-                <div class="col-4">
-                    <h4>Site Links</h4>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="students">For Students</a></li>
-                        <li class="list-group-item"><a href="sponsers">For Sponsers</a></li>
-                        <li class="list-group-item"><a href="employers">For Employers</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-3">
-                    <h4>Contact Us</h4>
-                    <address>
-                        123 street</br>
-                        city, state, zip</br>
-                        Phone<br>
-                        <br>
-                        contact name<br>
-                    </address>
-                </div>
             </div>
-        </div>\
-
-        <div class="p-2 bg-dark">
-            <p class="text-white text-center">&copy; Copyright 2021 GLKYFAME</p>
-        </div>
-    </footer>
+            <div class="p-2 bg-dark">
+                <p class="text-white text-center">&copy; Copyright 2021 GLKYFAME</p>
+            </div>
+        </footer>
 </body>
-
 </html>

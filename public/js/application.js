@@ -7,18 +7,54 @@ $(document).ready(function () {
         }
     })
 
+
+    $('#showContact').click(function (e) {
+        e.preventDefault();
+        $('#streetAddress').val(application.contact_app.streetAddress);
+        $('#address2').val(application.contact_app.address2);
+        $('#city').val(application.contact_app.city);
+        $('#state').val(application.contact_app.state);
+        $('#zip').val(application.contact_app.zip);
+        $('#primaryPhone').val(application.contact_app.primaryPhone);
+        $('#altPhone').val(application.contact_app.altPhone);
+
+        $('.contact-label').hide();
+        $('#showContact').hide();
+        $('.update').show();
+        $('#updateBtns').show();
+    });
+
+
+
+    $('#cancelBtn').click(function (e) {
+        e.preventDefault();
+        $('.update').hide();
+        $('#updateBtns').hide();
+        $('.contact-label').show();
+        $('#showContact').show();
+
+
+    });
+
+
+    $('#showTranscript').click(function (e) {
+        e.preventDefault();
+        $('#placeHolder').hide();
+        $('#contactDiv').hide();
+        $('#transcriptDiv').show();
+    });
+
     $('#startBtn').click(function (e) {
         e.preventDefault();
         $('#appDescription').hide();
         var currentSection = application.currentSection;
         fillCurrentSection(application);
 
-        if (application.completed_date != null) {
+        if (application.completed_date != 'null') {
             $('#section1').show();
             application.currentSection = 7;
             enableMenuItems(currentSection);
-        }
-        else {
+        } else {
             $('#section' + (currentSection + 1)).show();
             enableMenuItems(currentSection);
         }
@@ -65,9 +101,11 @@ $(document).ready(function () {
 
     $('input[name=KYOTE]').click(function () {
         if ($("input[id='KYOTEyes']").is(':checked')) {
-            $('#KYOTEscore').show()
+            $('#KYOTEScoresContainer').show()
+            $('.ACT').addClass('score-input')
         } else {
-            $('#KYOTEscore').hide()
+            $('#KYOTEScoresContainer').hide()
+            $('.ACT').removeClass('score-input')
         }
     });
 
@@ -124,10 +162,12 @@ $(document).ready(function () {
     $('#essayBtn').click(function (e) {
         e.preventDefault()
         var sectionNum = $(this).data('section')
+        var essaytest = $('#essay').val();
+        // alert(essaytest);
 
         var hasErrors = false
         $('.essay-input').each(function () {
-            if ($(this).val() == '') {
+            if ($(this).val() === '') {
                 hasErrors = true
                 var formInputLabel = $(this)
                     .parents('#essay-required')
@@ -139,7 +179,12 @@ $(document).ready(function () {
         if (hasErrors) {
             return
         } else {
-            saveEssayData(e, sectionNum)
+            // $('#section' + sectionNum).hide();
+            // $('essayNav').removeClass('disabled');
+            // $('#sectionCheck' + sectionNum).show();
+            //
+            // $('#section' + (sectionNum + 1)).show();
+            saveEssayData(e, sectionNum);
         }
     });
 
@@ -177,11 +222,13 @@ $(document).ready(function () {
         if (hasErrors) {
             return
         } else {
+            // $('#completedNav').removeClass('disabled')
+            // $('#complete-check').show()
+            // location.replace(dashBoardRouteUrl);
             completeApplication(e)
         }
     })
 });
-
 
 
 function checkForRelatedSponsor() {
@@ -248,11 +295,6 @@ function saveContactData(e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    //   var contactModel = getContactInfo();
-    //   updateSection(contactRouteUrl, contactModel, sectionNum);
-    //  });
-
     $.ajax({
         type: 'POST',
         url: contactRouteUrl,
@@ -267,13 +309,13 @@ function saveContactData(e, sectionNum) {
             primaryPhone: $('#primaryPhone').val(),
             altPhone: $('#altPhone').val(),
             currentSection: sectionNum + 1,
-            // data: dataToSave
         },
         dataType: 'json',
-        // contentType: 'application/json',
+
         success: function (result) {
             if (result) {
-                alert('Saved!')
+                $('#contactDiv').hide()
+                $('#placeHolder').show();
                 $('#section' + sectionNum).hide()
                 $('#contactNav').removeClass('disabled')
                 $('#c-check').show()
@@ -298,23 +340,7 @@ function saveStatusData(e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
-    // var streetAddress = $('#streetAddress').val();
-    // var address2 = $('#address2').val();
-    // var city = $('#city').val();
-    // var state = $('#state').val();
-    // var zip = $('#zip').val();
-    // var primaryPhone = $('#primaryPhone').val();
-    // var altPhone = $('#altPhone').val();
 
-    // var contactModel = {
-    // streetAddress: streetAddress,
-    // address2: address2,
-    // city: city,
-    // state: state,
-    // zip: zip,
-    // primaryPhone: primaryPhone,
-    // altPhone: altPhone
-    // };
     $.ajax({
         type: 'POST',
         url: statusRouteUrl,
@@ -337,10 +363,10 @@ function saveStatusData(e, sectionNum) {
         dataType: 'json',
         success: function (result) {
             if (result) {
-                alert('Saved!')
+
                 $('#section' + sectionNum).hide()
                 $('#statusNav').removeClass('disabled')
-                $('#s-check').show()
+                $('#sectionCheck' + sectionNum).show()
                 $('#section' + (sectionNum + 1)).show()
             } else {
                 alert('data not saved!')
@@ -359,13 +385,15 @@ function getEmployerPrototype() {
         reasonForLeaving: "",
     };
 }
+
 function saveEmploymentData(e) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    })
+    });
+
     var sectionNum = $(this).data('section')
 
     var employers = [];
@@ -388,21 +416,11 @@ function saveEmploymentData(e) {
         url: employmentRoutetUrl,
         data: {
             _token: $('#employmentToken').val(),
-
-            // employerName: $('.employerName').val(),
-            // employerPhone: $('.employerPhone').val(),
-            // workDuties: $('.workDuties').val(),
-            // employmentStart: $('.employmentStart').val(),
-            // employmentEnd: $('.employmentEnd').val(),
-            // reasonForLeaving: $('.reasonForLeaving').val(),
-            // currentSection: sectionNum + 1
-
             employerArray: employers
         },
         dataType: 'json',
         success: function (result) {
             if (result) {
-                alert('Saved!')
                 $('#section' + sectionNum).hide()
                 $('#section' + (sectionNum + 1)).show()
             } else {
@@ -472,7 +490,6 @@ function saveAssessmentData(e, sectionNum) {
         dataType: 'json',
         success: function (result) {
             if (result) {
-                alert('Saved!')
                 $('#section' + sectionNum).hide()
                 $('#assessmentNav').removeClass('disabled')
                 $('#a-check').show()
@@ -483,31 +500,34 @@ function saveAssessmentData(e, sectionNum) {
         }
     })
 }
-function saveEssayData(e, sectionNum) {
+
+function saveEssayData(e, sectionNum, essaytest) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    })
+    });
     $.ajax({
         type: 'POST',
         url: essayRouteUrl,
         data: {
             _token: $('#essayToken').val(),
+            //   essay: essaytest,
             essay: $('#essay').val(),
             currentSection: sectionNum + 1
         },
         dataType: 'json',
         success: function (result) {
             if (result) {
-                alert('Saved!')
-                $('#section' + sectionNum).hide()
-                $('essayNav').removeClass('disabled')
-                $('#essay-check').show()
-                $('#section' + (sectionNum + 1)).show()
+
+                $('#section' + sectionNum).hide();
+                $('essayNav').removeClass('disabled');
+                $('#sectionCheck' + sectionNum).show();
+
+                $('#section' + (sectionNum + 1)).show();
             } else {
-                alert('data not saved!')
+                alert('data not saved!');
             }
         }
     })
@@ -521,20 +541,19 @@ function saveTranscriptData(e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var transcriptMethod = $('input[name=transcriptMethod]:checked').val();
-
+    ``
+    const transcriptMethod = $('input[name=transcriptMethod]:checked').val();
     var file_data = $('#transcriptFile').prop('files')[0];
-
-    var transcriptUpload = new FormData();
-
-    transcriptUpload.append('file', file_data);
-    transcriptUpload.append('currentSection', sectionNum + 1);
-    transcriptUpload.append('transcriptMethod', transcriptMethod);
-
-    // alert(transcriptUpload);
+    if (file_data !== '') {
+        var transcriptUpload = new FormData();
+        transcriptUpload.append('file', file_data);
+        transcriptUpload.append('currentSection', sectionNum + 1);
+        transcriptUpload.append('transcriptMethod', transcriptMethod);
+    } else
+        transcriptUpload = transcriptMethod;
 
     $.ajax({
-        url: transcriptRouteUrl, // point to server-side PHP script
+        url: transcriptRouteUrl, // route to controller function as declared in application view
         cache: false,
         type: 'POST',
         contentType: false,
@@ -542,7 +561,9 @@ function saveTranscriptData(e, sectionNum) {
         data: transcriptUpload,
         success: function (result) {
             if (result) {
-                alert('Saved!')
+
+                $('#transcriptDiv').hide();
+                $('#placeHolder').show();
                 $('#section' + sectionNum).hide()
                 $('#transcriptNav').removeClass('disabled')
                 $('#t-check').show()
@@ -564,6 +585,7 @@ function GetTodayDate() {
 
     return currentDate
 }
+
 function completeApplication(e) {
     e.preventDefault()
     $.ajaxSetup({
@@ -599,8 +621,7 @@ function enableMenuItems(currentSection) {
         if (i < 7) {
             $("#sectionNav" + i).removeClass('disabled');
             $("#sectionCheck" + i).removeClass('hide');
-        }
-        else {
+        } else {
             $("#sectionCheck" + i).removeClass('hide');
         }
     }
@@ -635,7 +656,6 @@ function fillCurrentSection(application) {
                 $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore);
                 $('#ACTScoresContainer').show();
             }
-
 
 
             if (application.assesment_app.SAT != 0) {

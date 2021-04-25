@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\ApplicationController;
@@ -20,8 +21,8 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::view('/students', 'students'); 
-Route::view('/sponsors', 'sponsors'); 
+Route::view('/students', 'students');
+Route::view('/sponsors', 'sponsors');
 Route::view('/employers','employers');
 // Route::view('/application','application');
 
@@ -36,7 +37,7 @@ Route::get('/sponsors', [SponsorController::class, 'index'])
 Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
     ->name('sponsors.show');
 
-//Student Application routes 
+//Student Application routes
 Route::get('/form', [ApplicationController::class, 'index'])->name('form');
 Route::post('/form', [ApplicationController::class, 'formSubmit'])->name('form.formSubmit');
 Route::post('/formStatus', [ApplicationController::class, 'formStatus'])->name('form.formStatus');
@@ -48,7 +49,16 @@ Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
 
-Route::get('/signIn', function () {})->middleware(['auth'])->name('signIn');
+Route::get('/signIn', function () {
+    $user = Auth::user();
+
+    if ($user->Role === "Admin"){
+        return redirect()->route('adminDashboard');
+    }
+    else{
+        return redirect()->route('dashboard');
+    }
+})->middleware(['auth'])->name('signIn');
 
 //Admin routes
 Route::get('admin/manageApplications', [AdminController::class, 'viewApplications'])->name('applications');

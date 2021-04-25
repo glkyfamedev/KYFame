@@ -1,109 +1,73 @@
-<div class="container-fluid">
-    <nav x-data="{ open: false }" class="">
-        <!-- Primary Navigation Menu -->
-        <div class="relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6">
-                <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-                    <div class="flex justify-start lg:w-0 lg:flex-1">
-                        <x-slot name="logo">
-                            <a href="/">
-                                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                            </a>
-                        </x-slot>
-                        <a href="{{ URL('/') }}">
-                            <span class="sr-only">KYFAME</span>
-                            <img class="h-8 w-auto sm:h-10" src="{{ URL::to('/assets/logo.png') }}"
-                                style="height: 50px;" />
-                        </a>
-                    </div><!-- Logo -->
-
-                    <!-- Navigation Links -->
-                    <div class="">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    </div>
-
-                    @if (Auth::user()->Role == 'Admin')
-                        <div class="">
+<div class="container-fluid p-3" style="background: rgba(255, 255, 255, 0.64);">
+    <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-light border-bottom">
+        <div class="container-fluid">
+            @if (Auth::user()->Role === 'Admin')
+                <x-nav-link :href="route('adminDashboard')" :active="request()->routeIs('adminDashboard')">
+                    <img class="" alt="" src="{{URL::to('assets/logo.png') }}"
+                         style="height: 50px;"/>
+                </x-nav-link>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse p-3" id="navbarNav">
+                    <ul class=" navbar-nav float-end">
+                        <li class="nav-item">
                             <x-nav-link :href="route('applications')" :active="request()->routeIs('applications')">
                                 {{ __('Applications') }}
                             </x-nav-link>
-                        </div>
-                        <div class="">
+                        </li>
+                        <li class="nav-item">
                             <x-nav-link :href="route('viewSponsors')" :active="request()->routeIs('viewSponsors')">
                                 {{ __('Sponsors') }}
                             </x-nav-link>
-                        </div>
-                    @else
-                        <div class="">
-                            <x-nav-link :href="route('form')" :active="request()->routeIs('form')">
-                                {{ __('Application') }}
-                            </x-nav-link>
-
-                        </div>
-                        
-                    @endif
+                        </li>
+                    </ul>
                 </div>
-
-                <!-- Settings Dropdown -->
-
-
-                <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-
-            <!-- Responsive Navigation Menu -->
-            <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-responsive-nav-link>
-                </div>
-
-                <!-- Responsive Settings Options -->
-                <div class="pt-4 pb-1 border-t border-gray-200">
+            @else
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <img class="" alt="" src="{{URL::to('assets/logo.png') }}"
+                         style="height: 50px;"/>
+                </x-nav-link>
+            @endif
+            <div class="btn-group">
+                <button type="button" class="btn btn-pink">
                     <div class="flex items-center px-4">
                         <div class="flex-shrink-0">
-                            <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                            <i class="bi bi-person-circle"></i>
                         </div>
-
                         <div class="ml-3">
                             <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ Auth::user()->last_name }}</div>
                         </div>
                     </div>
-
-                    <div class="mt-3 space-y-1">
-                        <!-- Authentication -->
+                </button>
+                <button type="button" class="btn btn-pink dropdown-toggle dropdown-toggle-split" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                            <x-nav-link :href="route('logout')" class="dropdown-item"
+                                        onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log out') }}
-                            </x-responsive-nav-link>
+                            </x-nav-link>
                         </form>
-                    </div>
-                </div>
+                    </li>
+                    {{--                            <li><a class="dropdown-item" href="#">Another action</a></li>--}}
+                    {{--                            <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
+                    {{--                            <li><hr class="dropdown-divider"></li>--}}
+                    {{--                            <li><a class="dropdown-item" href="#">Separated link</a></li>--}}
+                </ul>
             </div>
         </div>
     </nav>
 </div>
+
+
+
+
+
+
+
