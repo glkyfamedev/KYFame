@@ -30,9 +30,10 @@ class ApplicationController extends Controller
                 'contactApp',
                 'statusApp',
                 'employmentApp',
-                'assesmentApp')->firstOrFail();
+                'assesmentApp')
+                ->firstOrFail();
 
-            session(['application' => $application]);
+                 session(['application' => $application]);
 
             return view('application', ['application'=> $application]);
         }
@@ -41,7 +42,7 @@ class ApplicationController extends Controller
         }
     }
 
-    public function formSubmit(Request $request)
+    public function formSubmit(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
 
@@ -61,7 +62,7 @@ class ApplicationController extends Controller
                 $contactModel->save();
                 $application->currentSection = $request->currentSection;
 
-                if ($application->start_date == null){
+                if ($application->start_date === null){
                     $application->start_date = new DateTime('NOW');
                 }
 
@@ -80,7 +81,7 @@ class ApplicationController extends Controller
         }
     }
 
-    public function formStatus(Request $request)
+    public function formStatus(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
 
@@ -105,7 +106,7 @@ class ApplicationController extends Controller
                 $application->save();
                     $application->refresh();
 
-                  
+
 
                 //save application to session $session['application'] = $application
 
@@ -116,10 +117,10 @@ class ApplicationController extends Controller
         }
     }
 
-    public function formEmployment(Request $request)
+    public function formEmployment(Request $request): \Illuminate\Http\JsonResponse
     {
        $application = session('application');
-      
+
        $employerArrays = $request->employerArray;
 
         if ($request->ajax()) {
@@ -144,9 +145,9 @@ class ApplicationController extends Controller
 
                 $application->currentSection = $request->currentSection;
                 $application->save();
-       
 
-           
+
+
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -156,7 +157,7 @@ class ApplicationController extends Controller
 
     }
 
-    public function formAssesments(Request $request)
+    public function formAssesments(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
 
@@ -199,8 +200,8 @@ class ApplicationController extends Controller
                 $application->currentSection = $request->currentSection;
                 $application->save();
 
-              
-            
+
+
 
                 return response()->json(['success' => true]);
 
@@ -210,7 +211,7 @@ class ApplicationController extends Controller
         }
     }
 
-    public function formEssay(Request $request)
+    public function formEssay(Request $request): \Illuminate\Http\JsonResponse
     {
           $application = session('application');
 
@@ -237,8 +238,12 @@ class ApplicationController extends Controller
         $user = Auth::user();
         $application = session('application');
 
-        $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
-        $request->file->move(public_path('transcripts'), $fileName);
+        if($request->file())
+        {
+            $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
+            $request->file->move(public_path('transcripts'), $fileName);
+        }
+
 
         if ($request->ajax()) {
             try {
@@ -248,7 +253,7 @@ class ApplicationController extends Controller
                 $application->transcriptPath = $fileName;
 
                 $application->save();
-           
+
                 return response()->json(['success' => true]);
 
             } catch (Exception $e) {
@@ -257,9 +262,9 @@ class ApplicationController extends Controller
         }
     }
 
-    public function CompleteApplication(Request $request)
+    public function CompleteApplication(Request $request): \Illuminate\Http\JsonResponse
     {
-        // $application = session('application');
+        $application = session('application');
         $user = Auth::user();
         if ($request->ajax()) {
             try{
@@ -271,9 +276,9 @@ class ApplicationController extends Controller
                 if($success){
                     $emailController = new EmailController($user);
                     $emailController-> AdminEmail($user);
-                    $action = $application->application_action;
+                    $action = $complete->application_action;
 
-                    if( $action == 'approved')
+                    if( $action === 'approved')
                     {
                         $emailController->studentApprovedEmail($user);
                     }
@@ -282,7 +287,7 @@ class ApplicationController extends Controller
                         $emailController-> StudentConfirmationEmail($user);
                     }
                 }
-                   
+
               return response()->json(['success' => true]);
             }
             catch (Exception $e) {

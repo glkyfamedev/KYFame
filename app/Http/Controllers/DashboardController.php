@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Sponsor;
-use App\Models\User;
-use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StudentApplication;
 
@@ -15,10 +12,10 @@ class DashboardController extends Controller
         // $this->middleware('auth');
         // $this->middleware('verified');
     }
-          
+
     public function index()
     {
-        $user = Auth::user();    
+        $user = Auth::user();
         $application = StudentApplication::where('user_id', $user->id)
         ->with('contactApp')
         ->firstOrCreate(
@@ -28,9 +25,9 @@ class DashboardController extends Controller
         [
         'start_date' => null
         ]);
-        
-        return view('dashboard', ['application'=>$application]);       
+
+        return view('dashboard', ['application'=>$application]);
     }
 
-     
+
 }

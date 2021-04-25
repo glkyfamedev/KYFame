@@ -8,12 +8,8 @@ $(document).ready(function () {
     })
 
 
-
     $('#showContact').click(function (e) {
         e.preventDefault();
-        $('#placeHolder').hide();
-        $('#transcriptDiv').hide();
-
         $('#streetAddress').val(application.contact_app.streetAddress);
         $('#address2').val(application.contact_app.address2);
         $('#city').val(application.contact_app.city);
@@ -22,13 +18,22 @@ $(document).ready(function () {
         $('#primaryPhone').val(application.contact_app.primaryPhone);
         $('#altPhone').val(application.contact_app.altPhone);
 
-        $('#contactDiv').show();
+        $('.contact-label').hide();
+        $('#showContact').hide();
+        $('.update').show();
+        $('#updateBtns').show();
     });
+
+
+
     $('#cancelBtn').click(function (e) {
         e.preventDefault();
-        $('#placeHolder').show();
-        $('#transcriptDiv').hide();
-        $('#contactDiv').hide();
+        $('.update').hide();
+        $('#updateBtns').hide();
+        $('.contact-label').show();
+        $('#showContact').show();
+
+
     });
 
 
@@ -49,8 +54,7 @@ $(document).ready(function () {
             $('#section1').show();
             application.currentSection = 7;
             enableMenuItems(currentSection);
-        }
-        else {
+        } else {
             $('#section' + (currentSection + 1)).show();
             enableMenuItems(currentSection);
         }
@@ -97,9 +101,11 @@ $(document).ready(function () {
 
     $('input[name=KYOTE]').click(function () {
         if ($("input[id='KYOTEyes']").is(':checked')) {
-            $('#KYOTEscore').show()
+            $('#KYOTEScoresContainer').show()
+            $('.ACT').addClass('score-input')
         } else {
-            $('#KYOTEscore').hide()
+            $('#KYOTEScoresContainer').hide()
+            $('.ACT').removeClass('score-input')
         }
     });
 
@@ -161,7 +167,7 @@ $(document).ready(function () {
 
         var hasErrors = false
         $('.essay-input').each(function () {
-            if ($(this).val() == '') {
+            if ($(this).val() === '') {
                 hasErrors = true
                 var formInputLabel = $(this)
                     .parents('#essay-required')
@@ -173,12 +179,12 @@ $(document).ready(function () {
         if (hasErrors) {
             return
         } else {
-            $('#section' + sectionNum).hide();
-            $('essayNav').removeClass('disabled');
-            $('#sectionCheck' + sectionNum).show();
-
-            $('#section' + (sectionNum + 1)).show();
-            // saveEssayData(e, sectionNum, essaytest)
+            // $('#section' + sectionNum).hide();
+            // $('essayNav').removeClass('disabled');
+            // $('#sectionCheck' + sectionNum).show();
+            //
+            // $('#section' + (sectionNum + 1)).show();
+            saveEssayData(e, sectionNum);
         }
     });
 
@@ -216,14 +222,13 @@ $(document).ready(function () {
         if (hasErrors) {
             return
         } else {
-            $('#completedNav').removeClass('disabled')
-            $('#complete-check').show()
-            location.replace(dashBoardRouteUrl);
-            // completeApplication(e)
+            // $('#completedNav').removeClass('disabled')
+            // $('#complete-check').show()
+            // location.replace(dashBoardRouteUrl);
+            completeApplication(e)
         }
     })
 });
-
 
 
 function checkForRelatedSponsor() {
@@ -503,14 +508,13 @@ function saveEssayData(e, sectionNum, essaytest) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
     $.ajax({
         type: 'POST',
         url: essayRouteUrl,
         data: {
             _token: $('#essayToken').val(),
-            essay: essaytest,
-            // essay: $('#essay').val(),
+            //   essay: essaytest,
+            essay: $('#essay').val(),
             currentSection: sectionNum + 1
         },
         dataType: 'json',
@@ -537,20 +541,19 @@ function saveTranscriptData(e, sectionNum) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var transcriptMethod = $('input[name=transcriptMethod]:checked').val();
-
+    ``
+    const transcriptMethod = $('input[name=transcriptMethod]:checked').val();
     var file_data = $('#transcriptFile').prop('files')[0];
-
-    var transcriptUpload = new FormData();
-
-    transcriptUpload.append('file', file_data);
-    transcriptUpload.append('currentSection', sectionNum + 1);
-    transcriptUpload.append('transcriptMethod', transcriptMethod);
-
-    // alert(transcriptUpload);
+    if (file_data !== '') {
+        var transcriptUpload = new FormData();
+        transcriptUpload.append('file', file_data);
+        transcriptUpload.append('currentSection', sectionNum + 1);
+        transcriptUpload.append('transcriptMethod', transcriptMethod);
+    } else
+        transcriptUpload = transcriptMethod;
 
     $.ajax({
-        url: transcriptRouteUrl, // point to server-side PHP script
+        url: transcriptRouteUrl, // route to controller function as declared in application view
         cache: false,
         type: 'POST',
         contentType: false,
@@ -582,6 +585,7 @@ function GetTodayDate() {
 
     return currentDate
 }
+
 function completeApplication(e) {
     e.preventDefault()
     $.ajaxSetup({
@@ -617,8 +621,7 @@ function enableMenuItems(currentSection) {
         if (i < 7) {
             $("#sectionNav" + i).removeClass('disabled');
             $("#sectionCheck" + i).removeClass('hide');
-        }
-        else {
+        } else {
             $("#sectionCheck" + i).removeClass('hide');
         }
     }
@@ -653,7 +656,6 @@ function fillCurrentSection(application) {
                 $('#ACTcompositeScore').val(application.assesment_app.ACTcompositeScore);
                 $('#ACTScoresContainer').show();
             }
-
 
 
             if (application.assesment_app.SAT != 0) {

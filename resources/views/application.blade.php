@@ -36,7 +36,6 @@
             color: red;
             font-size: x-small;
         }
-
         .errorBorder {
             border: solid 2px red !important;
         }
@@ -56,20 +55,29 @@
             <div class="bg-white border-gray-200">
 
                 <div id="appDescription">
+                   <p>
+                        The application is divided into six sections sections, each section must be completed before moving on. 
+                        Once a section has been completed you will be able to go back to it at any time to make corrections or changes.
+                    </p>
 
-                    <p> In order to be considered for the FAME program, you will be expected to submit your highachool
+                    <p> In order to be considered for the FAME program, you will be expected to submit your highschool
                         transcripts within 14 days of completeing your application. </p>
 
                     <p>
-
+                       During the Application, you will be required to submit a written essay explaining your
+                       qualifications for the program as well as why you would like to join.
+                    </p>
+                    
+                     <p>
+                        Please enter the phone number where you can be reached and make sure your prefered contact method 
+                        is a way we can contact you in response to your application. 
                     </p>
 
-
                     <div>
-                        @if ($application->start_date == null)
+                        @if ($application->start_date === null)
                             <button type="button" class="btn btn-pink fw-bolder" id="startBtn">Start Application
                             </button>
-                        @elseif ($application->start_date != null && $application->completed_date == null)
+                        @elseif ($application->start_date !== null && $application->completed_date === null)
                             <button type="button" class=" btn btn-navy" id="startBtn">Continue Application</button>
                         @else
                             <button type="button" class="btn btn-pink " id="startBtn">Edit/Update Application</button>
@@ -80,9 +88,9 @@
                 </div>
 
                 <div class="form-section toggle" id="section1" style="display:none;">
-                    <h2>Contact Information</h2>
+                    <h2 class="blue border-bottom mb-4">Contact Information</h2>
 
-                    <div class="messages"></div>
+                    <div class="messages border-bottom"></div>
 
 
                     <form class="contact-form row g-3" id="contact-Section">
@@ -123,7 +131,7 @@
                         </div>
 
                         <div class="col contact-required">
-                            <label class="form-label contact-label" for="phone">Primary Phone <i
+                            <label class="form-label contact-label" for="primaryPhone">Primary Phone <i
                                     class="bi bi-asterisk required"></i></label>
                             <input id="primaryPhone" class="form-control contact-input phone" type="text"
                                    name="primaryPhone" required autofocus/>
@@ -133,7 +141,7 @@
                             <input id="altPhone" class="form-control phone" type="text" name="altPhone" autofocus/>
                         </div>
                         <div class="form-nav">
-                            <button type="submit" id="contactBtn" class="nextBtn btn btn-info float-right"
+                            <button type="submit" id="contactBtn" class="nextBtn btn btn-pink float-right"
                                     data-section="1">Next
                             </button>
                         </div>
@@ -144,31 +152,28 @@
                 <!-- Status INFORMATION FORM -->
                 <!-- FORM ROW 1 -->
                 <div class="form-section toggle" id="section2" style="display:none;">
-                    <h2>Legal status </h2>
+                    <h2 class="blue border-bottom mb-4">Legal status </h2>
                     <form class="Contact-form" method="POST" action="{{ route('form.formStatus') }}">
                         <input type="hidden" id="statusToken" name="_token" value="{{ Session::token() }}">
 
-                        <h5 for="over18">Will you be 18 before June 1? <i class="bi bi-asterisk required"></i></h5>
+                        <h5>Will you be 18 before June 1? <i class="bi bi-asterisk required"></i></h5>
                         <div id="over18" class="m-3">
                             <div class="form-check">
-                                <label class="form-check-label" for="legal">Yes</label>
-                                <input type="radio" class="section-data form-check-input" id="over18" name="under_18"
-                                       value="1" checked>
+                                <label class="form-check-label" for="over18">Yes</label>
+                                <input type="radio" class="section-data form-check-input" id="over18" name="under_18" value="1" checked>
                             </div>
                             <div class="form-check">
-                                <label class="form-check-label" for="over18">No</label>
-                                <input type="radio" class="section-data form-check-input" id="under18" name="under_18"
-                                       value="0">
+                                <label class="form-check-label" for="under18">No</label>
+                                <input type="radio" class="section-data form-check-input" id="under18" name="under_18" value="0">
                             </div>
                         </div>
 
-                        <h5 for="authorizedInUs">Are you authorized to work in the US? <i
+                        <h5 >Are you authorized to work in the US? <i
                                 class="bi bi-asterisk required"></i></h5>
                         <div class="m-3" id="authorizedInUs">
                             <div class="form-check">
                                 <label class="form-check-label" for="authorizedInUsYes">Yes</label>
-                                <input id="authorizedInUsYes" class="section-data form-check-input" type="radio"
-                                       name="authorizedInUS" value="1" required checked/>
+                                <input id="authorizedInUsYes" class="section-data form-check-input" type="radio" name="authorizedInUS" value="1" required checked/>
                             </div>
 
                             <div class="form-check">
@@ -178,7 +183,7 @@
                             </div>
                         </div>
 
-                        <h5 for="levelOfEducation">What is your highest level of Education? <i
+                        <h5>What is your highest level of Education? <i
                                 class="bi bi-asterisk required"></i></h5>
                         <div class="m-3" id="levelOfEducation">
                             <div class="form-check">
@@ -219,7 +224,7 @@
                         </div>
 
 
-                        <h5 for="RelativesAtSponsors">Do you have an relatives working for sponsoring companies? <i
+                        <h5>Do you have an relatives working for sponsoring companies? <i
                                 class="bi bi-asterisk required"></i></h5>
                         <div class="m-3 " id="relativesAtSponsors">
                             <div class="form-check">
@@ -235,19 +240,18 @@
                         </div>
 
                         <div class="m-3 hide status-required" id="relativeSponsorInput">
-                            <label for="relativeSponsorNames" class="form-label status-label">If you answered yes to
-                                the
-                                previous question please enter that sponor name here.<i
+                            <label for="relativeSponsorNames" class="form-label status-label">
+                                If you answered yes to the previous question please enter that sponor name here.<i
                                     class="bi bi-asterisk required"></i> </label>
                             <input id="relativeSponsorNames" class="form-control" type="text" name="" autofocus/>
                         </div>
 
 
-                        <h5 for="employedWithSponsor">Do you work for a sponsoring company? <i
+                        <h5>Do you work for a sponsoring company? <i
                                 class="bi bi-asterisk required"></i></h5>
                         <div class="m-3" id="employedWithSponsor">
                             <div class="form-check">
-                                <label class="form-check-label" for="workForSponsor">Yes</label>
+                                <label class="form-check-label" for="workForSponsorYes">Yes</label>
                                 <input type="radio" class="section-data form-check-input" id="workForSponsorYes"
                                        name="workForSponsor" value="1">
                             </div>
@@ -268,7 +272,7 @@
                         </div>
 
                         <div class="form-nav m-3">
-                            <button type="submit" id="statusBtn" class="nextBtn btn btn-info float-right"
+                            <button type="submit" id="statusBtn" class="nextBtn btn btn-pink float-right"
                                     data-section="2">Next
                             </button>
                         </div>
@@ -280,7 +284,7 @@
                 <!-- <h2>Work History</h2> -->
                 <!-- FORM ROW 1 -->
                 <div class="form-section toggle" style="display:none;" id="section3">
-                    <h2>Employment History</h2>
+                    <h2 class="blue border-bottom mb-4">Employment History</h2>
 
                     <div id="employmentContainer">
 
@@ -288,12 +292,12 @@
                     </div>
 
                     <div class="col-md-2 mb-3 mt-4" id="addButton">
-                        <button class="btn btn-primary" type="button" style="width:140px;" id="addField">Add Employer
+                        <button class="btn btn-navy" type="button" style="width:140px;" id="addField">Add Employer
                         </button>
                     </div>
 
                     <div class="form-nav">
-                        <button type="submit" id="employmentBtn" class="btn btn-info float-right"
+                        <button type="submit" id="employmentBtn" class="btn btn-pink float-right"
                                 data-section="3">Next
                         </button>
                     </div>
@@ -302,8 +306,9 @@
                 <!-- Assesments INFORMATION FORM -->
                 <!-- <h2>Assesment Information</h2> -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section4" style="display: none" ;>
-                    <h2> Assessments</h2>
+                <div class="form-section toggle" id="section4" style="display: none">
+                    <h2 class="blue border-bottom mb-4"> Assessments</h2>
+                    
                     <form class="contact-form" method="post" action="{{ route('form.formAssesments') }}">
                         <input type="hidden" id="assesmentToken" name="_token" value="{{ Session::token() }}">
                         <div class="m-3">
@@ -320,7 +325,7 @@
 
                         <div class="m-3">
                             <div id="ACTScoresContainer" class="hide">
-                                <h5 for="ACTScores">ACT Scores <i>(required)</i></h5>
+                                <h5>ACT Scores <i>(required)</i></h5>
                                 <div id="ACTScores" class="row score-required" style="display: inline-flex;">
                                     <div class="col">
                                         <label class="score-label" for="ACTenglishScore"></label>
@@ -366,7 +371,7 @@
 
                         <div class="m-3">
                             <div id="SATScoresContainer" class="hide">
-                                <h5 for="SATScores">SAT Scores <i>(required)</i></h5>
+                                <h5>SAT Scores <i>(required)</i></h5>
                                 <div class="row score-required" id="SATScores" style="display: inline-flex;">
                                     <div class="col">
                                         <label class="score-label" for="SATmath"></label>
@@ -407,7 +412,7 @@
 
                         <div class="m-3" id="KYOTEscore">
                             <div id="KYOTEScoresContainer" class="hide">
-                                <h5>Select Area and enter score</h5>
+                                <h5> <label for="KYOTEarea">Select Area and enter score</label></h5>
                                 <div class="input-group mb-3">
                                     <select id="KYOTEarea" name="KYOTEarea">
                                         <option value="">Select a KYOTE area</option>
@@ -415,18 +420,19 @@
                                         <option value="writting">writting</option>
                                         <option value="math">math</option>
                                     </select>
+                                    <label for="KYOTEscore"></label>
                                     <input type="text" class="form-control testScore" id="KYOTEscore" name="KYOTEscore"
-                                           placeholder="Area Score"/>
+                                     placeholder="Area Score"/>
                                 </div>
                             </div>
                         </div>
 
                         <div class="m-3">
-                            <h5 for="">If You haven't taken the ACT, SAT or KYOTE, but have taken another
-                                assesment..
-                            </h5>
-                            <input type="text" class="form-control" id="otherAssesments" name="otherAssesments"
-                                   placeholder="Other Assessments and scores">
+                            <h5><label for="otherAssesments">
+                                    If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
+                                </label> </h5>
+                           <input type="text" class="form-control" id="otherAssesments" name="otherAssesments"
+                                placeholder="Other Assessments and scores">
                         </div>
 
                         <div class="m-3">
@@ -438,7 +444,7 @@
                             </div>
 
                             <div class="form-check">
-                                <label for="SkillsUSAno" class="form-check-label">No</label>
+                                <label for="skillsUSAno" class="form-check-label">No</label>
                                 <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0"
                                        checked>
                             </div>
@@ -503,7 +509,7 @@
                         </div>
 
                         <div class="form-nav m-3">
-                            <button type="submit" id="assesmentBtn" class=" btn btn-info float-right"
+                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right"
                                     data-section="4">Next
                             </button>
                         </div>
@@ -513,8 +519,8 @@
 
                 <!-- Essay -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section5" style="display:none" ;>
-                    <h2> Essay </h2>
+                <div class="form-section toggle" id="section5" style="display:none" >
+                    <h2 class="blue border-bottom mb-4"> Essay </h2>
                     <form class="contact-form">
                         <input type="hidden" id="essayToken" name="_token" value="{{ Session::token() }}">
                         <div id="essay-required">
@@ -523,9 +529,9 @@
 
                             <textarea class="form-control essay-input" id="essay" rows="3" name=""></textarea>
 
-                              
+
                             <div class="form-nav">
-                                <button type="" id="essayBtn" class="nextBtn btn btn-info float-right"
+                                <button id="essayBtn" class="nextBtn btn btn-pink float-right"
                                         data-section="5">Next
                                 </button>
                             </div>
@@ -535,15 +541,16 @@
 
                 <!-- Transcripts -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section6" style="display:none" ;>
-                    <h2> Transcripts</h2>
+                <div class="form-section toggle" id="section6" style="display:none" >
+                    <h2 class="blue border-bottom  mb-4"> Transcripts</h2>
+                
                     <form class="contact-form" method="post" action="{{ route('form.formTranscript') }}">
                         <input type="hidden" id="transcriptToken" name="_token" value="{{ Session::token() }}">
                         <p> Select a method for submiting your transcripts. <i>Transcripts must be submited within
-                                14
-                                days of completeing the application</i></p>
-
+                                14 days of completeing the application.
+                                 You can upload them now directly, or attach them an email and submit them that way.</i></p>
                         <div class="transctiptMethod">
+
                             <label class="transcriptLabel"></label>
                             <div class="p-3">
                                 <div class="form-check">
@@ -559,7 +566,6 @@
                                                name="transcript"/>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="p-3">
@@ -583,7 +589,7 @@
                         </div>
 
                         <div class="form-nav">
-                            <button type="submit" id="transcriptBtn" class="nextBtn btn btn-info float-right"
+                            <button type="submit" id="transcriptBtn" class="nextBtn btn btn-pink float-right"
                                     data-section="6">Next
                             </button>
                         </div>
@@ -592,8 +598,8 @@
 
                 <!-- Agreement and submit -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle termsCheck sectionContainer" id="section7" style="display:none" ;>
-                    <h2>Terms and Complete</h2>
+                <div class="form-section toggle termsCheck sectionContainer" id="section7" style="display:none" >
+                    <h2 class="blue border-bottom mb-4">Terms and Complete</h2>
                     <form class="contact-form">
                         <input type="hidden" id="completeToken" name="_token" value="{{ Session::token() }}">
 
@@ -646,7 +652,7 @@
                             </label>
                         </div>
 
-                        <button id="finishBtn" class="finish btn btn-success" type="submit">Submit</button>
+                        <button id="finishBtn" class="finish btn btn-pink" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
@@ -704,53 +710,51 @@
             <div class="row g-3 mt-3">
                 <div class="col">
                     <label class="form-label" for="employerName">Employer Name</label>
-                    <input class="section-data form-control  employerName" type="text" name="employerName"/>
+                    <input class="section-data form-control employerName" id="employerName" type="text" name="employerName"/>
                 </div>
 
                 <div class="col">
                     <label class="form-label" for="employerPhone">Employer Phone</label>
-                    <input class="section-data form-control  employerPhone" type="text" name="employerPhone"/>
+                    <input class="section-data form-control employerPhone" id="employerPhone" type="text" name="employerPhone"/>
                 </div>
             </div>
 
             <label class="form-label" for="workDuties">Duties performed</label>
-            <input class="section-data form-control workDuties" type="text" name="workDuties"/>
+            <input class="section-data form-control workDuties" id="workDuties" type="text" name="workDuties"/>
 
             <div class="row g-3 mt-3">
                 <div class="col-5">
                     <label class="form-label" for="employmentStart">Employment start date</label>
-                    <input type="date" class=" employmentStart" name="employmentStart"/>
+                    <input type="date" class=" employmentStart" id="employmentStart" name="employmentStart"/>
                 </div>
                 <div class="col-5">
                     <label class="form-label" for="employmentEnd">Employment end date</label>
-                    <input type="date" class=" employmentEnd" name="employmentEnd"/>
+                    <input type="date" class=" employmentEnd" id="employmentEnd" name="employmentEnd"/>
                 </div>
             </div>
 
             <div class="mt-3">
                 <label class="form-label" for="reasonForLeaving">Reason for leaving</label>
-                <input class="section-data form-control  reasonForLeaving" type="text" name="reasonForLeaving"/>
+                <input class="section-data form-control  reasonForLeaving" id="reasonForLeaving" type="text" name="reasonForLeaving"/>
             </div>
         </div>
     </div>
 
 
     <script>
-        var contactRouteUrl = "{{ route('form.formSubmit') }}";
-        var statusRouteUrl = "{{ route('form.formStatus') }}";
-        var employmentRoutetUrl = "{{ route('form.formEmployment') }}";
-        var assesmenRoutetUrl = "{{ route('form.formAssesments') }}";
-        var essayRouteUrl = "{{ route('form.formEssay') }}";
-        var transcriptRouteUrl = "{{ route('form.formTranscript') }}";
-        var completeRouteUrl = "{{ route('form.complete') }}";
-        var dashBoardRouteUrl = "{{ route('dashboard') }}";
-
+        const contactRouteUrl = "{{ route('form.formSubmit') }}";
+        const statusRouteUrl = "{{ route('form.formStatus') }}";
+        const employmentRoutetUrl = "{{ route('form.formEmployment') }}";
+        const assesmenRoutetUrl = "{{ route('form.formAssesments') }}";
+        const essayRouteUrl = "{{ route('form.formEssay') }}";
+        const transcriptRouteUrl = "{{ route('form.formTranscript') }}";
+        const completeRouteUrl = "{{ route('form.complete') }}";
+        const dashBoardRouteUrl = "{{ route('dashboard') }}";
     </script>
 
 
     <script>
-        var application = $.parseJSON('@json($application)');
-
+        const application = $.parseJSON('@json($application)');
     </script>
 
     <script src="{{ asset('js/application.js') }}" type="text/javascript"></script>
