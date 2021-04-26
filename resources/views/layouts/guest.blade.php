@@ -9,22 +9,32 @@
         <title>{{ config('app.name', 'KYFAME') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <!-- Styles -->
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">         
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-             <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+ 
+
+            <link rel="stylesheet" href="{{ asset('bootstrap5/css/bootstrap.css') }}"> 
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css" />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-            
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
             <!-- Scripts -->
             <script src="{{ asset('js/jquery.js') }}"></script>
+            <script src="{{ asset('bootstrap5/js/bootstrap.min.js')}}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js" integrity="sha512-Rd5Gf5A6chsunOJte+gKWyECMqkG8MgBYD1u80LOOJBfl6ka9CtatRrD4P0P5Q5V/z/ecvOCSYC8tLoWNrCpPg==" crossorigin="anonymous"></script>
+
             <script src="{{ asset('js/app.js') }}" defer></script>
-            <script src="{{ asset('js/bootstrap/bootstrap.js')}}"></script>
+         
            
     </head>
 
-    <body class="font-sans antialiased m-0">
+    <body class="font-text m-0">
         <div class="min-h-screen">
             @include('layouts.navigation')
 

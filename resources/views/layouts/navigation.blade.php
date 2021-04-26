@@ -1,4 +1,5 @@
 <section>
+
        <div class="container-fluid" style="background: rgba(255, 255, 255, 0.64);">
         <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">           
