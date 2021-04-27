@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function __construct($user)
+    public function __construct()
     {
-      $user = Auth::user();
+        
     }
 
     public function AdminEmail($user)
@@ -24,7 +24,6 @@ class EmailController extends Controller
          $email = 'kyfame.dev@gmail.com';
          $details= [
          'title' => 'New Applicant',
-        //  'body' => 'A new application has been submitted by'.' ' .' '. $user->first_name .' ' .' '. $user->last_name . '.'
          'body' => sprintf($format, $user->first_name, $user->last_name)
          ];
          Mail::to($email)->send(new Gmail($details));
@@ -50,8 +49,25 @@ class EmailController extends Controller
         ];
         Mail::to($email)->send(new Gmail($details));
     }
-  
 
+    public function contactEmail(Request $request)
+    {
+        $contactEmail = $request->contactEmail;
+        $contactName = $request->contactName;
+        $contactMessage = $request->contactMessage;
 
+        if ($request->ajax()) { 
 
+            
+                $email = 'kyfame.dev@gmail.com';
+                $details= [
+                'title' => 'Contact Request from'. ' ' . $contactName .' '. $contactEmail,
+                'body' => 'Message deatils: ' .' '.' '. $contactMessage
+                ];
+                Mail::to($email)->send(new Gmail($details));
+                return response()->json(['success' => true]);
+           
+   
+        }
+    }
 }

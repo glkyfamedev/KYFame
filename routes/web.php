@@ -7,7 +7,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\SponsorController;
 use App\Models\StudentApplication;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailController;
 
 
 /*
@@ -30,6 +30,8 @@ Route::view('/employers','employers');
 Route::get('/', function () {
     return view('home');
 });
+Route::post('/email', [EmailController::class, 'contactEmail'])->name('email.contact');
+
 
 Route::get('/sponsors', [SponsorController::class, 'index'])
     ->name('sponsors');
