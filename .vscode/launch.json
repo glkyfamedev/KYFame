@@ -14,7 +14,7 @@
                 "-t",
                 "."
             ],
-            "port": 9000,
+            "port": 9001,
             "serverReadyAction": {
                 "action": "openExternally"
             }
@@ -26,16 +26,13 @@
             "program": "${file}",
             "cwd": "${fileDirname}",
             "externalConsole": false,
-            "port": 9000
+            "port": 9001
         },
         {
             "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
-            "port": 9001,
-            "ignore": [
-            "**/vendor/**/*.php"
-        ]
+            "port": 9001
         }
     ]
 }
