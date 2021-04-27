@@ -233,36 +233,41 @@ class ApplicationController extends Controller
                 }
             }
     }
+
     public function formTranscript(Request $request)
     {
         $user = Auth::user();
         $application = session('application');
+                   
+        try {
 
-        if($request->file())
-        {
-            $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
-            $request->file->move(public_path('transcripts'), $fileName);
-        }
-
-
-        if ($request->ajax()) {
-            try {
-                $application = StudentApplication::where('id', $application->id)->first();
-                $application->transcript_method = $request->transcriptMethod;
-                $application->currentSection = $request->currentSection;
-                $application->transcriptPath = $fileName;
-
-                $application->save();
-
-                return response()->json(['success' => true]);
-
-            } catch (Exception $e) {
-                return response()->json(['success' => false]);
+            if($request->file())
+            {
+                $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
+                $request->file->move(public_path('transcripts'), $fileName);
             }
-        }
-    }
+            else{
+                
+                $fileName = 'N/A';
+            }
+                
+            $application = StudentApplication::where('id', $application->id)->first();
+            $application->transcript_method = $request->transcriptMethod;
+            $application->currentSection = $request->currentSection;
+            $application->transcriptPath = $fileName;
 
-    public function CompleteApplication(Request $request): \Illuminate\Http\JsonResponse
+            $application->save();
+
+            return response()->json(['success' => true]);
+
+        } catch (Exception $e) {
+            return response()->json(['success' => false]);
+        }
+     }
+        
+    
+
+    public function CompleteApplication(Request $request)
     {
         $application = session('application');
         $user = Auth::user();
