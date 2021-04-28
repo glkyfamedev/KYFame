@@ -1,7 +1,7 @@
 <x-homePage-layout>
-    @php
+    {{-- @php
     phpinfo()
-    @endphp
+    @endphp  --}}
     <style>
         .logoSmall {
             max-height: 70px;

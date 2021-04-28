@@ -5,21 +5,21 @@
             <div class="col-md-7">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ __('Application') }}
-                </h2>
-            </div>
+    </h2>
+    </div>
 
-            <div class="col">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
-            </div>
-        </div>
+    <div class="col">
+        <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
+    </div>
+    </div>
     </x-slot> --}}
-    <x-auth-session-status class="mb-4" :status="session('status')"/>
-    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     @if (Session::has('message'))
-        <div class="alert alert-info">
-            {{ Session::get('message') }}
-        </div>
+    <div class="alert alert-info">
+        {{ Session::get('message') }}
+    </div>
     @endif
 
     <style>
@@ -36,6 +36,7 @@
             color: red;
             font-size: x-small;
         }
+
         .errorBorder {
             border: solid 2px red !important;
         }
@@ -55,8 +56,8 @@
             <div class="bg-white border-gray-200">
 
                 <div id="appDescription">
-                   <p>
-                        The application is divided into six sections sections, each section must be completed before moving on. 
+                    <p>
+                        The application is divided into six sections sections, each section must be completed before moving on.
                         Once a section has been completed you will be able to go back to it at any time to make corrections or changes.
                     </p>
 
@@ -64,23 +65,23 @@
                         transcripts within 14 days of completeing your application. </p>
 
                     <p>
-                       During the Application, you will be required to submit a written essay explaining your
-                       qualifications for the program as well as why you would like to join.
+                        During the Application, you will be required to submit a written essay explaining your
+                        qualifications for the program as well as why you would like to join.
                     </p>
-                    
-                     <p>
-                        Please enter the phone number where you can be reached and make sure your prefered contact method 
-                        is a way we can contact you in response to your application. 
+
+                    <p>
+                        Please enter the phone number where you can be reached and make sure your prefered contact method
+                        is a way we can contact you in response to your application.
                     </p>
 
                     <div>
                         @if ($application->start_date === null)
-                            <button type="button" class="btn btn-pink fw-bolder" id="startBtn">Start Application
-                            </button>
+                        <button type="button" class="btn btn-pink fw-bolder" id="startBtn">Start Application
+                        </button>
                         @elseif ($application->start_date !== null && $application->completed_date === null)
-                            <button type="button" class=" btn btn-navy" id="startBtn">Continue Application</button>
+                        <button type="button" class=" btn btn-navy" id="startBtn">Continue Application</button>
                         @else
-                            <button type="button" class="btn btn-pink " id="startBtn">Edit/Update Application</button>
+                        <button type="button" class="btn btn-pink " id="startBtn">Edit/Update Application</button>
                         @endif
                     </div>
 
@@ -89,60 +90,58 @@
 
                 <div class="form-section toggle" id="section1" style="display:none;">
                     <h2 class="blue border-bottom mb-4">Contact Information</h2>
-
                     <div class="messages border-bottom"></div>
-
-
                     <form class="contact-form row g-3" id="contact-Section">
-                        <input type="hidden" id="token" name="_token" value="{{ Session::token() }}">
-
+                        <input type="hidden" id="contactToken" name="_token" value="{{ Session::token() }}">
                         <div class="col-8 contact-required">
-                            {{-- {{ contact_app->streetAddress }} --}}
-                            <label class="form-label contact-label" for="streetAddress">Street address <i
-                                    class="bi bi-asterisk required"></i></label>
-                            <input id="streetAddress" class="form-control contact-input" type="text"
-                                   name="streetAddress" required autofocus/>
+                            <label class="form-label contact-label" for="streetAddress">Street address <i class="bi bi-asterisk required"></i></label>
+                            <input id="streetAddress" class="form-control contact-input" type="text" name="streetAddress" required autofocus />
                         </div>
 
                         <div class="col">
                             <label class="form-label contact-label" for="address2">Apt or Suite number </label>
-                            <input id="address2" class="form-control" type="text" name="address2" autofocus/>
+                            <input id="address2" class="form-control" type="text" name="address2" autofocus />
                         </div>
 
                         <div class="col-md-6 contact-required">
-                            <label class="form-label contact-label" for="city">City <i
-                                    class="bi bi-asterisk required"></i></label>
-                            <input id="city" class="form-control contact-input" type="text" name="city" required
-                                   autofocus/>
+                            <label class="form-label contact-label" for="city">City <i class="bi bi-asterisk required"></i></label>
+                            <input id="city" class="form-control contact-input" type="text" name="city" required autofocus />
                         </div>
 
                         <div class="col-md-4 contact-required">
-                            <label class="form-label contact-label" for="state">State <i
-                                    class="bi bi-asterisk required"></i></label>
-                            <input id="state" class="form-control contact-input" type="text" name="state" required
-                                   autofocus/>
+                            <label class="form-label contact-label" for="state">State <i class="bi bi-asterisk required"></i></label>
+                            <input id="state" class="form-control contact-input" type="text" name="state" required autofocus />
                         </div>
 
                         <div class="col-md-2 contact-required">
-                            <label class="form-label contact-label" for="zip">Zip <i
-                                    class="bi bi-asterisk required"></i></label>
-                            <input id="zip" class="form-control contact-input" type="text" name="zip" required
-                                   autofocus/>
+                            <label class="form-label contact-label" for="zip">Zip <i class="bi bi-asterisk required"></i></label>
+                            <input id="zip" class="form-control contact-input" type="text" name="zip" required autofocus />
                         </div>
 
                         <div class="col contact-required">
-                            <label class="form-label contact-label" for="primaryPhone">Primary Phone <i
-                                    class="bi bi-asterisk required"></i></label>
-                            <input id="primaryPhone" class="form-control contact-input phone" type="text"
-                                   name="primaryPhone" required autofocus/>
+                            <label class="form-label contact-label" for="primaryPhone">Primary Phone <i class="bi bi-asterisk required"></i></label>
+                            <input id="primaryPhone" class="form-control contact-input phone" type="text" name="primaryPhone" required autofocus />
                         </div>
                         <div class="col">
                             <label class="form-label contact-label" for="altPhone">Alt Phone</label>
-                            <input id="altPhone" class="form-control phone" type="text" name="altPhone" autofocus/>
+                            <input id="altPhone" class="form-control phone" type="text" name="altPhone" autofocus />
                         </div>
+                        <h5> <label for="contactMethod">Select Area and enter score</label></h5>
+                        <div class="input-group">
+                            <select id="contactMethod" class="form-control" name="contactMethod">
+                                <option value="">Prefered Contact</option>
+                                <option value="phone">Phone</option>
+                                <option value="Account Email">Account Email</option>
+                                <option value="Other Email">Other Email</option>
+                            </select>
+                            <div id="otherEmailDiv" class="hide">
+                                <label for="otherEmail"></label>
+                                <input type="text" class="form-control" id="otherEmail" name="otherEmail" placeholder="Contact Email" />
+                            </div>
+                        </div>
+
                         <div class="form-nav">
-                            <button type="submit" id="contactBtn" class="nextBtn btn btn-pink float-right"
-                                    data-section="1">Next
+                            <button type="submit" id="contactBtn" class="nextBtn btn btn-pink float-right" data-section="1">Next
                             </button>
                         </div>
                     </form>
@@ -168,112 +167,94 @@
                             </div>
                         </div>
 
-                        <h5 >Are you authorized to work in the US? <i
-                                class="bi bi-asterisk required"></i></h5>
+                        <h5>Are you authorized to work in the US? <i class="bi bi-asterisk required"></i></h5>
                         <div class="m-3" id="authorizedInUs">
                             <div class="form-check">
                                 <label class="form-check-label" for="authorizedInUsYes">Yes</label>
-                                <input id="authorizedInUsYes" class="section-data form-check-input" type="radio" name="authorizedInUS" value="1" required checked/>
+                                <input id="authorizedInUsYes" class="section-data form-check-input" type="radio" name="authorizedInUS" value="1" required checked />
                             </div>
 
                             <div class="form-check">
                                 <label class="form-check-label" for="authorizedInUsNo">No</label>
-                                <input id="authorizedInUsNo" class="section-data form-check-input" type="radio"
-                                       name="authorizedInUS" value="0" required/>
+                                <input id="authorizedInUsNo" class="section-data form-check-input" type="radio" name="authorizedInUS" value="0" required />
                             </div>
                         </div>
 
-                        <h5>What is your highest level of Education? <i
-                                class="bi bi-asterisk required"></i></h5>
+                        <h5>What is your highest level of Education? <i class="bi bi-asterisk required"></i></h5>
                         <div class="m-3" id="levelOfEducation">
                             <div class="form-check">
-                                <input type="radio" class="section-data form-check-input levelOfEducation" id="HsSenior"
-                                       name="levelOfEducation" value="HS Senior" checked>
+                                <input type="radio" class="section-data form-check-input levelOfEducation" id="HsSenior" name="levelOfEducation" value="HS Senior" checked>
                                 <label class="form-check-label" for="HsSenior">HS Senior</label>
                             </div>
 
                             <div class="form-check">
-                                <input type="radio" class="section-data form-check-input levelOfEducation"
-                                       id="HsGraduate" name="levelOfEducation" value="HS Graduate">
+                                <input type="radio" class="section-data form-check-input levelOfEducation" id="HsGraduate" name="levelOfEducation" value="HS Graduate">
                                 <label class="form-check-label" for="HsGraduate">HS Graduate</label>
                             </div>
 
                             <div class="form-check">
-                                <input type="radio" class="section-data form-check-input levelOfEducation" id="GED"
-                                       name="levelOfEducation" value="GED">
+                                <input type="radio" class="section-data form-check-input levelOfEducation" id="GED" name="levelOfEducation" value="GED">
                                 <label class="form-check-label" for="GED">GED</label>
                             </div>
 
                             <div class="form-check">
-                                <input type="radio" class="section-data form-check-input levelOfEducation"
-                                       id="SomeCollege" name="levelOfEducation" value="SomeCollege">
+                                <input type="radio" class="section-data form-check-input levelOfEducation" id="SomeCollege" name="levelOfEducation" value="SomeCollege">
                                 <label class="form-check-label" for="SomeCollege">Some College</label>
                             </div>
 
                             <div class="form-check">
-                                <input type="radio" class="section-data form-check-input levelOfEducation"
-                                       id="AscDegree" name="levelOfEducation" value="AssociatesDegree">
+                                <input type="radio" class="section-data form-check-input levelOfEducation" id="AscDegree" name="levelOfEducation" value="AssociatesDegree">
                                 <label class="form-check-label" for="AscDegree">Associates Degree</label>
                             </div>
 
                             <div class="form-check">
-                                <input type="radio" class="section-data form-check-input levelOfEducation"
-                                       id="BacDegree" name="levelOfEducation" value="BachelorsDegree">
+                                <input type="radio" class="section-data form-check-input levelOfEducation" id="BacDegree" name="levelOfEducation" value="BachelorsDegree">
                                 <label class="form-check-label" for="BacDegree">Bachelors Degree</label>
                             </div>
                         </div>
 
 
-                        <h5>Do you have an relatives working for sponsoring companies? <i
-                                class="bi bi-asterisk required"></i></h5>
+                        <h5>Do you have an relatives working for sponsoring companies? <i class="bi bi-asterisk required"></i></h5>
                         <div class="m-3 " id="relativesAtSponsors">
                             <div class="form-check">
                                 <label class="form-check-label" for="relativesYes">Yes</label>
-                                <input type="radio" class="section-data form-check-input" id="relativesYes"
-                                       name="relativeSponsors" value="1">
+                                <input type="radio" class="section-data form-check-input" id="relativesYes" name="relativeSponsors" value="1">
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label" for="relativesNo">No</label>
-                                <input type="radio" class="section-data form-check-input" id="relativesNo"
-                                       name="relativeSponsors" value="0" checked>
+                                <input type="radio" class="section-data form-check-input" id="relativesNo" name="relativeSponsors" value="0" checked>
                             </div>
                         </div>
 
                         <div class="m-3 hide status-required" id="relativeSponsorInput">
                             <label for="relativeSponsorNames" class="form-label status-label">
-                                If you answered yes to the previous question please enter that sponor name here.<i
-                                    class="bi bi-asterisk required"></i> </label>
-                            <input id="relativeSponsorNames" class="form-control" type="text" name="" autofocus/>
+                                If you answered yes to the previous question please enter that sponor name here.<i class="bi bi-asterisk required"></i> </label>
+                            <input id="relativeSponsorNames" class="form-control" type="text" name="" autofocus />
                         </div>
 
 
-                        <h5>Do you work for a sponsoring company? <i
-                                class="bi bi-asterisk required"></i></h5>
+                        <h5>Do you work for a sponsoring company? <i class="bi bi-asterisk required"></i></h5>
                         <div class="m-3" id="employedWithSponsor">
                             <div class="form-check">
                                 <label class="form-check-label" for="workForSponsorYes">Yes</label>
-                                <input type="radio" class="section-data form-check-input" id="workForSponsorYes"
-                                       name="workForSponsor" value="1">
+                                <input type="radio" class="section-data form-check-input" id="workForSponsorYes" name="workForSponsor" value="1">
                             </div>
 
                             <div class="form-check">
                                 <label class="form-check-label" for="workForSponsorNo">No</label>
-                                <input type="radio" class="section-data form-check-input" id="workForSponsorNo"
-                                       name="workForSponsor" value="0" checked>
+                                <input type="radio" class="section-data form-check-input" id="workForSponsorNo" name="workForSponsor" value="0" checked>
                             </div>
                         </div>
 
                         <div class="m-3 hide status-required" id="employedSponsorInput">
                             <label for="employedSponsorNames" class="form-label status-label">If you answered yes to
                                 the
-                                previous question please enter that sponor name here.<i
-                                    class="bi bi-asterisk required"></i> </label>
-                            <input id="employedSponsorNames" class="form-control" type="text" name="" autofocus/>
+                                previous question please enter that sponor name here.<i class="bi bi-asterisk required"></i> </label>
+                            <input id="employedSponsorNames" class="form-control" type="text" name="" autofocus />
                         </div>
 
                         <div class="form-nav m-3">
-                            <button type="submit" id="statusBtn" class="nextBtn btn btn-pink float-right"
-                                    data-section="2">Next
+                            <button type="submit" id="statusBtn" class="nextBtn btn btn-pink float-right" data-section="2">Next
                             </button>
                         </div>
                     </form>
@@ -297,8 +278,7 @@
                     </div>
 
                     <div class="form-nav">
-                        <button type="submit" id="employmentBtn" class="btn btn-pink float-right"
-                                data-section="3">Next
+                        <button type="submit" id="employmentBtn" class="btn btn-pink float-right" data-section="3">Next
                         </button>
                     </div>
                 </div>
@@ -308,7 +288,7 @@
                 <!-- FORM ROW 1 -->
                 <div class="form-section toggle" id="section4" style="display: none">
                     <h2 class="blue border-bottom mb-4"> Assessments</h2>
-                    
+
                     <form class="contact-form" method="post" action="{{ route('form.formAssesments') }}">
                         <input type="hidden" id="assesmentToken" name="_token" value="{{ Session::token() }}">
                         <div class="m-3">
@@ -329,28 +309,23 @@
                                 <div id="ACTScores" class="row score-required" style="display: inline-flex;">
                                     <div class="col">
                                         <label class="score-label" for="ACTenglishScore"></label>
-                                        <input type="text" class="form-control ACT testScore" id="ACTenglishScore"
-                                               name="ACTenglishScore" placeholder="English"/>
+                                        <input type="text" class="form-control ACT testScore" id="ACTenglishScore" name="ACTenglishScore" placeholder="English" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="ACTreadingScore"></label>
-                                        <input type="text" class="form-control testScore ACT" id="ACTreadingScore"
-                                               name="ACTreadingScore" placeholder="Reading"/>
+                                        <input type="text" class="form-control testScore ACT" id="ACTreadingScore" name="ACTreadingScore" placeholder="Reading" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="ACTmathScore"></label>
-                                        <input type="text" class="form-control testScore ACT" id="ACTmathScore"
-                                               name="ACTmathScore" placeholder="Math"/>
+                                        <input type="text" class="form-control testScore ACT" id="ACTmathScore" name="ACTmathScore" placeholder="Math" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="ACTscienceScore"></label>
-                                        <input type="text" class="form-control testScore ACT" id="ACTscienceScore"
-                                               name="ACTscienceScore" placeholder="Science"/>
+                                        <input type="text" class="form-control testScore ACT" id="ACTscienceScore" name="ACTscienceScore" placeholder="Science" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="ACTcompositeScore"></label>
-                                        <input type="text" class="form-control testScore ACT" id="ACTcompositeScore"
-                                               name="ACTcompositeScore" placeholder="Composite"/>
+                                        <input type="text" class="form-control testScore ACT" id="ACTcompositeScore" name="ACTcompositeScore" placeholder="Composite" />
                                     </div>
                                 </div>
                             </div>
@@ -375,23 +350,19 @@
                                 <div class="row score-required" id="SATScores" style="display: inline-flex;">
                                     <div class="col">
                                         <label class="score-label" for="SATmath"></label>
-                                        <input type="text" class="form-control testScore SAT" id="SATmath"
-                                               name="SATmath" placeholder="Math"/>
+                                        <input type="text" class="form-control testScore SAT" id="SATmath" name="SATmath" placeholder="Math" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="SATCriticalThinking"></label>
-                                        <input type="text" class="form-control testScore SAT" id="SATCriticalThinking"
-                                               name="SATCriticalThinking " placeholder="Critical Thinking"/>
+                                        <input type="text" class="form-control testScore SAT" id="SATCriticalThinking" name="SATCriticalThinking " placeholder="Critical Thinking" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="SATwriting"></label>
-                                        <input type="text" class="form-control testScore SAT" id="SATwriting"
-                                               name="SATwriting" placeholder="Writing"/>
+                                        <input type="text" class="form-control testScore SAT" id="SATwriting" name="SATwriting" placeholder="Writing" />
                                     </div>
                                     <div class="col">
                                         <label class="score-label" for="SATcomposite"></label>
-                                        <input type="text" class="form-control testScore SAT" id="SATcomposite"
-                                               name="SATcomposite" placeholder="Composite"/>
+                                        <input type="text" class="form-control testScore SAT" id="SATcomposite" name="SATcomposite" placeholder="Composite" />
                                     </div>
                                 </div>
                             </div>
@@ -405,8 +376,7 @@
                             </div>
                             <div class="form-check">
                                 <label for="KYOTEno" class="form-check-label">No</label>
-                                <input type="radio" class="form-check-input" id="KYOTEno" name="KYOTE" value="0"
-                                       checked>
+                                <input type="radio" class="form-check-input" id="KYOTEno" name="KYOTE" value="0" checked>
                             </div>
                         </div>
 
@@ -421,8 +391,7 @@
                                         <option value="math">math</option>
                                     </select>
                                     <label for="KYOTEscore"></label>
-                                    <input type="text" class="form-control testScore" id="KYOTEscore" name="KYOTEscore"
-                                     placeholder="Area Score"/>
+                                    <input type="text" class="form-control testScore" id="KYOTEscore" name="KYOTEscore" placeholder="Area Score" />
                                 </div>
                             </div>
                         </div>
@@ -431,22 +400,19 @@
                             <h5><label for="otherAssesments">
                                     If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
                                 </label> </h5>
-                           <input type="text" class="form-control" id="otherAssesments" name="otherAssesments"
-                                placeholder="Other Assessments and scores">
+                            <input type="text" class="form-control" id="otherAssesments" name="otherAssesments" placeholder="Other Assessments and scores">
                         </div>
 
                         <div class="m-3">
                             <h5>Did you participate in Skills USA?</h5>
                             <div class="form-check">
                                 <label for="skillsUSAyes" class="form-check-label">Yes</label>
-                                <input type="radio" class="form-check-input" id="skillsUSAyes" name="skillsUSA"
-                                       value="1">
+                                <input type="radio" class="form-check-input" id="skillsUSAyes" name="skillsUSA" value="1">
                             </div>
 
                             <div class="form-check">
                                 <label for="skillsUSAno" class="form-check-label">No</label>
-                                <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0"
-                                       checked>
+                                <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0" checked>
                             </div>
                         </div>
 
@@ -454,35 +420,29 @@
                             <h5>Did you participate in project lead the way?</h5>
                             <div class="form-check">
                                 <label for="projectLeadTheWayYes" class="form-check-label">Yes</label>
-                                <input type="radio" class="form-check-input" id="projectLeadTheWayYes"
-                                       name="projectLeadTheWay" value="1">
+                                <input type="radio" class="form-check-input" id="projectLeadTheWayYes" name="projectLeadTheWay" value="1">
                             </div>
 
                             <div class="form-check">
                                 <label for="projectLeadTheWayNo" class="form-check-label">No</label>
-                                <input type="radio" class="form-check-input" id="projectLeadTheWayNo"
-                                       name="projectLeadTheWay" value="0" checked>
+                                <input type="radio" class="form-check-input" id="projectLeadTheWayNo" name="projectLeadTheWay" value="0" checked>
                             </div>
                         </div>
 
                         <div class="m-3">
                             <label for="manufacturingAcedemics">Have you completed any Manufacturing
                                 Acedemics?</label>
-                            <input type="text" class="form-control" id="manufacturingAcedemics"
-                                   name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
+                            <input type="text" class="form-control" id="manufacturingAcedemics" name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
                         </div>
 
                         <div class="m-3">
                             <label for="awardsAndHonors">Awards and Honors</label>
-                            <input type="text" class="form-control" id="awardsAndHonors" name="awardsAndHonors"
-                                   placeholder="">
+                            <input type="text" class="form-control" id="awardsAndHonors" name="awardsAndHonors" placeholder="">
                         </div>
 
                         <div class="m-3">
-                            <label for="highSchoolAttended">Name of highschool attended? <i
-                                    class="bi bi-asterisk required"></i></label>
-                            <input type="text" class="form-control required-input" id="highSchoolAttended"
-                                   name="highSchoolAttended" placeholder="">
+                            <label for="highSchoolAttended">Name of highschool attended? <i class="bi bi-asterisk required"></i></label>
+                            <input type="text" class="form-control required-input" id="highSchoolAttended" name="highSchoolAttended" placeholder="">
                         </div>
 
                         <div class="m-3">
@@ -492,25 +452,21 @@
 
                         <div class="m-3">
                             <label for="highSchoolActivities">List any highschool Activites</label>
-                            <input type="text" class="form-control" id="highSchoolActivities"
-                                   name="highSchoolActivities" placeholder="">
+                            <input type="text" class="form-control" id="highSchoolActivities" name="highSchoolActivities" placeholder="">
                         </div>
 
                         <div class="m-3">
                             <label for="technicalPrograms">List any other technical programs attended</label>
-                            <input type="text" class="form-control" id="technicalPrograms" name="technicalPrograms"
-                                   placeholder="">
+                            <input type="text" class="form-control" id="technicalPrograms" name="technicalPrograms" placeholder="">
                         </div>
 
                         <div class="m-3">
                             <label for="additionalComments">Additional Comments</label>
-                            <input type="text" class="form-control" id="additionalComments" name="additionalComments"
-                                   placeholder="">
+                            <input type="text" class="form-control" id="additionalComments" name="additionalComments" placeholder="">
                         </div>
 
                         <div class="form-nav m-3">
-                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right"
-                                    data-section="4">Next
+                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="4">Next
                             </button>
                         </div>
 
@@ -519,20 +475,18 @@
 
                 <!-- Essay -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section5" style="display:none" >
+                <div class="form-section toggle" id="section5" style="display:none">
                     <h2 class="blue border-bottom mb-4"> Essay </h2>
                     <form class="contact-form">
                         <input type="hidden" id="essayToken" name="_token" value="{{ Session::token() }}">
                         <div id="essay-required">
-                            <label for="essay" class="form-label essay-label">Personal Essay <i
-                                    class="bi bi-asterisk required"></i></label>
+                            <label for="essay" class="form-label essay-label">Personal Essay <i class="bi bi-asterisk required"></i></label>
 
                             <textarea class="form-control essay-input" id="essay" rows="3" name=""></textarea>
 
 
                             <div class="form-nav">
-                                <button id="essayBtn" class="nextBtn btn btn-pink float-right"
-                                        data-section="5">Next
+                                <button id="essayBtn" class="nextBtn btn btn-pink float-right" data-section="5">Next
                                 </button>
                             </div>
                         </div>
@@ -541,14 +495,14 @@
 
                 <!-- Transcripts -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section6" style="display:none" >
+                <div class="form-section toggle" id="section6" style="display:none">
                     <h2 class="blue border-bottom  mb-4"> Transcripts</h2>
-                
+
                     <form class="contact-form" method="post" action="{{ route('form.formTranscript') }}">
                         <input type="hidden" id="transcriptToken" name="_token" value="{{ Session::token() }}">
                         <p> Select a method for submiting your transcripts. <i>Transcripts must be submited within
                                 14 days of completeing the application.
-                                 You can upload them now directly, or attach them an email and submit them that way.</i></p>
+                                You can upload them now directly, or attach them an email and submit them that way.</i></p>
                         <div class="transctiptMethod">
 
                             <label class="transcriptLabel"></label>
@@ -556,14 +510,12 @@
                                 <div class="form-check">
                                     <label class="form-check-label" for="uploadTranscripts">Upload transcripts
                                         directly</label>
-                                    <input class="form-check-input transcript" type="radio" id="uploadTranscripts"
-                                           name="transcriptMethod" value="uploadTranscripts">
+                                    <input class="form-check-input transcript" type="radio" id="uploadTranscripts" name="transcriptMethod" value="uploadTranscripts">
                                 </div>
 
                                 <div class="" id="transciptUpload">
                                     <div class="input-group m-3">
-                                        <input type="file" id="transcriptFile" class="form-control" placeholder=""
-                                               name="transcript"/>
+                                        <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
                                     </div>
                                 </div>
                             </div>
@@ -572,8 +524,7 @@
                                 <div class="form-check">
                                     <label class="form-check-label" for="sendEmail">Send transctipts through
                                         Email</label>
-                                    <input class="form-check-input transcript" type="radio" id="sendEmail"
-                                           name="transcriptMethod" value="SendEmail">
+                                    <input class="form-check-input transcript" type="radio" id="sendEmail" name="transcriptMethod" value="SendEmail">
                                 </div>
                             </div>
 
@@ -581,16 +532,14 @@
                                 <div class="form-check">
                                     <label class="form-check-label" for="sendLater">I will submit my transcripts within
                                         14 days of submiting my application </label>
-                                    <input class="form-check-input transcript" type="radio" id="sendLater"
-                                           name="transcriptMethod" value="SendLater">
+                                    <input class="form-check-input transcript" type="radio" id="sendLater" name="transcriptMethod" value="SendLater">
                                 </div>
                             </div>
 
                         </div>
 
                         <div class="form-nav">
-                            <button type="submit" id="transcriptBtn" class="nextBtn btn btn-pink float-right"
-                                    data-section="6">Next
+                            <button type="submit" id="transcriptBtn" class="nextBtn btn btn-pink float-right" data-section="6">Next
                             </button>
                         </div>
                     </form>
@@ -598,7 +547,7 @@
 
                 <!-- Agreement and submit -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle termsCheck sectionContainer" id="section7" style="display:none" >
+                <div class="form-section toggle termsCheck sectionContainer" id="section7" style="display:none">
                     <h2 class="blue border-bottom mb-4">Terms and Complete</h2>
                     <form class="contact-form">
                         <input type="hidden" id="completeToken" name="_token" value="{{ Session::token() }}">
@@ -612,8 +561,7 @@
                         </div>
 
                         <div class="form-check">
-                            <label for="term2" class="termLabel form-check-label hide"><i
-                                    class="bi bi-asterisk required "></i></label>
+                            <label for="term2" class="termLabel form-check-label hide"><i class="bi bi-asterisk required "></i></label>
                             <input class="form-check-input termCheck" type="checkbox" value="" id="term2">
                             <label class="form-check-label termLabel d-inline" for="term2">
                                 To be considered for the program, I must work at the company which selects me
@@ -663,38 +611,31 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush nav nav-tabs flex-column" id="appNav" role="tablist">
                         <li class="list-group-item nav-item disabled" id="sectionNav1">
-                            <a href="#section1">Contact Info</a><label class="hide" id="sectionCheck1"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section1">Contact Info</a><label class="hide" id="sectionCheck1"><i class="bi bi-check2 check"></i></label>
                         </li>
 
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav2">
-                            <a href="#section2">Legal Status</a><label class="hide" id="sectionCheck2"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section2">Legal Status</a><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
                         </li>
 
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav3">
-                            <a href="#section3">Employment History</a><label class="hide" id="sectionCheck3"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section3">Employment History</a><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
                         </li>
 
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav4">
-                            <a href="#section4">Assessments</a><label class="hide" id="sectionCheck4"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section4">Assessments</a><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
                         </li>
 
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav5">
-                            <a href="#section5">Essay</a><label class="hide" id="sectionCheck5"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section5">Essay</a><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
                         </li>
 
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav6">
-                            <a href="#section6">Transcripts</a><label class="hide" id="sectionCheck6"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section6">Transcripts</a><label class="hide" id="sectionCheck6"><i class="bi bi-check2 check"></i></label>
                         </li>
 
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav7">
-                            <a href="#section7">Finish</a><label class="hide" id="sectionCheck7"><i
-                                    class="bi bi-check2 check"></i></label>
+                            <a href="#section7">Finish</a><label class="hide" id="sectionCheck7"><i class="bi bi-check2 check"></i></label>
                         </li>
                     </ul>
                 </div>
@@ -710,32 +651,32 @@
             <div class="row g-3 mt-3">
                 <div class="col">
                     <label class="form-label" for="employerName">Employer Name</label>
-                    <input class="section-data form-control employerName" id="employerName" type="text" name="employerName"/>
+                    <input class="section-data form-control employerName" id="employerName" type="text" name="employerName" />
                 </div>
 
                 <div class="col">
                     <label class="form-label" for="employerPhone">Employer Phone</label>
-                    <input class="section-data form-control employerPhone" id="employerPhone" type="text" name="employerPhone"/>
+                    <input class="section-data form-control employerPhone" id="employerPhone" type="text" name="employerPhone" />
                 </div>
             </div>
 
             <label class="form-label" for="workDuties">Duties performed</label>
-            <input class="section-data form-control workDuties" id="workDuties" type="text" name="workDuties"/>
+            <input class="section-data form-control workDuties" id="workDuties" type="text" name="workDuties" />
 
             <div class="row g-3 mt-3">
                 <div class="col-5">
                     <label class="form-label" for="employmentStart">Employment start date</label>
-                    <input type="date" class=" employmentStart" id="employmentStart" name="employmentStart"/>
+                    <input type="date" class=" employmentStart" id="employmentStart" name="employmentStart" />
                 </div>
                 <div class="col-5">
                     <label class="form-label" for="employmentEnd">Employment end date</label>
-                    <input type="date" class=" employmentEnd" id="employmentEnd" name="employmentEnd"/>
+                    <input type="date" class=" employmentEnd" id="employmentEnd" name="employmentEnd" />
                 </div>
             </div>
 
             <div class="mt-3">
                 <label class="form-label" for="reasonForLeaving">Reason for leaving</label>
-                <input class="section-data form-control  reasonForLeaving" id="reasonForLeaving" type="text" name="reasonForLeaving"/>
+                <input class="section-data form-control  reasonForLeaving" id="reasonForLeaving" type="text" name="reasonForLeaving" />
             </div>
         </div>
     </div>
@@ -750,11 +691,13 @@
         const transcriptRouteUrl = "{{ route('form.formTranscript') }}";
         const completeRouteUrl = "{{ route('form.complete') }}";
         const dashBoardRouteUrl = "{{ route('dashboard') }}";
+
     </script>
 
 
     <script>
         const application = $.parseJSON('@json($application)');
+
     </script>
 
     <script src="{{ asset('js/application.js') }}" type="text/javascript"></script>

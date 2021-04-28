@@ -57,7 +57,10 @@ class ApplicationController extends Controller
                 $contactModel->zip = $request->zip;
                 $contactModel->primaryPhone = $request->primaryPhone;
                 $contactModel->altPhone = $request->altPhone;
+                $contactModel->preferedContactMethod = $request->preferedContactMethod;
+                $contactModel->otherEmail = $request->otherEmail;
                 $contactModel->student_application_id = $application->id;
+
 
                 $contactModel->save();
                 $application->currentSection = $request->currentSection;
@@ -236,6 +239,7 @@ class ApplicationController extends Controller
 
     public function formTranscript(Request $request)
     {
+        
         $user = Auth::user();
         $application = session('application');
                    
@@ -275,6 +279,7 @@ class ApplicationController extends Controller
             try{
                 $complete = StudentApplication::find(1);
                 $complete->completed_date = $request->completed_date;
+               
                 $complete->save();
 
                 $success = true;

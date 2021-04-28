@@ -115,7 +115,7 @@
                             </a>
                         </address>
 
-                        <button class="btn btn-block btn-pink" id="contactBtn" type="btn">Send Now!</button>
+                        <button class="btn btn-block btn-pink" id="contactFormBtn" type="btn">Send Now!</button>
 
                     </div>
                 </div>
@@ -129,38 +129,3 @@
 </body>
 
 </html>
-
-<script>
-    const contactRouteUrl = "{{ route('email.contact') }}"
-
-    $('#contactBtn').click(function() {
-        var contactName = $('#contactName').val();
-        var contactEmail = $('#contactEmail').val();
-        var contactMessage = $('#contactMessage').val();
-
-
-        $.ajax({
-            type: 'POST'
-            , url: contactRouteUrl
-            , data: {
-                _token: $('#contactFormToken').val()
-                , contactName: $('#contactName').val()
-                , contactEmail: $('#contactEmail').val()
-                , contactMessage: $('#contactMessage').val(),
-
-            }
-            , dataType: 'json',
-
-            success: function(result) {
-                if (result) {
-                    alert("Email sent!")
-                } else {
-                    alert("email could not be sent, please try again.")
-                }
-            }
-
-        });
-
-    });
-
-</script>

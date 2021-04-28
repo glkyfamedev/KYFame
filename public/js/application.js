@@ -7,41 +7,13 @@ $(document).ready(function () {
         }
     })
 
-
-    $('#showContact').click(function (e) {
-        e.preventDefault();
-        $('#streetAddress').val(application.contact_app.streetAddress);
-        $('#address2').val(application.contact_app.address2);
-        $('#city').val(application.contact_app.city);
-        $('#state').val(application.contact_app.state);
-        $('#zip').val(application.contact_app.zip);
-        $('#primaryPhone').val(application.contact_app.primaryPhone);
-        $('#altPhone').val(application.contact_app.altPhone);
-
-        $('.contact-label').hide();
-        $('#showContact').hide();
-        $('.update').show();
-        $('#updateBtns').show();
-    });
-
-
-
-    $('#cancelBtn').click(function (e) {
-        e.preventDefault();
-        $('.update').hide();
-        $('#updateBtns').hide();
-        $('.contact-label').show();
-        $('#showContact').show();
-
-
-    });
-
-
-    $('#showTranscript').click(function (e) {
-        e.preventDefault();
-        $('#placeHolder').hide();
-        $('#contactDiv').hide();
-        $('#transcriptDiv').show();
+    $('#contactMethod').change(function () {
+        if ($(this).val() == 'Other Email') {
+            $('#otherEmailDiv').removeClass('hide');
+        }
+        else {
+            $('#otherEmailDiv').addClass('hide');
+        }
     });
 
     $('#startBtn').click(function (e) {
@@ -113,6 +85,7 @@ $(document).ready(function () {
         e.preventDefault()
         var sectionNum = $(this).data('section')
         var hasErrors = false
+
         $('.contact-input').each(function () {
             if ($(this).val() == '') {
                 hasErrors = true
@@ -288,7 +261,7 @@ function addEmploymentSection() {
     }
 }
 
-function saveContactData(e, sectionNum) {
+function saveContactData(e, sectionNum, contactMethod) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -299,7 +272,7 @@ function saveContactData(e, sectionNum) {
         type: 'POST',
         url: contactRouteUrl,
         data: {
-            _token: $('#token').val(),
+            _token: $('#contactToken').val(),
 
             streetAddress: $('#streetAddress').val(),
             address2: $('#address2').val(),
@@ -308,6 +281,9 @@ function saveContactData(e, sectionNum) {
             zip: $('#zip').val(),
             primaryPhone: $('#primaryPhone').val(),
             altPhone: $('#altPhone').val(),
+            preferedContactMethod: $('#contactMethod').val(),
+            otherEmail: $('#otherEmail').val(),
+
             currentSection: sectionNum + 1,
         },
         dataType: 'json',
