@@ -715,13 +715,6 @@ a.openNav {
     padding-left: 0;
 }
 
-
-
-
-
-
-
-
 .floating-arrow {
     -webkit-animation: floating-arrow 1.6s infinite ease-in-out 0s;
     -o-animation: floating-arrow 1.6s infinite ease-in-out 0s;
@@ -946,6 +939,8 @@ footer.footer {
         height: 100%;
     }
 }
+
+
 
 @media only screen and (min-width: 480px) and (max-width: 599px) {
     .inner-section h3 {

@@ -25,6 +25,8 @@
     <script src="{{ asset('js/jquery.js') }}"> </script>
 
     <script src="{{ asset('bootstrap5/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"> </script>
+
     <script src="{{ asset('js/utility.js') }}" defer></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -73,7 +75,7 @@
                 <div class="col-lg-4 offset-lg-1">
                     <h2> <span class="pink fw-bold">Get In</span> Touch</h2>
                     <form method="post">
-                        <input type="hidden" id="contactFormToken" name="_token" value="{{ Session::token() }}">
+
 
                         <div class="row">
                             <div class="m-1">
@@ -118,8 +120,10 @@
                                 <i class="bi bi-twitter fs-3"></i>
                             </a>
                         </address>
-
-                        <button class="btn btn-block btn-pink" id="contactBtn" type="btn">Send Now!</button>
+                        <form>
+                            <input type="hidden" id="contactFormToken" name="_token" value="{{ Session::token() }}">
+                            <button class="btn btn-block btn-pink" id="contactFormBtn" type="btn">Send Now!</button>
+                        </form>
 
                     </div>
                 </div>
