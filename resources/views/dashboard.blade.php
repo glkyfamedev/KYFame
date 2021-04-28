@@ -52,14 +52,6 @@
                     </div>
 
 
-
-
-
-
-
-
-
-
                     <div class="col-lg dashboardCol" id="transcriptDiv">
 
                         <div class="card">

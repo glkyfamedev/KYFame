@@ -283,16 +283,14 @@
         </div>
     </section>
 
-    <section id="what-we-do">
+    <section id="training-programs">
         <div class="container">
             <h3 class="section-title mb-2 h1 navy">Training Offered </h3>
-
             <p class="text-center text-muted">
                 The Fame program offers many training oppurtunities for participants,
                 You'll engage in Manufacturing Core Exercises like Safety Culture, Visual Workplace Organization, Lean
                 Manufacturing, Problem Solving and Machine Reliability, as well as Professional Behaviors.
             </p>
-
             <div class="row mt-5">
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xl-3">
                     <div class="card">
