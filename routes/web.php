@@ -49,7 +49,7 @@ Route::post('/formEssay', [ApplicationController::class, 'formEssay'])->name('fo
 Route::post('/formTranscript', [ApplicationController::class, 'formTranscript'])->name('form.formTranscript');
 Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication'])->name('form.complete');
 
-Route::get('/dashboard2', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
 Route::post('/upadteProfile', [DashboardController::class, 'updateProfile'])->middleware('verified')->name('dashboard.updateProfile');
 Route::post('/updateTranscript',
 [DashboardController::class,'updateTranscript'])->middleware('verified')->name('dashboard.updateTranscript');

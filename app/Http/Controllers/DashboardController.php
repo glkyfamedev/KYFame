@@ -27,7 +27,7 @@ class DashboardController extends Controller
         'start_date' => null
         ]);
 
-        return view('dashboard2', ['application'=>$application]);
+        return view('dashboard', ['application'=>$application]);
     }
 
     public function updateProfile(Request $request): \Illuminate\Http\JsonResponse
