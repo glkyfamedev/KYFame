@@ -155,7 +155,7 @@ final class Versions
   'seld/phar-utils' => '1.1.1@8674b1d84ffb47cc59a101f5d5a3b61e87d23796',
   'symfony/filesystem' => 'v5.2.6@8c86a82f51658188119e62cff0a050a12d09836f',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-develop@fad0ea5cf8dc2df3f4453bcd771ac1589b420c6e',
+  'laravel/laravel' => 'dev-develop@0139cf105788d7215813386f684255308b52d32b',
 );
 
     private function __construct()

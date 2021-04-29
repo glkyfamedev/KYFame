@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\EmailController;
 use App\Mail\Gmail;
 use App\Models\AssesmentApp;
@@ -18,69 +19,27 @@ class ApplicationController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
         $user = Auth::user();
 
-        try{
+        try {
             $application = StudentApplication::where('user_id', $user->id)->with(
                 'contactApp',
                 'statusApp',
                 'employmentApp',
-                'assesmentApp')
+                'assesmentApp'
+            )
                 ->firstOrFail();
 
-                 session(['application' => $application]);
+            session(['application' => $application]);
 
-            return view('application', ['application'=> $application]);
-        }
-        catch(Exception $e) {
+            return view('application', ['application' => $application]);
+        } catch (Exception $e) {
             return null;
-        }
-    }
-
-    public function formSubmit(Request $request): \Illuminate\Http\JsonResponse
-    {
-        $application = session('application');
-
-        if ($request->ajax()) {
-            try {
-                $contactModel = contactApp::where('student_application_id', $application->id)->first() ?? new ContactApp();
-
-                $contactModel->streetAddress = $request->streetAddress;
-                $contactModel->address2 = $request->address2;
-                $contactModel->city = $request->city;
-                $contactModel->state = $request->state;
-                $contactModel->zip = $request->zip;
-                $contactModel->primaryPhone = $request->primaryPhone;
-                $contactModel->altPhone = $request->altPhone;
-                $contactModel->preferedContactMethod = $request->preferedContactMethod;
-                $contactModel->otherEmail = $request->otherEmail;
-                $contactModel->student_application_id = $application->id;
-
-
-                $contactModel->save();
-                $application->currentSection = $request->currentSection;
-
-                if ($application->start_date === null){
-                    $application->start_date = new DateTime('NOW');
-                }
-
-
-                $application->save();
-                $application->refresh();
-
-                $session['application'] = $application;
-
-                return response()->json(['success' => true]);
-            }
-            catch (Exception $e) {
-                return response()->json(['success' => false]);
-            }
-
         }
     }
 
@@ -88,12 +47,12 @@ class ApplicationController extends Controller
     {
         $application = session('application');
 
-          $student_application_id = $application->id;
+        $student_application_id = $application->id;
 
         if ($request->ajax()) {
             try {
 
-                $status = statusApp::where('student_application_id',$application->id)->first() ?? new StatusApp();
+                $status = statusApp::where('student_application_id', $application->id)->first() ?? new StatusApp();
 
                 $status->under_18 = $request->under_18;
                 $status->authorizedInUS = $request->authorizedInUS;
@@ -107,7 +66,7 @@ class ApplicationController extends Controller
                 $status->save();
                 $application->currentSection = $request->currentSection;
                 $application->save();
-                    $application->refresh();
+                $application->refresh();
 
 
 
@@ -122,25 +81,24 @@ class ApplicationController extends Controller
 
     public function formEmployment(Request $request): \Illuminate\Http\JsonResponse
     {
-       $application = session('application');
+        $application = session('application');
 
-       $employerArrays = $request->employerArray;
+        $employerArrays = $request->employerArray;
 
         if ($request->ajax()) {
             try {
                 $employmentModel =
-                EmploymentApp::where('student_application_id',$application->id)->first() ?? new EmploymentApp();
+                    EmploymentApp::where('student_application_id', $application->id)->first() ?? new EmploymentApp();
 
-                foreach($employerArrays as $employerArray)
-                {
+                foreach ($employerArrays as $employerArray) {
                     $employmentModel = new $employmentModel;
 
                     $employmentModel['employerName'] = $employerArray['name'];
                     $employmentModel['employerPhone'] = $employerArray['phone'];
-                    $employmentModel ['workDuties'] = $employerArray['workDuties'];
-                    $employmentModel ['employmentStart'] = $employerArray['employmentStart'];
-                    $employmentModel ['employmentEnd'] = $employerArray['employmentEnd'];
-                    $employmentModel ['reasonForLeaving'] = $employerArray['reasonForLeaving'];
+                    $employmentModel['workDuties'] = $employerArray['workDuties'];
+                    $employmentModel['employmentStart'] = $employerArray['employmentStart'];
+                    $employmentModel['employmentEnd'] = $employerArray['employmentEnd'];
+                    $employmentModel['reasonForLeaving'] = $employerArray['reasonForLeaving'];
                     $employmentModel->student_application_id = $application->id;
 
                     $employmentModel->save();
@@ -152,12 +110,10 @@ class ApplicationController extends Controller
 
 
                 return response()->json(['success' => true]);
-
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
             }
         }
-
     }
 
     public function formAssesments(Request $request): \Illuminate\Http\JsonResponse
@@ -166,7 +122,7 @@ class ApplicationController extends Controller
 
         if ($request->ajax()) {
             try {
-            $assesments = AssesmentApp::where('student_application_id',$application->id)->first() ?? new AssesmentApp();
+                $assesments = AssesmentApp::where('student_application_id', $application->id)->first() ?? new AssesmentApp();
 
                 $assesments->ACT = $request->ACT;
                 $assesments->ACTenglishScore = $request->ACTenglishScore;
@@ -207,7 +163,6 @@ class ApplicationController extends Controller
 
 
                 return response()->json(['success' => true]);
-
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
             }
@@ -216,99 +171,57 @@ class ApplicationController extends Controller
 
     public function formEssay(Request $request): \Illuminate\Http\JsonResponse
     {
-          $application = session('application');
+        $application = session('application');
 
-                if ($request->ajax()) {
-                try {
+        if ($request->ajax()) {
+            try {
                 $user = Auth::user();
 
                 $storeData = $request->validate([
-                'essay' => 'required|max:255',
+                    'essay' => 'required|max:255',
                 ]);
                 $application = StudentApplication::find(1);
                 $application->essay = $request->essay;
                 $application->currentSection = $request->currentSection;
 
                 $application->save();
+
                 return response()->json(['success' => true]);
-                } catch (Exception $e) {
+            } catch (Exception $e) {
                 return response()->json(['success' => false]);
-                }
             }
-    }
-
-    public function formTranscript(Request $request)
-    {
-        
-        $user = Auth::user();
-        $application = session('application');
-                   
-        try {
-
-            if($request->file())
-            {
-                $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
-                $request->file->move(public_path('transcripts'), $fileName);
-            }
-            else{
-                
-                $fileName = 'N/A';
-            }
-                
-            $application = StudentApplication::where('id', $application->id)->first();
-            $application->transcript_method = $request->transcriptMethod;
-            $application->currentSection = $request->currentSection;
-            $application->transcriptPath = $fileName;
-
-            $application->save();
-
-            return response()->json(['success' => true]);
-
-        } catch (Exception $e) {
-            return response()->json(['success' => false]);
         }
-     }
-        
-    
+    }
 
     public function CompleteApplication(Request $request)
     {
         $application = session('application');
         $user = Auth::user();
         if ($request->ajax()) {
-            try{
+            try {
                 $complete = StudentApplication::find(1);
                 $complete->completed_date = $request->completed_date;
-               
+
                 $complete->save();
 
                 $success = true;
-                if($success){
+                if ($success) {
                     $emailController = new EmailController($user);
-                    $emailController-> AdminEmail($user);
+                    $emailController->AdminEmail($user);
                     $action = $complete->application_action;
 
-                    if( $action === 'approved')
-                    {
+                    if ($action === 'approved') {
                         $emailController->studentApprovedEmail($user);
-                    }
-                    else
-                    {
-                        $emailController-> StudentConfirmationEmail($user);
+                    } else {
+                        $emailController->StudentConfirmationEmail($user);
                     }
                 }
 
-              return response()->json(['success' => true]);
-            }
-            catch (Exception $e) {
+                return response()->json(['success' => true]);
+            } catch (Exception $e) {
                 $success = false;
                 return response()->json(['success' => false]);
             }
-
-
         }
-
     }
-
-
 }

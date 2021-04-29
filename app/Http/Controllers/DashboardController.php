@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StudentApplication;
@@ -18,16 +19,19 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $application = StudentApplication::where('user_id', $user->id)
-        ->with('contactApp')
-        ->firstOrCreate(
-        [
-        'user_id' => $user->id
-        ],
-        [
-        'start_date' => null
-        ]);
+            ->with('contactApp')
+            ->firstOrCreate(
+                [
+                    'user_id' => $user->id
+                ],
+                [
+                    'start_date' => null
+                ]
+            );
 
-        return view('dashboard', ['application'=>$application]);
+        session(['application' => $application]);
+
+        return view('dashboard', ['application' => $application]);
     }
 
     public function updateProfile(Request $request): \Illuminate\Http\JsonResponse
@@ -53,8 +57,8 @@ class DashboardController extends Controller
                 $contactModel->save();
                 $application->currentSection = $request->currentSection;
 
-                if ($application->start_date === null){
-                $application->start_date = new DateTime('NOW');
+                if ($application->start_date === null) {
+                    $application->start_date = new DateTime('NOW');
                 }
 
 
@@ -64,13 +68,10 @@ class DashboardController extends Controller
                 $session['application'] = $application;
 
                 return response()->json(['success' => true]);
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 return response()->json(['success' => false]);
             }
         }
-        
-            
     }
 
     public function updateTranscript(Request $request)
@@ -78,9 +79,8 @@ class DashboardController extends Controller
         $user = Auth::user();
         $application = session('application');
         try {
-            if($request->file())
-            {
-                $fileName = $user->last_name .''. $user->id .'.'.$request->file->extension();
+            if ($request->file()) {
+                $fileName = $user->last_name . '' . $user->id . '.' . $request->file->extension();
                 $request->file->move(public_path('transcripts'), $fileName);
             }
             $application = StudentApplication::where('id', $application->id)->first();
@@ -90,11 +90,8 @@ class DashboardController extends Controller
             $application->save();
 
             return response()->json(['success' => true]);
-
         } catch (Exception $e) {
-        return response()->json(['success' => false]);
+            return response()->json(['success' => false]);
         }
     }
-
-
 }

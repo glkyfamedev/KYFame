@@ -8,7 +8,8 @@ use App\Http\Controllers\SponsorController;
 use App\Models\StudentApplication;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
-
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TranscriptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\EmailController;
 
 Route::view('/students', 'students');
 Route::view('/sponsors', 'sponsors');
-Route::view('/employers','employers');
+Route::view('/employers', 'employers');
 // Route::view('/application','application');
 
 
@@ -41,26 +42,31 @@ Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
 
 //Student Application routes
 Route::get('/form', [ApplicationController::class, 'index'])->name('form');
-Route::post('/form', [ApplicationController::class, 'formSubmit'])->name('form.formSubmit');
+
+Route::get("/contact", [ContactController::class, 'index'])->name('contact');
+Route::post("/savecontact", [ContactController::class, 'saveContact'])->name('saveContact');
+
 Route::post('/formStatus', [ApplicationController::class, 'formStatus'])->name('form.formStatus');
 Route::post('/formEmployment', [ApplicationController::class, 'formEmployment'])->name('form.formEmployment');
 Route::post('/formAssesments', [ApplicationController::class, 'formAssesments'])->name('form.formAssesments');
 Route::post('/formEssay', [ApplicationController::class, 'formEssay'])->name('form.formEssay');
-Route::post('/formTranscript', [ApplicationController::class, 'formTranscript'])->name('form.formTranscript');
+
+Route::get('/transcript', [TranscriptController::class, 'index'])->name('transcript');
+Route::post('/saveTranscript', [TranscriptController::class, 'saveTranscript'])->name('saveTranscript');
+
 Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication'])->name('form.complete');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
-Route::post('/upadteProfile', [DashboardController::class, 'updateProfile'])->middleware('verified')->name('dashboard.updateProfile');
-Route::post('/updateTranscript',
-[DashboardController::class,'updateTranscript'])->middleware('verified')->name('dashboard.updateTranscript');
+
+Route::post('/updateProfile', [DashboardController::class, 'updateProfile'])->middleware('verified')->name('dashboard.updateProfile');
+Route::post('/updateTranscript', [DashboardController::class, 'updateTranscript'])->middleware('verified')->name('dashboard.updateTranscript');
 
 Route::get('/signIn', function () {
     $user = Auth::user();
 
-    if ($user->Role === "Admin"){
+    if ($user->Role === "Admin") {
         return redirect()->route('adminDashboard');
-    }
-    else{
+    } else {
         return redirect()->route('dashboard');
     }
 })->middleware(['auth'])->name('signIn');
@@ -75,8 +81,8 @@ Route::get('admin/updateSponor/{id}', [AdminController::class, 'updateSponsor'])
 
 
 Route::get('admin/applicationSelected/{id}', [AdminController::class, 'selectApplication'])
-->name('application.show');
+    ->name('application.show');
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

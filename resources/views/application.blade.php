@@ -1,18 +1,4 @@
 <x-app-layout>
-
-    {{-- <x-slot name="header">
-        <div class="row">
-            <div class="col-md-7">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Application') }}
-    </h2>
-    </div>
-
-    <div class="col">
-        <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
-    </div>
-    </div>
-    </x-slot> --}}
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -50,8 +36,6 @@
     </style>
 
     <div class="row py-5 justify-content-center">
-
-
         <div class="col-7 p-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="bg-white border-gray-200">
 
@@ -88,69 +72,9 @@
 
                 </div>
 
-                <div class="form-section toggle" id="section1" style="display:none;">
-                    <h2 class="blue border-bottom mb-4">Contact Information</h2>
-                    <div class="messages border-bottom"></div>
-                    <form class="contact-form row g-3" id="contact-Section">
-                        <input type="hidden" id="contactToken" name="_token" value="{{ Session::token() }}">
-                        <div class="col-8 contact-required">
-                            <label class="form-label contact-label" for="streetAddress">Street address <i class="bi bi-asterisk required"></i></label>
-                            <input id="streetAddress" class="form-control contact-input" type="text" name="streetAddress" required autofocus />
-                        </div>
-
-                        <div class="col">
-                            <label class="form-label contact-label" for="address2">Apt or Suite number </label>
-                            <input id="address2" class="form-control" type="text" name="address2" autofocus />
-                        </div>
-
-                        <div class="col-md-6 contact-required">
-                            <label class="form-label contact-label" for="city">City <i class="bi bi-asterisk required"></i></label>
-                            <input id="city" class="form-control contact-input" type="text" name="city" required autofocus />
-                        </div>
-
-                        <div class="col-md-4 contact-required">
-                            <label class="form-label contact-label" for="state">State <i class="bi bi-asterisk required"></i></label>
-                            <input id="state" class="form-control contact-input" type="text" name="state" required autofocus />
-                        </div>
-
-                        <div class="col-md-2 contact-required">
-                            <label class="form-label contact-label" for="zip">Zip <i class="bi bi-asterisk required"></i></label>
-                            <input id="zip" class="form-control contact-input" type="text" name="zip" required autofocus />
-                        </div>
-
-                        <div class="col contact-required">
-                            <label class="form-label contact-label" for="primaryPhone">Primary Phone <i class="bi bi-asterisk required"></i></label>
-                            <input id="primaryPhone" class="form-control contact-input phone" type="text" name="primaryPhone" required autofocus />
-                        </div>
-                        <div class="col">
-                            <label class="form-label contact-label" for="altPhone">Alt Phone</label>
-                            <input id="altPhone" class="form-control phone" type="text" name="altPhone" autofocus />
-                        </div>
-                        <h5> <label for="contactMethod">Select Area and enter score</label></h5>
-                        <div class="input-group">
-                            <select id="contactMethod" class="form-control" name="contactMethod">
-                                <option value="">Prefered Contact</option>
-                                <option value="phone">Phone</option>
-                                <option value="Account Email">Account Email</option>
-                                <option value="Other Email">Other Email</option>
-                            </select>
-                            <div id="otherEmailDiv" class="hide">
-                                <label for="otherEmail"></label>
-                                <input type="text" class="form-control" id="otherEmail" name="otherEmail" placeholder="Contact Email" />
-                            </div>
-                        </div>
-
-                        <div class="form-nav">
-                            <button type="submit" id="contactBtn" class="nextBtn btn btn-pink float-right" data-section="1">Next
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-
                 <!-- Status INFORMATION FORM -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section2" style="display:none;">
+                <div class="form-section toggle" id="section1" style="display:none;">
                     <h2 class="blue border-bottom mb-4">Legal status </h2>
                     <form class="Contact-form" method="POST" action="{{ route('form.formStatus') }}">
                         <input type="hidden" id="statusToken" name="_token" value="{{ Session::token() }}">
@@ -264,7 +188,7 @@
                 <!-- Work INFORMATION FORM -->
                 <!-- <h2>Work History</h2> -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" style="display:none;" id="section3">
+                <div class="form-section toggle" style="display:none;" id="section2">
                     <h2 class="blue border-bottom mb-4">Employment History</h2>
 
                     <div id="employmentContainer">
@@ -286,7 +210,7 @@
                 <!-- Assesments INFORMATION FORM -->
                 <!-- <h2>Assesment Information</h2> -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section4" style="display: none">
+                <div class="form-section toggle" id="section3" style="display: none">
                     <h2 class="blue border-bottom mb-4"> Assessments</h2>
 
                     <form class="contact-form" method="post" action="{{ route('form.formAssesments') }}">
@@ -475,7 +399,7 @@
 
                 <!-- Essay -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section5" style="display:none">
+                <div class="form-section toggle" id="section4" style="display:none">
                     <h2 class="blue border-bottom mb-4"> Essay </h2>
                     <form class="contact-form">
                         <input type="hidden" id="essayToken" name="_token" value="{{ Session::token() }}">
@@ -493,61 +417,9 @@
                     </form>
                 </div>
 
-                <!-- Transcripts -->
-                <!-- FORM ROW 1 -->
-                <div class="form-section toggle" id="section6" style="display:none">
-                    <h2 class="blue border-bottom  mb-4"> Transcripts</h2>
-
-                    <form class="contact-form" method="post" action="{{ route('form.formTranscript') }}">
-                        <input type="hidden" id="transcriptToken" name="_token" value="{{ Session::token() }}">
-                        <p> Select a method for submiting your transcripts. <i>Transcripts must be submited within
-                                14 days of completeing the application.
-                                You can upload them now directly, or attach them an email and submit them that way.</i></p>
-                        <div class="transctiptMethod">
-
-                            <label class="transcriptLabel"></label>
-                            <div class="p-3">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="uploadTranscripts">Upload transcripts
-                                        directly</label>
-                                    <input class="form-check-input transcript" type="radio" id="uploadTranscripts" name="transcriptMethod" value="uploadTranscripts">
-                                </div>
-
-                                <div class="" id="transciptUpload">
-                                    <div class="input-group m-3">
-                                        <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-3">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="sendEmail">Send transctipts through
-                                        Email</label>
-                                    <input class="form-check-input transcript" type="radio" id="sendEmail" name="transcriptMethod" value="SendEmail">
-                                </div>
-                            </div>
-
-                            <div class="p-3">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="sendLater">I will submit my transcripts within
-                                        14 days of submiting my application </label>
-                                    <input class="form-check-input transcript" type="radio" id="sendLater" name="transcriptMethod" value="SendLater">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="form-nav">
-                            <button type="submit" id="transcriptBtn" class="nextBtn btn btn-pink float-right" data-section="6">Next
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
                 <!-- Agreement and submit -->
                 <!-- FORM ROW 1 -->
-                <div class="form-section toggle termsCheck sectionContainer" id="section7" style="display:none">
+                <div class="form-section toggle termsCheck sectionContainer" id="section5" style="display:none">
                     <h2 class="blue border-bottom mb-4">Terms and Complete</h2>
                     <form class="contact-form">
                         <input type="hidden" id="completeToken" name="_token" value="{{ Session::token() }}">
@@ -605,44 +477,30 @@
                 </div>
             </div>
         </div>
-
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group list-group-flush nav nav-tabs flex-column" id="appNav" role="tablist">
-                        <li class="list-group-item nav-item disabled" id="sectionNav1">
-                            <a href="#section1">Contact Info</a><label class="hide" id="sectionCheck1"><i class="bi bi-check2 check"></i></label>
+                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav1">
+                            <a href="#section1">Legal Status</a><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
                         </li>
-
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav2">
-                            <a href="#section2">Legal Status</a><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section2">Employment History</a><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
                         </li>
-
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav3">
-                            <a href="#section3">Employment History</a><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section3">Assessments</a><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
                         </li>
-
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav4">
-                            <a href="#section4">Assessments</a><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section4">Essay</a><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
                         </li>
-
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav5">
-                            <a href="#section5">Essay</a><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
-                        </li>
-
-                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav6">
-                            <a href="#section6">Transcripts</a><label class="hide" id="sectionCheck6"><i class="bi bi-check2 check"></i></label>
-                        </li>
-
-                        <li class="list-group-item nav-item nav-item disabled" id="sectionNav7">
-                            <a href="#section7">Finish</a><label class="hide" id="sectionCheck7"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section5">Finish</a><label class="hide" id="sectionCheck7"><i class="bi bi-check2 check"></i></label>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div id="employerTemplate" style="display: none;">
         <input type="hidden" id="employmentToken" name="_token" value="{{ Session::token() }}">
@@ -681,27 +539,21 @@
         </div>
     </div>
 
-
     <script>
-        const contactRouteUrl = "{{ route('form.formSubmit') }}";
         const statusRouteUrl = "{{ route('form.formStatus') }}";
         const employmentRoutetUrl = "{{ route('form.formEmployment') }}";
         const assesmenRoutetUrl = "{{ route('form.formAssesments') }}";
         const essayRouteUrl = "{{ route('form.formEssay') }}";
-        const transcriptRouteUrl = "{{ route('form.formTranscript') }}";
         const completeRouteUrl = "{{ route('form.complete') }}";
         const dashBoardRouteUrl = "{{ route('dashboard') }}";
-
     </script>
 
 
     <script>
         const application = $.parseJSON('@json($application)');
-
     </script>
 
     <script src="{{ asset('js/application.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script>
-
 
 </x-app-layout>

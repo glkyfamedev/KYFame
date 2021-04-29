@@ -27,8 +27,8 @@
                 <div class="row p-4">
                     <h3 class="pink">Welcome {{ Auth::user()->first_name }}, What do you need to do?</h3>
                 </div>
-
                 <div class="row">
+
                     <div class="col-lg-5 dashboardCol" id="profileDiv">
                         <div class="card" style="height: 300px; border-radius:20px;">
                             <div class="">
@@ -46,60 +46,55 @@
                                 <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
                             </div>
                             <div style="width:100%; text-align:center; margin-bottom:20px;">
-                                <a id="showContact" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('contact') }}">Update</a>
+                                <a id="showContact" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="#">Update</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-5 dashboardCol" id="profileDiv">
-                        <div class="card" style="height: 300px; border-radius:20px;">
-                            <div class="">
+
+
+
+
+
+
+
+
+
+                    <div class="col-lg dashboardCol" id="transcriptDiv">
+
+                        <div class="card">
+                            <div class="card-header">
                                 <div class="card-title">
-                                    <h4 class="blue fw-bold" style="text-align:center;">
-                                       Submit Transcripts
-                                    </h4>
+                                    <h4 class="blue fw-bold">Submit Transcripts</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="hide" id="disabledMsg">
+                                    <p> If you're not ready to submit your transcripts
+                                        during the application, you can come ack here after completing
+                                        it the application to upload them within 14 days of submission.
+                                    </p>
                                 </div>
 
-                            </div>
-                            <p class="m-auto"> Email or Upload your Transcripts
-                            </p>
-                            {{-- <div class="m-auto">
-                                <i class="bi bi-person-lines-fill" style="font-size: 3em; margin-top:-20px;"></i>
-                            </div> --}}
-                            <div class="m-auto">
-                                <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
-                            </div>
-                            <div style="width:100%; text-align:center; margin-bottom:20px;">
-                                <a id="submitTranscript" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('transcript') }}">Send</a>
+                                <div class="hide" id="transciptUpload">
+                                    <div class="input-group m-3">
+                                        <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
+                                    </div>
+                                    <div class="form-nav">
+                                        <button type="" id="updateTranscriptBtn" class="btn btn-pink float-right">upload</button>
+                                        <button id="cancelBtn" class="btn btn-yellow">Cancel</button>
+                                    </div>
+                                </div>
+
+                                <div id="transcriptsComplete" class="hide">
+                                    <h5> We have your transcripts!</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-5 dashboardCol" id="profileDiv">
-                        <div class="card" style="height: 300px; border-radius:20px;">
-                            <div class="">
-                                <div class="card-title">
-                                    <h4 class="blue fw-bold" style="text-align:center;">
-                                       Submit Transcripts
-                                    </h4>
-                                </div>
-
-                            </div>
-                            <p class="m-auto"> Continue to update application
-                            </p>
-                            {{-- <div class="m-auto">
-                                <i class="bi bi-person-lines-fill" style="font-size: 3em; margin-top:-20px;"></i>
-                            </div> --}}
-                            <div class="m-auto">
-                                <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
-                            </div>
-                            <div style="width:100%; text-align:center; margin-bottom:20px;">
-                                <a id="goToApplication" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('form') }}">Continue</a>
-                            </div>
-                    </div>
-                    </div>
-
-                    {{-- <div class="col-lg dashboardCol" id="applicationDiv">
+                    <div class="col-lg dashboardCol" id="applicationDiv">
 
                         <div class="card">
                             <div class="card-header">
@@ -142,64 +137,53 @@
                                 </x-nav-link>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
+
+
+
+
     <script>
         const updateProfileRouteUrl = "{{ route('dashboard.updateProfile')}}";
         const updateTranscriptRouteUrl = "{{ route('dashboard.updateTranscript') }}";
+
     </script>
     <script>
         const application = $.parseJSON('@json($application)');
+
     </script>
 
     <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script>
 </x-app-layout>
 
 
-{{-- <div class="col-lg dashboardCol" id="transcriptDiv">
 
-    <div class="card">
-        <div class="">
-            <div class="card-title">
-                <h4 class="blue fw-bold">Submit Transcripts</h4>
-            </div>
-        </div>
-        <div class="card-body">
 
-            <div class="hide" id="disabledMsg">
-                <p> If you're not ready to submit your transcripts
-                    during the application, you can come ack here after completing
-                    it the application to upload them within 14 days of submission.
-                </p>
-            </div>
 
-            {{-- <div class="hide" id="transciptUpload">
-                <div class="input-group m-3">
-                    <input type="file" id="transcriptFile" class="form-control" placeholder="" name="transcript" />
+{{-- <div class="col-lg-5 dashboardCol" id="profileDiv">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h4 class="blue fw-bold">
+                        Contact Info
+                    </h4>
                 </div>
-                <div class="form-nav">
-                    <button type="" id="updateTranscriptBtn" class="btn btn-pink float-right">upload</button>
-                    <button id="cancelBtn" class="btn btn-yellow">Cancel</button>
-                </div>
-            </div> --}}
-
-            {{-- <div style="width:100%; text-align:center; margin-bottom:20px;">
-                <a id="submitTranscript" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('transcript') }}">Send</a>
-            </div>
-
-            <div id="transcriptsComplete" class="hide">
-                <h5> We have your transcripts!</h5>
             </div>
         </div>
     </div>
-</div> --}}
 
 
-
+  --}}
 {{-- <div id="showProfile" class="hide">
                                         <button id="profileBtn" class="btn btn-block btn-pink" href="#">Update profile</button>
                                     </div>
@@ -315,3 +299,60 @@
 </div>
 </form>
 </div> --}}
+
+
+
+{{-- <form class="contact-form row g-3 p-2" id="contact-Section">
+    {{-- <input type="hidden" id="updateContact" name="_token" value="{{ Session::token() }}"> --}}
+<div class="card-body">
+    <div class="contact-form row g-3" id="profileInfo">
+        <div class="col-7">
+            <label class="form-label contact-label" for="streetAddress"> Street Address{{$application->streetAddress}}</label>
+            <input id="streetAddress" class="form-control hide contact-input update" type="text" placeholder="{{$application->streetAddress}}" name="streetAddress" autofocus />
+        </div>
+
+        <div class="col">
+            <label class="form-label contact-label" for="address2">Apt or Suite </label>
+            <input id="address2" class="form-control hide update" type="text" name="address2" autofocus />
+        </div>
+
+        <div class="col-4">
+            <label class="form-label contact-label" for="city">City{{ $application->city }} </label>
+
+            <input id="city" class="form-control contact-input hide update" type="text" name="city" required autofocus />
+        </div>
+
+        <div class="col-3">
+            <label class="form-label contact-label" for="state">State </label>
+
+            <input id="state" class="form-control contact-input hide update" type="text" name="state" required autofocus />
+        </div>
+
+        <div class="col-4">
+            <label class="form-label contact-label" for="zip">Zip </label>
+
+            <input id="zip" class="form-control contact-input hide update" type="text" name="zip" required autofocus />
+        </div>
+
+        <div class="col-6">
+            <label class="form-label contact-label" for="primaryPhone">Primary Phone </label>
+
+            <input id="primaryPhone" class="form-control contact-input phone hide update" type="text" name="primaryPhone" required autofocus />
+        </div>
+
+        <div class="col">
+            <label class="form-label contact-label" for="altPhone">Alt Phone</label>
+
+            <input id="altPhone" class="form-control phone hide update" type="text" name="altPhone" autofocus />
+        </div>
+
+        <a id="showContact" class="btn btn-sm btn-pink" href="#">Update Contact Info</a>
+        <div id="updateBtns" class="hide">
+            <button type="submit" id="contactBtn" class="nextBtn btn-pink btn float-right" data-section="1">Update</button>
+
+            <button id="cancelBtn" class="btn btn-yellow ">Cancel</button>
+        </div>
+    </div>
+
+</div>
+</form> --}}
