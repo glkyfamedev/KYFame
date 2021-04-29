@@ -25,7 +25,7 @@
     <script src="{{ asset('js/jquery.js') }}"> </script>
 
     <script src="{{ asset('bootstrap5/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/dashboard.js') }}"> </script>
+    {{-- <script src="{{ asset('js/dashboard.js') }}"> </script> --}}
 
     <script src="{{ asset('js/utility.js') }}" defer></script>
 
