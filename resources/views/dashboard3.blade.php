@@ -51,15 +51,6 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-
                     <div class="col-lg dashboardCol" id="transcriptDiv">
 
                         <div class="card">
@@ -86,7 +77,6 @@
                                         <button id="cancelBtn" class="btn btn-yellow">Cancel</button>
                                     </div>
                                 </div>
-
                                 <div id="transcriptsComplete" class="hide">
                                     <h5> We have your transcripts!</h5>
                                 </div>

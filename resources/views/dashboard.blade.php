@@ -29,8 +29,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-5 dashboardCol" id="profileDiv">
-                        <div class="card" style="height: 300px; border-radius:20px;">
+                    <div class="col-lg-4 dashboardCol" id="profileDiv">
+                        {{-- Profile Card  --}}
+                        <div class="card p-3" style="height: 300px; border-radius:20px;">
                             <div class="">
                                 <div class="card-title">
                                     <h4 class="blue fw-bold" style="text-align:center;">
@@ -46,24 +47,26 @@
                                 <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
                             </div>
                             <div style="width:100%; text-align:center; margin-bottom:20px;">
-                                <a id="showContact" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('contact') }}">Update</a>
+
+                                <a id="contactBtn" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('contact') }}">Update</a>
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-5 dashboardCol" id="profileDiv">
-                        <div class="card" style="height: 300px; border-radius:20px;">
+                    {{-- Transcript Card  --}}
+                    <div class="col-lg-4 dashboardCol" id="profileDiv">
+                        <div class="card p-3" style="height: 300px; border-radius:20px;">
                             <div class="">
                                 <div class="card-title">
                                     <h4 class="blue fw-bold" style="text-align:center;">
-                                       Submit Transcripts
+                                        Submit Transcripts
                                     </h4>
                                 </div>
-
                             </div>
                             <p class="m-auto"> Email or Upload your Transcripts
                             </p>
-                            {{-- <div class="m-auto">
+                            {{-- <div class="  put Trancsript icon here "> 
                                 <i class="bi bi-person-lines-fill" style="font-size: 3em; margin-top:-20px;"></i>
                             </div> --}}
                             <div class="m-auto">
@@ -75,12 +78,13 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-5 dashboardCol" id="profileDiv">
-                        <div class="card" style="height: 300px; border-radius:20px;">
+                    {{-- Application Card  --}}
+                    <div class="col-lg-4 dashboardCol" id="profileDiv">
+                        <div class="card p-3" style="height: 300px; border-radius:20px;">
                             <div class="">
                                 <div class="card-title">
                                     <h4 class="blue fw-bold" style="text-align:center;">
-                                       Your Application
+                                        Your Application
                                     </h4>
                                 </div>
 
@@ -88,7 +92,7 @@
                             <p class="m-auto"> Continue to update your application
                             </p>
                             {{-- <div class="m-auto">
-                                <i class="bi bi-person-lines-fill" style="font-size: 3em; margin-top:-20px;"></i>
+                                <i class="Put application Icon herel" style="font-size: 3em; margin-top:-20px;"></i>
                             </div> --}}
                             <div class="m-auto">
                                 <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
@@ -96,68 +100,66 @@
                             <div style="width:100%; text-align:center; margin-bottom:20px;">
                                 <a id="goToApplication" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('form') }}">Continue</a>
                             </div>
-                    </div>
-                    </div>
-
-                    {{-- <div class="col-lg dashboardCol" id="applicationDiv">
-
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h4 class="blue fw-bold"> Completion status</h4>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush flex-column" id="" role="">
-                                    <li class="list-group-item" id="sectionNav1">
-                                        <p>Contact Info</p><label class="hide" id="sectionCheck1"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-
-                                    <li class="list-group-item" id="sectionNav2">
-                                        <p>Legal Status</p><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-
-                                    <li class="list-group-item" id="sectionNav3">
-                                        <p>Employment History</p><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-
-                                    <li class="list-group-item" id="sectionNav4">
-                                        <p>Assessments</p><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-
-                                    <li class="list-group-item" id="sectionNav5">
-                                        <p>Essay</p><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-
-                                    <li class="list-group-item" id="sectionNav6">
-                                        <p>Transcripts</p><label class="hide" id="sectionCheck6"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-
-                                    <li class="list-group-item" id="sectionNav7">
-                                        <p>Finish</p><label class="hide" id="sectionCheck7"><i class="bi bi-check2 check"></i></label>
-                                    </li>
-                                </ul>
-                                <x-nav-link :href="route('form')" class="d-block btn btn-pink btn-sm" :active="request()->routeIs('form')">
-                                    {{ __('Application') }}
-                                </x-nav-link>
-                            </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+
     <script>
         const updateProfileRouteUrl = "{{ route('dashboard.updateProfile')}}";
         const updateTranscriptRouteUrl = "{{ route('dashboard.updateTranscript') }}";
+
     </script>
     <script>
         const application = $.parseJSON('@json($application)');
+
     </script>
 
     <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script>
 </x-app-layout>
+
+
+
+{{-- <div class="card-body">  --}}
+{{-- <ul class="list-group list-group-flush flex-column" id="" role="">
+    <li class="list-group-item" id="sectionNav1">
+        <p>Contact Info</p><label class="hide" id="sectionCheck1"><i class="bi bi-check2 check"></i></label>
+    </li>
+
+    <li class="list-group-item" id="sectionNav2">
+        <p>Legal Status</p><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
+    </li>
+
+    <li class="list-group-item" id="sectionNav3">
+        <p>Employment History</p><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
+    </li>
+
+    <li class="list-group-item" id="sectionNav4">
+        <p>Assessments</p><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
+    </li>
+
+    <li class="list-group-item" id="sectionNav5">
+        <p>Essay</p><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
+    </li>
+
+    <li class="list-group-item" id="sectionNav6">
+        <p>Transcripts</p><label class="hide" id="sectionCheck6"><i class="bi bi-check2 check"></i></label>
+    </li>
+
+    <li class="list-group-item" id="sectionNav7">
+        <p>Finish</p><label class="hide" id="sectionCheck7"><i class="bi bi-check2 check"></i></label>
+    </li>
+</ul>
+<x-nav-link :href="route('form')" class="d-block btn btn-pink btn-sm" :active="request()->routeIs('form')">
+    {{ __('Application') }}
+</x-nav-link>
+</div> --}}
+
+
+
 
 
 {{-- <div class="col-lg dashboardCol" id="transcriptDiv">
@@ -187,15 +189,15 @@
                 </div>
             </div> --}}
 
-            {{-- <div style="width:100%; text-align:center; margin-bottom:20px;">
+{{-- <div style="width:100%; text-align:center; margin-bottom:20px;">
                 <a id="submitTranscript" class="btn btn-pink btn-block mx-auto" style="width:50%;" href="{{ URL::route('transcript') }}">Send</a>
-            </div>
+</div>
 
-            <div id="transcriptsComplete" class="hide">
-                <h5> We have your transcripts!</h5>
-            </div>
-        </div>
-    </div>
+<div id="transcriptsComplete" class="hide">
+    <h5> We have your transcripts!</h5>
+</div>
+</div>
+</div>
 </div> --}}
 
 

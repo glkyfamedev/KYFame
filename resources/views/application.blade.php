@@ -308,92 +308,121 @@
                             <div id="KYOTEScoresContainer" class="hide">
                                 <h5> <label for="KYOTEarea">Select Area and enter score</label></h5>
                                 <div class="input-group mb-3">
-                                    <select id="KYOTEarea" name="KYOTEarea">
+                                    <select id="KYOTEarea1" name="KYOTEarea">
                                         <option value="">Select a KYOTE area</option>
                                         <option value="reading">reading</option>
                                         <option value="writting">writting</option>
                                         <option value="math">math</option>
                                     </select>
                                     <label for="KYOTEscore"></label>
-                                    <input type="text" class="form-control testScore" id="KYOTEscore" name="KYOTEscore" placeholder="Area Score" />
+                                    <input type="text" class="form-control KYOTE testScore" id="KYOTEscore1" name="KYOTEscore" placeholder="Area Score" />
+                                </div>
+
+                                <h5> <label for="KYOTEarea">Select Area and enter score</label></h5>
+                                <div class="input-group mb-3">
+                                    <select id="KYOTEarea2" name="KYOTEarea">
+                                        <option value="">Select a KYOTE area</option>
+                                        <option value="reading">reading</option>
+                                        <option value="writting">writting</option>
+                                        <option value="math">math</option>
+                                    </select>
+                                    <label for="KYOTEscore"></label>
+                                    <input type="text" class="form-control KYOTE testScore" id="KYOTEscore2" name="KYOTEscore" placeholder="Area Score" />
+
+                                </div>
+
+
+
+                                <h5> <label for="KYOTEarea">Select Area and enter score</label></h5>
+                                <div class="input-group mb-3">
+                                    <select id="KYOTEarea3" name="KYOTEarea">
+                                        <option value="">Select a KYOTE area</option>
+                                        <option value="reading">reading</option>
+                                        <option value="writting">writting</option>
+                                        <option value="math">math</option>
+                                    </select>
+                                    <label for="KYOTEscore"></label>
+                                    <input type="text" class="form-control KYOTE testScore" id="KYOTEscore3" name="KYOTEscore" placeholder="Area Score" />
+
+                                </div>
+
+                            </div>
+
+                            <div class="m-3">
+                                <h5><label for="otherAssesments">
+                                        If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
+                                    </label> </h5>
+                                <input type="text" class="form-control" id="otherAssesments" name="otherAssesments" placeholder="Other Assessments and scores">
+                            </div>
+
+                            <div class="m-3">
+                                <h5>Did you participate in Skills USA?</h5>
+                                <div class="form-check">
+                                    <label for="skillsUSAyes" class="form-check-label">Yes</label>
+                                    <input type="radio" class="form-check-input" id="skillsUSAyes" name="skillsUSA" value="1">
+                                </div>
+
+                                <div class="form-check">
+                                    <label for="skillsUSAno" class="form-check-label">No</label>
+                                    <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0" checked>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="m-3">
-                            <h5><label for="otherAssesments">
-                                    If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
-                                </label> </h5>
-                            <input type="text" class="form-control" id="otherAssesments" name="otherAssesments" placeholder="Other Assessments and scores">
-                        </div>
+                            <div class="m-3">
+                                <h5>Did you participate in project lead the way?</h5>
+                                <div class="form-check">
+                                    <label for="projectLeadTheWayYes" class="form-check-label">Yes</label>
+                                    <input type="radio" class="form-check-input" id="projectLeadTheWayYes" name="projectLeadTheWay" value="1">
+                                </div>
 
-                        <div class="m-3">
-                            <h5>Did you participate in Skills USA?</h5>
-                            <div class="form-check">
-                                <label for="skillsUSAyes" class="form-check-label">Yes</label>
-                                <input type="radio" class="form-check-input" id="skillsUSAyes" name="skillsUSA" value="1">
+                                <div class="form-check">
+                                    <label for="projectLeadTheWayNo" class="form-check-label">No</label>
+                                    <input type="radio" class="form-check-input" id="projectLeadTheWayNo" name="projectLeadTheWay" value="0" checked>
+                                </div>
                             </div>
 
-                            <div class="form-check">
-                                <label for="skillsUSAno" class="form-check-label">No</label>
-                                <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0" checked>
-                            </div>
-                        </div>
-
-                        <div class="m-3">
-                            <h5>Did you participate in project lead the way?</h5>
-                            <div class="form-check">
-                                <label for="projectLeadTheWayYes" class="form-check-label">Yes</label>
-                                <input type="radio" class="form-check-input" id="projectLeadTheWayYes" name="projectLeadTheWay" value="1">
+                            <div class="m-3">
+                                <label for="manufacturingAcedemics">Have you completed any Manufacturing
+                                    Acedemics?</label>
+                                <input type="text" class="form-control" id="manufacturingAcedemics" name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
                             </div>
 
-                            <div class="form-check">
-                                <label for="projectLeadTheWayNo" class="form-check-label">No</label>
-                                <input type="radio" class="form-check-input" id="projectLeadTheWayNo" name="projectLeadTheWay" value="0" checked>
+                            <div class="m-3">
+                                <label for="awardsAndHonors">Awards and Honors</label>
+                                <input type="text" class="form-control" id="awardsAndHonors" name="awardsAndHonors" placeholder="">
                             </div>
-                        </div>
 
-                        <div class="m-3">
-                            <label for="manufacturingAcedemics">Have you completed any Manufacturing
-                                Acedemics?</label>
-                            <input type="text" class="form-control" id="manufacturingAcedemics" name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
-                        </div>
+                            <div class="m-3">
+                                <label for="highSchoolAttended">Name of highschool attended? <i class="bi bi-asterisk required"></i></label>
+                                <input type="text" class="form-control required-input" id="highSchoolAttended" name="highSchoolAttended" placeholder="">
+                            </div>
 
-                        <div class="m-3">
-                            <label for="awardsAndHonors">Awards and Honors</label>
-                            <input type="text" class="form-control" id="awardsAndHonors" name="awardsAndHonors" placeholder="">
-                        </div>
+                            <div class="m-3">
+                                <label for="GPA">Highschool GPA <i class="bi bi-asterisk required"></i></label>
+                                <input type="text" class="form-control required-input" id="GPA" name="GPA" placeholder="">
+                            </div>
 
-                        <div class="m-3">
-                            <label for="highSchoolAttended">Name of highschool attended? <i class="bi bi-asterisk required"></i></label>
-                            <input type="text" class="form-control required-input" id="highSchoolAttended" name="highSchoolAttended" placeholder="">
-                        </div>
+                            <div class="m-3">
+                                <label for="highSchoolActivities">List any highschool Activites</label>
+                                <input type="text" class="form-control" id="highSchoolActivities" name="highSchoolActivities" placeholder="">
+                            </div>
 
-                        <div class="m-3">
-                            <label for="GPA">Highschool GPA <i class="bi bi-asterisk required"></i></label>
-                            <input type="text" class="form-control required-input" id="GPA" name="GPA" placeholder="">
-                        </div>
+                            <div class="m-3">
+                                <label for="technicalPrograms">List any other technical programs attended</label>
+                                <input type="text" class="form-control" id="technicalPrograms" name="technicalPrograms" placeholder="">
+                            </div>
 
-                        <div class="m-3">
-                            <label for="highSchoolActivities">List any highschool Activites</label>
-                            <input type="text" class="form-control" id="highSchoolActivities" name="highSchoolActivities" placeholder="">
-                        </div>
+                            <div class="m-3">
+                                <label for="additionalComments">Additional Comments</label>
+                                <input type="text" class="form-control" id="additionalComments" name="additionalComments" placeholder="">
+                            </div>
 
-                        <div class="m-3">
-                            <label for="technicalPrograms">List any other technical programs attended</label>
-                            <input type="text" class="form-control" id="technicalPrograms" name="technicalPrograms" placeholder="">
-                        </div>
+                            <div class="form-nav m-3">
+                                <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="3">Next
+                                </button>
+                            </div>
 
-                        <div class="m-3">
-                            <label for="additionalComments">Additional Comments</label>
-                            <input type="text" class="form-control" id="additionalComments" name="additionalComments" placeholder="">
                         </div>
-
-                        <div class="form-nav m-3">
-                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="3">Next
-                            </button>
-                        </div>
-
                     </form>
                 </div>
 
@@ -477,6 +506,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
@@ -546,11 +578,13 @@
         const essayRouteUrl = "{{ route('form.formEssay') }}";
         const completeRouteUrl = "{{ route('form.complete') }}";
         const dashBoardRouteUrl = "{{ route('dashboard') }}";
+
     </script>
 
 
     <script>
         const application = $.parseJSON('@json($application)');
+
     </script>
 
     <script src="{{ asset('js/application.js') }}" type="text/javascript"></script>

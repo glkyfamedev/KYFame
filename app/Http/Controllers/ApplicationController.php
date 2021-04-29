@@ -138,8 +138,12 @@ class ApplicationController extends Controller
                 $assesments->SATcomposite = $request->SATcomposite;
 
                 $assesments->KYOTE = $request->KYOTE;
-                $assesments->KYOTEarea = $request->KYOTEarea;
-                $assesments->KYOTEscore = $request->KYOTEscore;
+                $assesments->KYOTEarea1 = $request->KYOTEarea1;
+                $assesments->KYOTEscore1 = $request->KYOTEscore1;
+                $assesments->KYOTEarea2 = $request->KYOTEarea2;
+                $assesments->KYOTEscore2 = $request->KYOTEscore2;
+                $assesments->KYOTEarea3 = $request->KYOTEarea3;
+                $assesments->KYOTEscore3 = $request->KYOTEscore3;
 
                 $assesments->otherAssesments = $request->otherAssesments;
                 $assesments->skillsUSA = $request->skillsUSA;
