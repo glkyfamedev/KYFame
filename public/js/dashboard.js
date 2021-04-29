@@ -2,9 +2,6 @@ $(document).ready(function () {
     $('.phone').mask('(999) 999-9999')
 
 
-    var screen = window.matchMedia("(max-width: 700px)")
-    showMobileView(screen) // Call listener function at run time
-    screen.addListener(showMobileView);
 
     $('#showContact').click(function (e) {
         e.preventDefault();
@@ -123,12 +120,6 @@ $('#cancelBtn').click(function (e) {
 
 
 
-// function showMobileView(screen) {
-//     if (screen.matches) { // If media query matches
-
-//         $('#viewProfile').removeClass('hide');
-//     }
-// }
 
 function saveContactData(e) {
     e.preventDefault()

@@ -65,10 +65,10 @@ $(document).ready(function () {
     $('input[name=KYOTE]').click(function () {
         if ($("input[id='KYOTEyes']").is(':checked')) {
             $('#KYOTEScoresContainer').show()
-            $('.ACT').addClass('score-input')
+            $('.KYOTE').addClass('score-input')
         } else {
             $('#KYOTEScoresContainer').hide()
-            $('.ACT').removeClass('score-input')
+            $('.KYOTE').removeClass('score-input')
         }
     });
 
@@ -300,7 +300,7 @@ function saveEmploymentData(e) {
     })
 }
 
-function saveAssessmentData(e, sectionNum) {
+function saveAssessmentData(e) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
@@ -339,8 +339,12 @@ function saveAssessmentData(e, sectionNum) {
             SATcomposite: $('#SATcomposite').val(),
 
             KYOTE: $('input[name=KYOTE]:checked').val(),
-            KYOTEarea: $('#KYOTEarea').val(),
-            KYOTEscore: $('#KYOTEscore').val(),
+            KYOTEarea1: $('#KYOTEarea1').val(),
+            KYOTEscore1: $('#KYOTEscore1').val(),
+            KYOTEarea2: $('#KYOTEarea2').val(),
+            KYOTEscore2: $('#KYOTEscore2').val(),
+            KYOTEarea3: $('#KYOTEarea3').val(),
+            KYOTEscore3: $('#KYOTEscore3').val(),
 
             otherAssesments: $('#otherAssesments').val(),
 
@@ -371,7 +375,7 @@ function saveAssessmentData(e, sectionNum) {
     })
 }
 
-function saveEssayData(e, sectionNum, essaytest) {
+function saveEssayData(e, sectionNum) {
     e.preventDefault()
     $.ajaxSetup({
         headers: {
