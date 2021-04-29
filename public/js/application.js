@@ -7,15 +7,6 @@ $(document).ready(function () {
         }
     })
 
-    $('#contactMethod').change(function () {
-        if ($(this).val() == 'Other Email') {
-            $('#otherEmailDiv').removeClass('hide');
-        }
-        else {
-            $('#otherEmailDiv').addClass('hide');
-        }
-    });
-
     $('#startBtn').click(function (e) {
         e.preventDefault();
         $('#appDescription').hide();
@@ -81,28 +72,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#contactBtn').click(function (e) {
-        e.preventDefault()
-        var sectionNum = $(this).data('section')
-        var hasErrors = false
-
-        $('.contact-input').each(function () {
-            if ($(this).val() == '') {
-                hasErrors = true
-                var formInputLabel = $(this)
-                    .parents('.contact-required')
-                    .find('.contact-label')
-                // formInputLabel.text("Required");
-                formInputLabel.css('color', 'red')
-            }
-        })
-        if (hasErrors) {
-            return
-        } else {
-            saveContactData(e, sectionNum)
-        }
-    });
-
     $('#statusBtn').click(function (e) {
         e.preventDefault()
         var sectionNum = $(this).data('section')
@@ -152,31 +121,7 @@ $(document).ready(function () {
         if (hasErrors) {
             return
         } else {
-            // $('#section' + sectionNum).hide();
-            // $('essayNav').removeClass('disabled');
-            // $('#sectionCheck' + sectionNum).show();
-            //
-            // $('#section' + (sectionNum + 1)).show();
             saveEssayData(e, sectionNum);
-        }
-    });
-
-    $('#transcriptBtn').click(function (e) {
-        e.preventDefault()
-        var sectionNum = $(this).data('section')
-        var hasErrors = false
-        if (!$('input[name=transcriptMethod]:checked').length) {
-            hasErrors = true
-            var transcriptLabel = $('.transcriptLabel')
-            transcriptLabel.css('color', 'red')
-            transcriptLabel.text(
-                'You must pick a submission method for your transcripts'
-            )
-        }
-        if (hasErrors) {
-            return
-        } else {
-            saveTranscriptData(e, sectionNum)
         }
     });
 
@@ -195,9 +140,6 @@ $(document).ready(function () {
         if (hasErrors) {
             return
         } else {
-            // $('#completedNav').removeClass('disabled')
-            // $('#complete-check').show()
-            // location.replace(dashBoardRouteUrl);
             completeApplication(e)
         }
     })
@@ -259,54 +201,6 @@ function addEmploymentSection() {
     if (currentEmployerCount == 3) {
         $('#addField').addClass('disabled')
     }
-}
-
-function saveContactData(e, sectionNum, contactMethod) {
-    e.preventDefault()
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'POST',
-        url: contactRouteUrl,
-        data: {
-            _token: $('#contactToken').val(),
-
-            streetAddress: $('#streetAddress').val(),
-            address2: $('#address2').val(),
-            city: $('#city').val(),
-            state: $('#state').val(),
-            zip: $('#zip').val(),
-            primaryPhone: $('#primaryPhone').val(),
-            altPhone: $('#altPhone').val(),
-            preferedContactMethod: $('#contactMethod').val(),
-            otherEmail: $('#otherEmail').val(),
-
-            currentSection: sectionNum + 1,
-        },
-        dataType: 'json',
-
-        success: function (result) {
-            if (result) {
-                $('#contactDiv').hide()
-                $('#placeHolder').show();
-                $('#section' + sectionNum).hide()
-                $('#contactNav').removeClass('disabled')
-                $('#c-check').show()
-                $('#section' + (sectionNum + 1)).show()
-            } else {
-                alert('data not saved!')
-            }
-        },
-        error: function (error, xhr) {
-            var i = 0
-        },
-        failure: function (i, e) {
-            var i = 0
-        }
-    })
 }
 
 function saveStatusData(e, sectionNum) {
@@ -499,58 +393,20 @@ function saveEssayData(e, sectionNum, essaytest) {
 
                 $('#section' + sectionNum).hide();
                 $('essayNav').removeClass('disabled');
-                $('#sectionCheck' + sectionNum).show();
 
-                $('#section' + (sectionNum + 1)).show();
+                if (application.completed_date != null) {
+                    location.replace(dashBoardRouteUrl);
+                }
+                else {
+                    $('#sectionCheck' + sectionNum).show();
+                    $('#section' + (sectionNum + 1)).show();
+                }
             } else {
                 alert('data not saved!');
             }
         }
     })
 }
-
-
-function saveTranscriptData(e, sectionNum) {
-    e.preventDefault()
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    ``
-    const transcriptMethod = $('input[name=transcriptMethod]:checked').val();
-    var file_data = $('#transcriptFile').prop('files')[0];
-    if (file_data !== '') {
-        var transcriptUpload = new FormData();
-        transcriptUpload.append('file', file_data);
-        transcriptUpload.append('currentSection', sectionNum + 1);
-        transcriptUpload.append('transcriptMethod', transcriptMethod);
-    } else
-        transcriptUpload = transcriptMethod;
-
-    $.ajax({
-        url: transcriptRouteUrl, // route to controller function as declared in application view
-        cache: false,
-        type: 'POST',
-        contentType: false,
-        processData: false,
-        data: transcriptUpload,
-        success: function (result) {
-            if (result) {
-
-                $('#transcriptDiv').hide();
-                $('#placeHolder').show();
-                $('#section' + sectionNum).hide()
-                $('#transcriptNav').removeClass('disabled')
-                $('#t-check').show()
-                $('#section' + (sectionNum + 1)).show()
-            } else {
-                alert('data not saved!')
-            }
-        }
-    });
-}
-
 
 function GetTodayDate() {
     var tdate = new Date()
@@ -594,7 +450,7 @@ function completeApplication(e) {
 
 function enableMenuItems(currentSection) {
     for (var i = currentSection; i > 0; i--) {
-        if (i < 7) {
+        if (i < 5) {
             $("#sectionNav" + i).removeClass('disabled');
             $("#sectionCheck" + i).removeClass('hide');
         } else {

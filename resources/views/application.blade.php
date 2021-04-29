@@ -178,7 +178,7 @@
                         </div>
 
                         <div class="form-nav m-3">
-                            <button type="submit" id="statusBtn" class="nextBtn btn btn-pink float-right" data-section="2">Next
+                            <button type="submit" id="statusBtn" class="nextBtn btn btn-pink float-right" data-section="1">Next
                             </button>
                         </div>
                     </form>
@@ -202,7 +202,7 @@
                     </div>
 
                     <div class="form-nav">
-                        <button type="submit" id="employmentBtn" class="btn btn-pink float-right" data-section="3">Next
+                        <button type="submit" id="employmentBtn" class="btn btn-pink float-right" data-section="2">Next
                         </button>
                     </div>
                 </div>
@@ -390,7 +390,7 @@
                         </div>
 
                         <div class="form-nav m-3">
-                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="4">Next
+                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="3">Next
                             </button>
                         </div>
 
@@ -410,7 +410,7 @@
 
 
                             <div class="form-nav">
-                                <button id="essayBtn" class="nextBtn btn btn-pink float-right" data-section="5">Next
+                                <button id="essayBtn" class="nextBtn btn btn-pink float-right" data-section="4">Next
                                 </button>
                             </div>
                         </div>
@@ -482,19 +482,19 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush nav nav-tabs flex-column" id="appNav" role="tablist">
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav1">
-                            <a href="#section1">Legal Status</a><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section1">Legal Status</a><label class="hide" id="sectionCheck1"><i class="bi bi-check2 check"></i></label>
                         </li>
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav2">
-                            <a href="#section2">Employment History</a><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section2">Employment History</a><label class="hide" id="sectionCheck2"><i class="bi bi-check2 check"></i></label>
                         </li>
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav3">
-                            <a href="#section3">Assessments</a><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section3">Assessments</a><label class="hide" id="sectionCheck3"><i class="bi bi-check2 check"></i></label>
                         </li>
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav4">
-                            <a href="#section4">Essay</a><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section4">Essay</a><label class="hide" id="sectionCheck4"><i class="bi bi-check2 check"></i></label>
                         </li>
                         <li class="list-group-item nav-item nav-item disabled" id="sectionNav5">
-                            <a href="#section5">Finish</a><label class="hide" id="sectionCheck7"><i class="bi bi-check2 check"></i></label>
+                            <a href="#section5">Finish</a><label class="hide" id="sectionCheck5"><i class="bi bi-check2 check"></i></label>
                         </li>
                     </ul>
                 </div>
@@ -514,7 +514,7 @@
 
                 <div class="col">
                     <label class="form-label" for="employerPhone">Employer Phone</label>
-                    <input class="section-data form-control employerPhone" id="employerPhone" type="text" name="employerPhone" />
+                    <input class="section-data form-control employerPhone phone" id="employerPhone" type="text" name="employerPhone" />
                 </div>
             </div>
 
