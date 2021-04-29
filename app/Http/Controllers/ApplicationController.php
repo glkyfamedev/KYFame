@@ -180,7 +180,7 @@ class ApplicationController extends Controller
                 $storeData = $request->validate([
                     'essay' => 'required|max:255',
                 ]);
-                $application = StudentApplication::find(1);
+                $application = StudentApplication::find($user->id);
                 $application->essay = $request->essay;
                 $application->currentSection = $request->currentSection;
 

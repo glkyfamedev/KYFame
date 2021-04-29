@@ -80,12 +80,12 @@
                             <div class="">
                                 <div class="card-title">
                                     <h4 class="blue fw-bold" style="text-align:center;">
-                                       Submit Transcripts
+                                       Your Application
                                     </h4>
                                 </div>
 
                             </div>
-                            <p class="m-auto"> Continue to update application
+                            <p class="m-auto"> Continue to update your application
                             </p>
                             {{-- <div class="m-auto">
                                 <i class="bi bi-person-lines-fill" style="font-size: 3em; margin-top:-20px;"></i>
