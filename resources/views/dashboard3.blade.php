@@ -28,6 +28,7 @@
                     <h3 class="pink">Welcome {{ Auth::user()->first_name }}, What do you need to do?</h3>
                 </div>
                 <div class="row">
+
                     <div class="col-lg-5 dashboardCol" id="profileDiv">
                         <div class="card" style="height: 300px; border-radius:20px;">
                             <div class="">
@@ -49,6 +50,13 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
 
 
 
@@ -162,6 +170,20 @@
 
 
 
+{{-- <div class="col-lg-5 dashboardCol" id="profileDiv">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h4 class="blue fw-bold">
+                        Contact Info
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  --}}
 {{-- <div id="showProfile" class="hide">
                                         <button id="profileBtn" class="btn btn-block btn-pink" href="#">Update profile</button>
                                     </div>
@@ -277,3 +299,60 @@
 </div>
 </form>
 </div> --}}
+
+
+
+{{-- <form class="contact-form row g-3 p-2" id="contact-Section">
+    {{-- <input type="hidden" id="updateContact" name="_token" value="{{ Session::token() }}"> --}}
+<div class="card-body">
+    <div class="contact-form row g-3" id="profileInfo">
+        <div class="col-7">
+            <label class="form-label contact-label" for="streetAddress"> Street Address{{$application->streetAddress}}</label>
+            <input id="streetAddress" class="form-control hide contact-input update" type="text" placeholder="{{$application->streetAddress}}" name="streetAddress" autofocus />
+        </div>
+
+        <div class="col">
+            <label class="form-label contact-label" for="address2">Apt or Suite </label>
+            <input id="address2" class="form-control hide update" type="text" name="address2" autofocus />
+        </div>
+
+        <div class="col-4">
+            <label class="form-label contact-label" for="city">City{{ $application->city }} </label>
+
+            <input id="city" class="form-control contact-input hide update" type="text" name="city" required autofocus />
+        </div>
+
+        <div class="col-3">
+            <label class="form-label contact-label" for="state">State </label>
+
+            <input id="state" class="form-control contact-input hide update" type="text" name="state" required autofocus />
+        </div>
+
+        <div class="col-4">
+            <label class="form-label contact-label" for="zip">Zip </label>
+
+            <input id="zip" class="form-control contact-input hide update" type="text" name="zip" required autofocus />
+        </div>
+
+        <div class="col-6">
+            <label class="form-label contact-label" for="primaryPhone">Primary Phone </label>
+
+            <input id="primaryPhone" class="form-control contact-input phone hide update" type="text" name="primaryPhone" required autofocus />
+        </div>
+
+        <div class="col">
+            <label class="form-label contact-label" for="altPhone">Alt Phone</label>
+
+            <input id="altPhone" class="form-control phone hide update" type="text" name="altPhone" autofocus />
+        </div>
+
+        <a id="showContact" class="btn btn-sm btn-pink" href="#">Update Contact Info</a>
+        <div id="updateBtns" class="hide">
+            <button type="submit" id="contactBtn" class="nextBtn btn-pink btn float-right" data-section="1">Update</button>
+
+            <button id="cancelBtn" class="btn btn-yellow ">Cancel</button>
+        </div>
+    </div>
+
+</div>
+</form> --}}

@@ -14,7 +14,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5"
-
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
@@ -63,12 +62,10 @@
         "post-create-project-cmd": [
             "@/usr/local/bin/php artisan key:generate --ansi"
         ],
-
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:meta"
-            ]
-
+        ]
     }
 }

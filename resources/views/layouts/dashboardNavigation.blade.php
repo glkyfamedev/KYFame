@@ -37,7 +37,7 @@
                             <i class="bi bi-person-circle"></i>
                         </div>
                         <div class="ml-3">
-                            <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
+                            <div class="font-medium text-base text-white-800">{{ Auth::user()->first_name }}</div>
                         </div>
                     </div>
                 </button>
