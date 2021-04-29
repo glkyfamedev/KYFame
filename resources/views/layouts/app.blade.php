@@ -48,7 +48,7 @@
 
 
     <footer class="bg-light-grey p-3">
-        <div class="main p-4 mx-auto" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="contact-main p-4 mx-auto" style="visibility: visible; animation-name: fadeInUp;">
             <div class="row">
                 <div class="col-md-2 text-center mt-lg-5">
                     <ul class="list-group list-group-flush bg-light-grey">
