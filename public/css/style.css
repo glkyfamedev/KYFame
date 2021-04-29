@@ -424,8 +424,6 @@ span.bg-main {
     height: 80vh;
 }
 
-
-
 .student-masthead {
     background: url("../assets/studentBG.png") no-repeat center center;
     height: 90vh;
@@ -471,14 +469,6 @@ button.btn.btn-light {
     right: 23px;
 }
 
-
-
-/* .big-img img {
-    height: 325px;
-    width: 100%;
-    object-fit: cover;
-} */
-
 .inner-section {
     position: relative;
 }
@@ -504,8 +494,6 @@ button.btn.btn-light {
     top: 37px;
     left: 0;
 }
-
-
 
 hr.my-border {
     margin-top: 1rem;
@@ -568,7 +556,6 @@ section#group {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-
 
 
 .box img {
@@ -713,6 +700,43 @@ ul.timeline>li:before {
 .mbr-section-title3 {
     text-align: left;
 }
+
+
+/*Sponsors   */
+
+#sponsors {
+    background: #f7f7f7;
+    height: 100%;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.sponsor-header-row {
+    background: url("../assets/images/page-images/gearSplat.png") no-repeat center center;
+    height: 250px;
+}
+
+.sponsor-card-header {
+    height: 150px !important;
+
+}
+
+.sponsor-card {
+    height: 242px;
+
+
+}
+
+/* .sponsor-card-body {
+    height: 275px;
+
+} */
+
+.showSponsor-btn {
+    float: right;
+}
+
 
 @keyframes floating-arrow {
     from {
