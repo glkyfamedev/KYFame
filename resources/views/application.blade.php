@@ -36,7 +36,7 @@
     </style>
 
     <div class="row py-5 justify-content-center">
-        <div class="col-7 p-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="col-lg-7 p-7 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="bg-white border-gray-200">
 
                 <div id="appDescription">
@@ -347,81 +347,80 @@
                                 </div>
 
                             </div>
+                        </div>
 
-                            <div class="m-3">
-                                <h5><label for="otherAssesments">
-                                        If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
-                                    </label> </h5>
-                                <input type="text" class="form-control" id="otherAssesments" name="otherAssesments" placeholder="Other Assessments and scores">
+                        <div class="m-3">
+                            <h5><label for="otherAssesments">
+                                    If You haven't taken the ACT, SAT or KYOTE, but have taken another assesment..
+                                </label> </h5>
+                            <input type="text" class="form-control" id="otherAssesments" name="otherAssesments" placeholder="Other Assessments and scores">
+                        </div>
+
+                        <div class="m-3">
+                            <h5>Did you participate in Skills USA?</h5>
+                            <div class="form-check">
+                                <label for="skillsUSAyes" class="form-check-label">Yes</label>
+                                <input type="radio" class="form-check-input" id="skillsUSAyes" name="skillsUSA" value="1">
                             </div>
 
-                            <div class="m-3">
-                                <h5>Did you participate in Skills USA?</h5>
-                                <div class="form-check">
-                                    <label for="skillsUSAyes" class="form-check-label">Yes</label>
-                                    <input type="radio" class="form-check-input" id="skillsUSAyes" name="skillsUSA" value="1">
-                                </div>
+                            <div class="form-check">
+                                <label for="skillsUSAno" class="form-check-label">No</label>
+                                <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0" checked>
+                            </div>
+                        </div>
 
-                                <div class="form-check">
-                                    <label for="skillsUSAno" class="form-check-label">No</label>
-                                    <input type="radio" class="form-check-input" id="skillsUSAno" name="skillsUSA" value="0" checked>
-                                </div>
+                        <div class="m-3">
+                            <h5>Did you participate in project lead the way?</h5>
+                            <div class="form-check">
+                                <label for="projectLeadTheWayYes" class="form-check-label">Yes</label>
+                                <input type="radio" class="form-check-input" id="projectLeadTheWayYes" name="projectLeadTheWay" value="1">
                             </div>
 
-                            <div class="m-3">
-                                <h5>Did you participate in project lead the way?</h5>
-                                <div class="form-check">
-                                    <label for="projectLeadTheWayYes" class="form-check-label">Yes</label>
-                                    <input type="radio" class="form-check-input" id="projectLeadTheWayYes" name="projectLeadTheWay" value="1">
-                                </div>
-
-                                <div class="form-check">
-                                    <label for="projectLeadTheWayNo" class="form-check-label">No</label>
-                                    <input type="radio" class="form-check-input" id="projectLeadTheWayNo" name="projectLeadTheWay" value="0" checked>
-                                </div>
+                            <div class="form-check">
+                                <label for="projectLeadTheWayNo" class="form-check-label">No</label>
+                                <input type="radio" class="form-check-input" id="projectLeadTheWayNo" name="projectLeadTheWay" value="0" checked>
                             </div>
+                        </div>
 
-                            <div class="m-3">
-                                <label for="manufacturingAcedemics">Have you completed any Manufacturing
-                                    Acedemics?</label>
-                                <input type="text" class="form-control" id="manufacturingAcedemics" name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
-                            </div>
+                        <div class="m-3">
+                            <label for="manufacturingAcedemics">Have you completed any Manufacturing
+                                Acedemics?</label>
+                            <input type="text" class="form-control" id="manufacturingAcedemics" name="manufacturingAcedemics" placeholder="List Manufacturing Acedemics">
+                        </div>
 
-                            <div class="m-3">
-                                <label for="awardsAndHonors">Awards and Honors</label>
-                                <input type="text" class="form-control" id="awardsAndHonors" name="awardsAndHonors" placeholder="">
-                            </div>
+                        <div class="m-3">
+                            <label for="awardsAndHonors">Awards and Honors</label>
+                            <input type="text" class="form-control" id="awardsAndHonors" name="awardsAndHonors" placeholder="">
+                        </div>
 
-                            <div class="m-3">
-                                <label for="highSchoolAttended">Name of highschool attended? <i class="bi bi-asterisk required"></i></label>
-                                <input type="text" class="form-control required-input" id="highSchoolAttended" name="highSchoolAttended" placeholder="">
-                            </div>
+                        <div class="m-3">
+                            <label for="highSchoolAttended">Name of highschool attended? <i class="bi bi-asterisk required"></i></label>
+                            <input type="text" class="form-control required-input" id="highSchoolAttended" name="highSchoolAttended" placeholder="">
+                        </div>
 
-                            <div class="m-3">
-                                <label for="GPA">Highschool GPA <i class="bi bi-asterisk required"></i></label>
-                                <input type="text" class="form-control required-input" id="GPA" name="GPA" placeholder="">
-                            </div>
+                        <div class="m-3">
+                            <label for="GPA">Highschool GPA <i class="bi bi-asterisk required"></i></label>
+                            <input type="text" class="form-control required-input" id="GPA" name="GPA" placeholder="">
+                        </div>
 
-                            <div class="m-3">
-                                <label for="highSchoolActivities">List any highschool Activites</label>
-                                <input type="text" class="form-control" id="highSchoolActivities" name="highSchoolActivities" placeholder="">
-                            </div>
+                        <div class="m-3">
+                            <label for="highSchoolActivities">List any highschool Activites</label>
+                            <input type="text" class="form-control" id="highSchoolActivities" name="highSchoolActivities" placeholder="">
+                        </div>
 
-                            <div class="m-3">
-                                <label for="technicalPrograms">List any other technical programs attended</label>
-                                <input type="text" class="form-control" id="technicalPrograms" name="technicalPrograms" placeholder="">
-                            </div>
+                        <div class="m-3">
+                            <label for="technicalPrograms">List any other technical programs attended</label>
+                            <input type="text" class="form-control" id="technicalPrograms" name="technicalPrograms" placeholder="">
+                        </div>
 
-                            <div class="m-3">
-                                <label for="additionalComments">Additional Comments</label>
-                                <input type="text" class="form-control" id="additionalComments" name="additionalComments" placeholder="">
-                            </div>
+                        <div class="m-3">
+                            <label for="additionalComments">Additional Comments</label>
+                            <input type="text" class="form-control" id="additionalComments" name="additionalComments" placeholder="">
+                        </div>
 
-                            <div class="form-nav m-3">
-                                <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="3">Next
-                                </button>
-                            </div>
-
+                        <div class="form-nav m-3">
+                            <button type="submit" id="assesmentBtn" class=" btn btn-pink float-right" data-section="3">Next
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -509,7 +508,7 @@
 
 
 
-        <div class="col-3">
+        <div class="col-lg-3">
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group list-group-flush nav nav-tabs flex-column" id="appNav" role="tablist">

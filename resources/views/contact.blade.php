@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -44,7 +43,8 @@
 
                 <div class="form-section toggle" id="section1">
                     <h2 class="blue border-bottom mb-4">Contact Information</h2>
-                    <div class="messages border-bottom"></div>
+
+                    <div class="messages "></div>
                     <form class="contact-form row g-3" id="contact-Section" action="{{ route('saveContact') }}" method="POST">
                         @csrf
                         <input type="hidden" id="contactToken" name="_token" value="{{ Session::token() }}">
@@ -81,23 +81,27 @@
                             <label class="form-label contact-label" for="altPhone">Alt Phone</label>
                             <input id="altPhone" class="form-control phone" type="text" name="altPhone" autofocus />
                         </div>
-                        <h5> <label for="contactMethod">Select Area and enter score</label></h5>
-                        <div class="input-group">
-                            <select id="contactMethod" class="form-control" name="contactMethod">
-                                <option value="">Prefered Contact</option>
-                                <option value="phone">Phone</option>
-                                <option value="Account Email">Account Email</option>
-                                <option value="Other Email">Other Email</option>
-                            </select>
-                            <div id="otherEmailDiv" class="hide">
-                                <label for="otherEmail"></label>
-                                <input type="text" class="form-control" id="otherEmail" name="otherEmail" placeholder="Contact Email" />
+                        <h5> <label for="contactMethod">Prefered Method of Contact <i class="bi bi-asterisk required"></i></label></h5>
+                        <div class="row">
+                            <div class="col">
+                                <select id="contactMethod" class="form-control" name="contactMethod">
+                                    <option value="">Prefered Contact</option>
+                                    <option value="phone">Phone</option>
+                                    <option value="Account Email">Account Email</option>
+                                    <option value="Other Email">Other Email</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <div id="otherEmailDiv" class="hide">
+                                    <input type="text" class="form-control" id="otherEmail" name="otherEmail" placeholder="Contact Email" />
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-nav">
-                            <button type="submit" id="contactBtn" class="nextBtn btn btn-pink float-right">Save
-                            </button>
+                        <div class="row mt-3">
+                            <div class="form-nav">
+                                <button type="submit" id="contactBtn" class="nextBtn btn btn-pink float-right">Save
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -107,10 +111,12 @@
 
     <script>
         const saveContactUrl = "{{ route('saveContact') }}";
+
     </script>
 
     <script>
         const application = $.parseJSON('@json($contactData)');
+
     </script>
 
     <script src="{{ asset('js/jquery-maskedinput.js') }}" type="text/javascript"></script>
