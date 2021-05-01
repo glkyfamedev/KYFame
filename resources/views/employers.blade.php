@@ -56,9 +56,9 @@
         </div>
 
         <div class="row mx-lg-n5">
-            <div class="col-md px-lg-3 text-right my-auto">
+            <div class="col-md px-lg-3 my-auto">
                 <h2 class=" text-center align-bottom "><Span class=" pink">DEVELOP</span> THE WORKFORCE OF <span class="pink">TOMORROW</span> TODAY</h2>
-                <p class="text-right">The <span class=" pink">Greater Louisville chapter</span>
+                <p class="t">The <span class=" pink">Greater Louisville chapter</span>
                     The of the Kentucky Federation for Advanced Manufacturing Education
                     (GL KYFAME) is a company-sponsored partnership
                     of regional employers who share the goal of creating
@@ -68,7 +68,7 @@
                     Advanced Manufacturing Technician program (AMT).
                 </p>
 
-                <p class="text-right">
+                <p class="">
                     The<span class=" mint">Advanced Manufacturing Technician</span> (AMT)
                     program administered under the FAME model
                     leverages a work/learn framework to weave
@@ -76,12 +76,12 @@
                     distinct manufacturing core exercises into a
                     focused co-op experience</p>
 
-                <p class="text-right">
+                <p class="">
                     Professional behaviors and practices are
                     introduced and reinforced throughout AMT
                     programs through a <span class=" pink"> “learn it and live it” </span>approach.</p>
 
-                <p class="text-right">
+                <p class="">
                     Upon graduation, AMTs will demonstrate
                     mastery in the Manufacturing Core Exercises
                     (MCE’s) of Safety Culture, 5S Organizational
@@ -89,7 +89,7 @@
                 </P>
             </div>
             <div class="col-md py-3 px-lg-3">
-                <img src="assets/images/page-images/suit.png" style="border:transparent 1px; border-top-left-radius: 70%;" class="h-100" alt="" />
+                <img src="assets/images/page-images/suit.png" style="border:transparent 1px; border-top-left-radius: 70%;" class="h-100 ml-10" alt="" />
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5><span class="pink">FAME</span></h5>
-                            <p class="text-right blue">June 24, 20104</p>
+                            <p class="text-right blue">June 24, 2010</p>
                         </div>
                         <p>
                             The <span class="pink">Federation for Advanced Manufacturing Education</span>
@@ -123,7 +123,7 @@
                         </div>
                         <p>
                             The Greater Louisville Chapter
-                            was formed (need to get date for your) through a <span class="pink">partnership </span> with Jefferson
+                            was formed through a <span class="pink">partnership </span> with Jefferson
                             Community Technical College
                         </p>
                     </li>
@@ -176,7 +176,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5 class="pink">New Facility</h5>
-                            <p class="text-right blue">2020</p>
+                            <p class="text-right blue">Aug 4th 2020</p>
                         </div>
                         <p>
                             In 2020, Jefferson Community College opened a <span class="pink">State

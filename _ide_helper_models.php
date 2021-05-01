@@ -27,8 +27,12 @@ namespace App\Models{
  * @property int|null $SATwriting
  * @property int|null $SATcomposite
  * @property int|null $KYOTE
- * @property string|null $KYOTEarea
- * @property int|null $KYOTEscore
+ * @property string|null $KYOTEarea1
+ * @property int|null $KYOTEscore1
+ * @property string|null $KYOTEarea2
+ * @property int|null $KYOTEscore2
+ * @property string|null $KYOTEarea3
+ * @property int|null $KYOTEscore3
  * @property string|null $otherAssesments
  * @property int|null $skillsUSA
  * @property int|null $projectLeadTheWay
@@ -56,8 +60,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereHighSchoolAttended($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTE($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEarea($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEscore($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEarea1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEarea2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEarea3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEscore1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEscore2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereKYOTEscore3($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereManufacturingAcedemics($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereOtherAssesments($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssesmentApp whereProjectLeadTheWay($value)
@@ -78,13 +86,15 @@ namespace App\Models{
  * App\Models\ContactApp
  *
  * @property int $id
- * @property string $streetAddress
+ * @property string|null $streetAddress
  * @property string|null $address2
  * @property string|null $city
  * @property string|null $state
  * @property string|null $zip
  * @property string|null $primaryPhone
  * @property string|null $altPhone
+ * @property string|null $preferedContactMethod
+ * @property string|null $otherEmail
  * @property int|null $student_application_id
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp newQuery()
@@ -93,6 +103,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp whereAltPhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp whereCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactApp whereOtherEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactApp wherePreferedContactMethod($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp wherePrimaryPhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactApp whereStreetAddress($value)
@@ -135,7 +147,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property string|null $sponsor_name
+ * @property string|null $webSiteUrl
+ * @property string|null $socialMediaUrl
  * @property string|null $comments
+ * @property string|null $headertext
+ * @property string|null $missionText
+ * @property string|null $specialContentText
  * @property string|null $pic_path
  * @property string|null $contact_name
  * @property string|null $contact_email
@@ -160,10 +177,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactStreetAddr2($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactZip($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereHeadertext($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereMissionText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor wherePicPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSocialMediaUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSpecialContentText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSponsorName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereWebSiteUrl($value)
  */
 	class Sponsor extends \Eloquent {}
 }
@@ -173,14 +195,14 @@ namespace App\Models{
  * App\Models\StatusApp
  *
  * @property int $id
- * @property int|null $under_18
- * @property int|null $authorizedInUS
+ * @property string|null $under_18
+ * @property string|null $authorizedInUS
  * @property string|null $levelOfEducation
- * @property int|null $relativeSponsors
- * @property int|null $workForSponsor
+ * @property string|null $relativeSponsors
+ * @property string|null $workForSponsor
  * @property string|null $relative_sponsor_names
  * @property string|null $employed_sponsor_names
- * @property int|null $student_application_id
+ * @property int $student_application_id
  * @method static \Illuminate\Database\Eloquent\Builder|StatusApp newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StatusApp newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StatusApp query()
@@ -239,7 +261,7 @@ namespace App\Models{
  * App\Models\User
  *
  * @property int $id
- * @property string $Role
+ * @property string $role
  * @property string $first_name
  * @property string $last_name
  * @property string $email

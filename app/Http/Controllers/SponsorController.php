@@ -11,6 +11,8 @@ class SponsorController extends Controller
     public function index()
     {
         $sponsors = Sponsor::all(); 
+
+       
         
         return view('sponsors', compact('sponsors'));
     }
@@ -20,6 +22,9 @@ class SponsorController extends Controller
        public function show($id)
     {   
         $sponsor = Sponsor::findOrFail($id);
+         if($sponsor->specialContentText == null){
+         $sponsor->specialContentText = 'assets/navygear.png';
+         }
         return view('showSponsor', $sponsor);
     }
 

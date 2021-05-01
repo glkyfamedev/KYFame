@@ -1,7 +1,7 @@
 <section>
 
-    <div class="container-fluid" style="background-color:transparent;">
-        <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid" style="">
+        <nav x-data="{ open: false }" class="navbar navbar-expand-lg bg-light-grey">
             <div class="container-fluid">
 
                 <a href="{{ URL('/') }}" class="navbar-brand">
