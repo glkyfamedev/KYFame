@@ -13,6 +13,9 @@ class Sponsor extends Model
           
               'sponsor_name', 
               'comments',
+              'headertext',
+              'missionText',
+              'specialContentText',
               'pic_path', 
               'contact_name', 
               'contact_email', 

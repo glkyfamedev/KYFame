@@ -196,10 +196,6 @@
     color: #d32d69 !important;
 }
 
-
-
-
-
 /*gradients*/
 .dark-gradient {
     background: #4B79A1;
@@ -565,7 +561,6 @@ section#group {
     -o-object-fit: cover;
 }
 
-/****/
 .item {
     position: relative;
 }
@@ -662,33 +657,6 @@ ul.timeline>li:before {
     z-index: 400;
 }
 
-
-/* /* .wrap {
-    display: flex;
-    background: white;
-    padding: 1rem 1rem 1rem 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 7px 7px 30px -5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
-
-.wrap:hover {
-    background: hsla(187, 62%, 58%, 1);
-    /* background: linear-gradient(135deg, #53c6d6 0%, #235085 100%); */
-/* color: white;
-}
-
-.ico-wrap {
-    margin: auto;
-}
-
-.mbr-iconfont {
-    font-size: 4.5rem !important;
-    color: #235085;
-    margin: 1rem;
-    padding-right: 1rem;
-} */
-
 .ion-title3 {
     text-align: left;
 }
@@ -705,20 +673,17 @@ ul.timeline>li:before {
 /*Sponsors   */
 
 #sponsors {
-    background: #f7f7f7;
+    background: #F0F3F8;
     height: 100%;
     width: 100%;
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
 
-.sponsor-header-row {
-    background: url("../assets/images/page-images/gearSplat.png") no-repeat center center;
-    height: 250px;
-}
+.sponsor-header-row {}
 
 .sponsor-card-header {
-    height: 150px !important;
+    min-height: 150px !important;
 
 }
 
@@ -728,10 +693,10 @@ ul.timeline>li:before {
 
 }
 
-/* .sponsor-card-body {
-    height: 275px;
+.sponsor-card-body {
+    height: 80px;
 
-} */
+}
 
 .showSponsor-btn {
     float: right;

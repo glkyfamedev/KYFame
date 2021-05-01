@@ -203,7 +203,7 @@ class ApplicationController extends Controller
         $user = Auth::user();
         if ($request->ajax()) {
             try {
-                $complete = StudentApplication::find(1);
+                $complete = StudentApplication::find($user->id);
                 $complete->completed_date = $request->completed_date;
 
                 $complete->save();
