@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if($user->Role == 'Admin'){
+        if($user->role == 'Admin'){
            return redirect()->route(RouteServiceProvider::ADMINDASHBOARD);
         }
         else{

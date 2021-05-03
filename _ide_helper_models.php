@@ -149,10 +149,10 @@ namespace App\Models{
  * @property string|null $sponsor_name
  * @property string|null $webSiteUrl
  * @property string|null $socialMediaUrl
- * @property string|null $comments
- * @property string|null $headertext
+ * @property string|null $bodyText
+ * @property string|null $headerText
  * @property string|null $missionText
- * @property string|null $specialContentText
+ * @property string|null $specialContent
  * @property string|null $pic_path
  * @property string|null $contact_name
  * @property string|null $contact_email
@@ -167,7 +167,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor query()
- * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereComments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereBodyText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactName($value)
@@ -177,12 +177,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactStreetAddr2($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereContactZip($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereHeadertext($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereHeaderText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereMissionText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor wherePicPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSocialMediaUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSpecialContentText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSpecialContent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereSponsorName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereWebSiteUrl($value)
@@ -226,13 +226,15 @@ namespace App\Models{
  * @property int $id
  * @property string $start_date
  * @property string|null $transcript_method
- * @property string|null $transcriptPath
  * @property string|null $essay
  * @property string|null $application_action
  * @property int|null $currentSection
  * @property string $status
+ * @property string $qualified
  * @property string|null $completed_date
  * @property int|null $user_id
+ * @property mixed|null $transcript_data
+ * @property string|null $transcript_file_ext
  * @property-read \App\Models\AssesmentApp|null $assesmentApp
  * @property-read \App\Models\ContactApp|null $contactApp
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmploymentApp[] $employmentApp
@@ -247,10 +249,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereCurrentSection($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereEssay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereQualified($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereTranscriptData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereTranscriptFileExt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereTranscriptMethod($value)
- * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereTranscriptPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentApplication whereUserId($value)
  */
 	class StudentApplication extends \Eloquent {}

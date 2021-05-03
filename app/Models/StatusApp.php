@@ -10,15 +10,15 @@ class StatusApp extends Model
     public $timestamps = false; 
     use HasFactory;
    protected $guarded = [];
-    // protected $fillable = [        
-    //     'under_18',
-    //     'authorizedInUS',
-    //     'levelOfEducation',
-    //     'RelativeSponsers',
-    //     'WorkForSponser',
-    //     'EmployedWithSponser',
-    //     'studentApplication_id',        
-    // ];
+    protected $fillable = [        
+        'under_18',
+        'authorizedInUS',
+        'levelOfEducation',
+        'RelativeSponsers',
+        'WorkForSponser',
+        'EmployedWithSponser',
+        'studentApplication_id',        
+    ];
     
     
            public function Student_application()

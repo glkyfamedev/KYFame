@@ -12,10 +12,10 @@ class Sponsor extends Model
       protected $fillable = [
           
               'sponsor_name', 
-              'comments',
+              'bodyText',
               'headertext',
               'missionText',
-              'specialContentText',
+              'specialContent',
               'pic_path', 
               'contact_name', 
               'contact_email', 

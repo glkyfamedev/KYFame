@@ -417,9 +417,9 @@ function GetTodayDate() {
     var dd = tdate.getDate() //yields day
     var MM = tdate.getMonth() //yields month
     var yyyy = tdate.getFullYear() //yields year
-    var currentDate = dd + '-' + (MM + 1) + '-' + yyyy
+    var currentDate = (MM + 1) + '-' + dd + '-' + yyyy
 
-    return currentDate
+    return currentDate;
 }
 
 function completeApplication(e) {
