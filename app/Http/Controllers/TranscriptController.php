@@ -14,6 +14,8 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class TranscriptController extends Controller
 {
@@ -35,17 +37,18 @@ class TranscriptController extends Controller
         $application = session('application');
 
         try {
-            if ($request->file()) {
-                $fileName = $user->last_name . '' . $user->id . '.' . $request->file->extension();
-                $request->file->move(public_path('transcripts'), $fileName);
+            if ($request->file()) {                              
+                $file = file_get_contents($request->file('file')); 
+                $fileContents = base64_encode($file);
+
+                $application = StudentApplication::where('id', $application->id)->first();
+                $application->transcript_method = $request->transcriptMethod;
+                $application->transcript_data = $fileContents;
+                $application->transcript_file_ext = $request->file->getClientOriginalExtension();
+                $application->save();
             } else {
                 $fileName = 'N/A';
-            }
-
-            $application = StudentApplication::where('id', $application->id)->first();
-            $application->transcript_method = $request->transcriptMethod;
-            $application->transcriptPath = $fileName;
-            $application->save();
+            }            
 
             return redirect()->route("dashboard");
         } catch (Exception $e) {

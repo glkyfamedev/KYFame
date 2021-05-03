@@ -8,6 +8,7 @@ use App\Http\Controllers\SponsorController;
 use App\Models\StudentApplication;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TranscriptController;
 
@@ -22,23 +23,28 @@ use App\Http\Controllers\TranscriptController;
 |
 */
 
+
+//Guest routtes
 Route::view('/students', 'students');
 Route::view('/sponsors', 'sponsors');
 Route::view('/employers', 'employers');
-// Route::view('/application','application');
 
-
+//home 
 Route::get('/', function () {
     return view('home');
 });
+
+//Footer Contact Form
 Route::post('/email', [EmailController::class, 'contactEmail'])->name('email.contact');
 
+//Guest Sponsors 
+Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors');
 
-Route::get('/sponsors', [SponsorController::class, 'index'])
-    ->name('sponsors');
+Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])->name('sponsors.show');
 
-Route::get('/sponsorSelected/{id}', [SponsorController::class, 'show'])
-    ->name('sponsors.show');
+
+//Student/Guest dashboard 
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
 
 //Student Application routes
 Route::get('/form', [ApplicationController::class, 'index'])->name('form');
@@ -56,15 +62,14 @@ Route::post('/saveTranscript', [TranscriptController::class, 'saveTranscript'])-
 
 Route::post('/formComplete', [ApplicationController::class, 'CompleteApplication'])->name('form.complete');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
-
 Route::post('/updateProfile', [DashboardController::class, 'updateProfile'])->middleware('verified')->name('dashboard.updateProfile');
 Route::post('/updateTranscript', [DashboardController::class, 'updateTranscript'])->middleware('verified')->name('dashboard.updateTranscript');
 
+//log in and check Role
 Route::get('/signIn', function () {
     $user = Auth::user();
 
-    if ($user->Role === "Admin") {
+    if ($user->role === "Admin") {
         return redirect()->route('adminDashboard');
     } else {
         return redirect()->route('dashboard');
@@ -72,16 +77,28 @@ Route::get('/signIn', function () {
 })->middleware(['auth'])->name('signIn');
 
 //Admin routes
-Route::get('admin/manageApplications', [AdminController::class, 'viewApplications'])->name('applications');
+
+//Admin Dashboard 
 Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard');
 
+//Admin sponsor Routes
 Route::get('admin/viewSponsors', [AdminController::class, 'viewSponsors'])->name('viewSponsors');
 Route::get('admin/manageSponsors/{id}', [AdminController::class, 'manageSponsors'])->name('manageSponsors');
 Route::get('admin/updateSponor/{id}', [AdminController::class, 'updateSponsor'])->name('updateSponsor');
 
+Route::get('admin/addSponsor', [AdminController::class, 'addSponsor'])->name('addSponsor');
+Route::post('admin/createSponsor', [AdminController::class, 'createSponsor'])->name('createSponsor');
 
-Route::get('admin/applicationSelected/{id}', [AdminController::class, 'selectApplication'])
-    ->name('application.show');
+// Route::post('admin/deleteSponsor/{$id}', [AdminController::class, 'deleteSponsor'])->name('deleteSponsor');
+
+
+Route::get('admin/download', [AdminController::class, 'viewSponsors'])->name('viewSponsors');
+
+//Admin Application routes
+Route::get('admin/manageApplications', [AdminController::class, 'viewApplications'])->name('applications');
+Route::get('admin/applicationSelected/{id}', [AdminController::class, 'selectApplication'])->name('application.show');    
+Route::get('admin/download/{id}', [AdminController::class, 'downloadTranscript'])->name('application.downloadTranscript');    
+Route::post('admin/updateAppplication/{id}', [AdminController::class, 'updateApplication'])->name('updateApplication');
 
 
 

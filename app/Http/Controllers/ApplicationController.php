@@ -24,23 +24,41 @@ class ApplicationController extends Controller
 
     public function index(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        try {
-            $application = StudentApplication::where('user_id', $user->id)->with(
-                'contactApp',
-                'statusApp',
-                'employmentApp',
-                'assesmentApp'
-            )
-                ->firstOrFail();
+        $appId = 1;
+         try {
+            $application = StudentApplication::where('id', $appId)->with(
+         'contactApp',
+         'statusApp',
+         'employmentApp',
+         'assesmentApp',
+         'user'
+         )
+         ->firstOrFail();
 
-            session(['application' => $application]);
+         session(['application' => $application]);
 
-            return view('application', ['application' => $application]);
-        } catch (Exception $e) {
+         return view('application', ['application' => $application]);
+         } catch (Exception $e) {
             return null;
-        }
+         }
+
+        // try {
+        //     $application = StudentApplication::where('user_id', $user->id)->with(
+        //         'contactApp',
+        //         'statusApp',
+        //         'employmentApp',
+        //         'assesmentApp'
+        //     )
+        //     ->firstOrFail();
+
+        //     session(['application' => $application]);
+
+        //     return view('application', ['application' => $application]);
+        // } catch (Exception $e) {
+        //     return null;
+        // }
     }
 
     public function formStatus(Request $request): \Illuminate\Http\JsonResponse

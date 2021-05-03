@@ -36,7 +36,7 @@
                 <div class="col-lg-6 mx-auto">
                     <div class=" navy text-center">
                         <div class="card-body text-center" id="headerText">
-                            <h4> {{ $headertext}}</h4>
+                            <h4> {{ $headerText}}</h4>
                         </div>
                     </div>
                 </div>
@@ -44,14 +44,14 @@
 
             <div class="row mx-auto" id="body-container">
                 <div class="col-lg-5 p-4" id="specialContent">
-                    <img class="img-fluid card-img-top" src="{{asset($specialContentText) }}" />
+                    <img class="img-fluid card-img-top" src="{{asset($specialContent) }}" />
                 </div>
 
                 <div class="col-lg-6 p-4 my-lg-auto" id="bodyText">
                     <div class="row">
                         <h5>{{ $missionText }}.</h5>
                     </div>
-                    <h5>{{ $comments }}.</h5>
+                    <h5>{{ $bodyText }}.</h5>
                     <div class="row">
                         <div class="col-6">
                             <x-nav-link :href="URL('sponsors')" class="mx-auto" :active="request()->routeIs('sponsors')">

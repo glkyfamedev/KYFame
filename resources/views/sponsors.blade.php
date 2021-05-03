@@ -19,16 +19,9 @@
                 @foreach ($sponsors as $sponsor)
                 <div class="col-md-3">
                     <div class="sponsor-card p-3 rounded-2 card m-2 text-white">
-                        {{-- <div class="sponsor-card-header card-header bg-white">  --}}
                         <img class="img-fluid card-img-top" src="{{asset($sponsor['pic_path']) }}" />
-                        {{-- </div>  --}}
                         <div class="sponsor-card-body grey-gradient mt-auto ">
-                            {{-- <h5 class="card-title">Card title</h5>  --}
-                            <p class="">
-                                {{-- <center>{{ $sponsor['comments'] }}</center> --}}
-                            </p>
-
-                            <form method="get" action="{{ route('sponsors.show', $sponsor['id']) }}">
+                            <form method="get" class="" action="{{ route('sponsors.show', $sponsor['id']) }}">
                                 @csrf
                                 <a class="text-white p-3 font-bold showSponsor-btn" href="{{ route('sponsors.show', $sponsor['id']) }} ">{{ $sponsor['sponsor_name'] }}<i class="bi bi-chevron-double-right"></i></a>
                             </form>

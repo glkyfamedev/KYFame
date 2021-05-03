@@ -17,16 +17,19 @@ class StudentApplication extends Model
     public $timestamps = false; 
     
     function StudentApplication() {
-        $user_id = Auth::user()->id;
-        
+        $user_id = Auth::user()->id;        
     }
     
-    // protected $with = [
-    //     'contactApp', 
-    //     'statusApp',
-    //     'employmentApp',
-    //     'assesmentApp',         
-    // ];
+     
+
+    
+    protected $with = [
+        // 'contactApp', 
+        // 'statusApp',
+        // 'employmentApp',
+        // 'assesmentApp',   
+        // 'user'      
+    ];
     
     /**
      * The attributes that are mass assignable.
@@ -43,6 +46,7 @@ class StudentApplication extends Model
       'app_action',
       'current_section',
       'status',
+      'qualified',
       'completed_date',
       'user_id',
                      
@@ -59,15 +63,18 @@ class StudentApplication extends Model
     {
         return $this->hasOne(ContactApp::class);
     }
-          public function employmentApp()
+
+    public function employmentApp()
     {
         return $this->hasMany(EmploymentApp::class);
     }
-          public function assesmentApp()
+
+    public function assesmentApp()
     {
         return $this->hasOne(AssesmentApp::class);
     }
-          public function statusApp()
+
+    public function statusApp()
     {
         return $this->hasOne(StatusApp::class);
     }

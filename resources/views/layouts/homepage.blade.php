@@ -32,7 +32,9 @@
 
 <body class="font-text m-0">
     <div class="min-h-screen">
+
         @include('layouts.homeNavigation')
+
 
         <!-- Page Content -->
 
@@ -107,11 +109,11 @@
                             </div>
 
                             <a class="m-1" href="https://www.facebook.com/kyfame">
-                                <i class="bi bi-facebook fs-3"></i>
+                                <i class="bi bi-facebook fs-3 dark"></i>
 
                             </a>
                             <a class="m-1" href="https://twitter.com/kyfameamt?lang=en">
-                                <i class="bi bi-twitter fs-3"></i>
+                                <i class="bi bi-twitter fs-3 dark"></i>
                             </a>
                         </address>
 

@@ -106,6 +106,8 @@ $('#updateTranscriptBtn').click(function (e) {
     });
 });
 
+
+
 $('#cancelBtn').click(function (e) {
     e.preventDefault();
     $('.update').hide();
@@ -115,12 +117,6 @@ $('#cancelBtn').click(function (e) {
 
 
 });
-
-
-
-
-
-
 function saveContactData(e) {
     e.preventDefault()
     $.ajaxSetup({

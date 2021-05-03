@@ -3,18 +3,12 @@
     phpinfo()
     @endphp  --}}
     <style>
-        .logoSmall {
-            max-height: 70px;
-
-        }
-
         .logo {
-            boarder: none !important;
-            max-height: 60px;
+            max-height: 70px;
         }
 
         .carousel {
-            height: 150px;
+            height: 200px;
         }
 
     </style>
@@ -25,7 +19,7 @@
         </h2>
     </x-slot>
 
-    <div class="container-fliud p-lg-3 mb-lg-4">
+    <div class="container-fliud p-lg-3 mb-lg-4 mt-4">
         <div id="logoCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#logoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -38,48 +32,56 @@
 
             </div>
 
-            <div class="carousel-inner p-1">
+            <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="row mb-3 p-1 carouselLogos linear-grid ">
+                    <div class="row mb-3 p-1 carouselLogos justify-content-center">
 
-                        <div class="col-md-3">
-                            <img class=" logo img-fluid" src=" assets/Partner Logos/Macro-Plastics-logo-w-IPL-small.png" class="d-block w-100 " />
-
-                        </div>
-
-                        <div class="col-md-3">
-                            <img class=" logo img-fluid" src="assets/Partner Logos/Alliant Technologies.png" class=" d-block w-100 " />
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src=" assets/sponsor_pics/Macro-Plastics-logo-w-IPL-small.png" class="d-block w-100 " />
 
                         </div>
 
-                        <div class="col-md-3">
-                            <img class=" logo img-fluid" src="assets/Partner Logos/Clariant Logo Clear.jpg" class=" d-block w-100 " />
+                        <div class="col-md-2  my-auto ">
+                            <img class="img-fluid logo" src="assets/sponsor_pics/Alliant Technologies.png" class=" d-block w-100 " />
 
                         </div>
 
-                        <div class="col-md-3">
-                            <img class=" logo img-fluid" src="assets/Partner Logos/DDW.png" class=" d-block w-100 " />
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Clariant Logo Clear.jpg" class=" d-block w-100 " />
+
+                        </div>
+
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/DDW.png" class=" d-block w-100 " />
+
+                        </div>
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/berry-plastics.png" class=" d-block w-100 " />
 
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-item">
-                    <div class="row mb-3 p-1 carouselLogos">
+                    <div class="row mb-3 p-1 carouselLogos justify-content-center">
 
-                        <div class="col-md-3">
-                            <img class="logoSmall img-fluid" src="assets/Partner Logos/GE.png" class=" d-block w-100 " />
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/GElogo.jpg" class=" d-block w-100 " />
                         </div>
-                        <div class=" col-md-3">
-                            <img class="logoSmall img-fluid" src="assets/Partner Logos/Jones Plastics.jpg" class="d-block w-100  " />
-
-                        </div>
-                        <div class="col-md-3">
-                            <img class=" logoSmall img-fluid" src="assets/Partner Logos/ONeal.jpg" class=" d-block w-100 " />
+                        <div class=" col-md-2 my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Jones Plastics.jpg" class="d-block w-100  " />
 
                         </div>
-                        <div class="col-md-3">
-                            <img class="logoSmall img-fluid" src="assets/Partner Logos/Paradise Tomato.jpg" class=" d-block w-100 " />
+                        <div class="col-md-2  my-auto ">
+                            <img class=" logo img-fluid" src="assets/sponsor_pics/ONeal.jpg" class=" d-block w-100 " />
+
+                        </div>
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Paradise Tomato.jpg" class=" d-block w-100 " />
+
+                        </div>
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/G Greenlee Black_green_hr.jpg" class=" d-block w-100 " />
 
                         </div>
                     </div>
@@ -87,24 +89,44 @@
                 </div>
 
                 <div class="carousel-item">
-                    <div class="row mb-3 p-1 carouselLogos">
+                    <div class="row mb-3 p-1 carouselLogos justify-content-center">
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/TCI.png" class=" d-block w-100 " />
+                        </div>
+                        <div class=" col-md-3 my-auto ">
+                            <img class=" logo img-fluid" src="assets/sponsor_pics/Steel Technologies.png" class="d-block w-100 " />
+                        </div>
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/DOW-logo.svg" class="d-block w-100 " />
+                        </div>
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/AAK.svg" class="d-block w-100 " />
+                        </div>
+                        <div class="col-md-2  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/KCC.png" class="d-block w-100 " />
+                        </div>
 
-                        <div class="col-md-3">
-                            <img class="logo img-fluid" src="assets/Partner Logos/Lantech PMS287.jpg" class="d-block w-100 " />
+                    </div>
 
+                </div>
+                <div class="carousel-item">
+                    <div class="row mb-3 p-1 carouselLogos justify-content-center">
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Lantech PMS287.jpg" class="d-block w-100 " />
                         </div>
-                        <div class="col-md-3">
-                            <img class="logo img-fluid" src="assets/Partner Logos/Linak.png" class="d-block w-100 " />
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Linak.png" class="d-block w-100 " />
                         </div>
-                        <div class="col-md-4">
-                            <img class="logo img-fluid" src="assets/Partner Logos/Nucor.png" class="d-block w-100 " />
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Nucor.png" class="d-block w-100 " />
                         </div>
-                        <div class="col-md-2">
-                            <img class="logo img-fluid" src="assets/Partner Logos/Kentuky Kingdom.png" class="d-block w-100 " />
+                        <div class="col-md-3  my-auto ">
+                            <img class="logo img-fluid" src="assets/sponsor_pics/Kentuky Kingdom.png" class="d-block w-100 " />
                         </div>
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>
@@ -239,17 +261,27 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
                                 <p class="text-justify">Sam Corbett gets a look inside Jefferson Community and Technical College's new AMIT center for advanced manufacturing and IT education.</p>
+                                <a href="https://urldefense.com/v3/__https:/nam10.safelinks.protection.outlook.com/?url=https*3A*2F*2Fyoutu.be*2FJGkpZL2GDt4&data=04*7C01*7Casexton0084*40kctcs.edu*7C1cbabf9162db41b4999a08d88438b45f*7Cf2e339511ec44c72b2bfa4f4671d64af*7C0*7C0*7C637404726414275888*7CUnknown*7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0*3D*7C1000&sdata=4l9*2Fa4TXGLaihnZQ6Tsmee100FWwf1XWY3g86c*2BfGhc*3D&reserved=0__;JSUlJSUlJSUlJSUlJSUlJSUlJQ!!JrQhzo9tgg!zVbBe17oqATthqfAqzN1xyU2610f_w2zjqFyUi6icRBhK0gPdH4-TmGJwyUOaniqgKo$">
+                                    More...
+                                </a>
                             </div>
 
-                            <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <p class="text-justify">KAM article</p>
+                            <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <p class="text-justify">We worked with KAM and here is the story! </p>
+                                <a href="https://urldefense.com/v3/__https:/nam10.safelinks.protection.outlook.com/?url=https*3A*2F*2Furldefense.com*2Fv3*2F__https*3A*2F*2Fnam10.safelinks.protection.outlook.com*2F*3Furl*3Dhttps*3A*2F*2Fkam.us.com*2Frising-star-frank-hall*2F*3Ffbclid*3DIwAR3VPA8SzQZJRjKxZNG-vzwHKM5-HbaZwt_R3OmhLIVtIC16DCWfxJYf4GU*26amp*3Bdata*3D04*7C01*7Casexton0084*40kctcs.edu*7C6b3b8f3c819c40e0399b08d885b36023*7Cf2e339511ec44c72b2bfa4f4671d64af*7C0*7C0*7C637406352740938915*7CUnknown*7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0*3D*7C1000*26amp*3Bsdata*3DIJuG7iCvLnbzqfhHYkgdxXU8yXCXVZtKFHJ*2B1IS3p1I*3D*26amp*3Breserved*3D0__*3BJSUlJSUlJSUlJSUlJSUlJSUlJSUl!!JrQhzo9tgg!wYMbO8BWR57RHkl_T95wW34PMDtUCGxR2hORjesVTO5AYvfbHwcVpcYc6Z3VdvzBcwc*24&amp;data=04*7C01*7Casexton0084*40kctcs.edu*7C6706fe4eced14970849608d88cbe6617*7Cf2e339511ec44c72b2bfa4f4671d64af*7C0*7C0*7C637414096666769456*7CUnknown*7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0*3D*7C1000&amp;sdata=p9mFvQsWWpAtAIPVORCTaO6c47tGdbbAh7IiSn01M2Y*3D&amp;reserved=0__;JSUlJSUlJSUlJSUqKioqKioqJSUlKioqKioqKioqKioqJSUlKiolJSUlJSUlJSUlJSUlJSUlJSU!!JrQhzo9tgg!3ts7xgAVfp9IE5vKdqR41LynSOA2adBpGaKPeDyiuwy1MHIWCXPBPkSia6iOJbgUkZc$">
+                                    More...
+                                </a>
                             </div>
 
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="tab-pane fade show" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                 <p class="text-justify">Students Sign with leading manufacturing companies after finfishing the porgram. </p>
+                                <a href="https://www.wave3.com/2019/05/17/jctc-graduates-go-pro-by-signing-with-local-manufacturing-companies/">
+                                    More...
+                                </a>
+
                             </div>
 
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <div class="tab-pane fade show" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 <p class="text-justif"> JCTC to be the Leading manufacturing field contributer.</p>
                             </div>
                         </div>
@@ -257,8 +289,13 @@
                         <div class="linear-grid">
                             <div class="row">
                                 <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                                    <div class="col-1">
+                                        <a class="nav-item nav-link mt-5" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-main" aria-selected="true">
+                                            <i class="bi bi-arrow-left pink"></i>
+                                        </a>
+                                    </div>
                                     <div class="col-sm-6 col-md-3 mb-2">
-                                        <a class="nav-item nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                                        <a class="nav-item nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="false">
                                             <li role="presentation"> <img src="/assets/KAM.png" class="img-thumbnail"></li>
                                         </a>
                                     </div>
