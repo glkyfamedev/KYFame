@@ -68,7 +68,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-4 offset-lg-1">
+                <div class="col-lg-4 offset-lg-1 mt-3">
                     <h2> <span class="pink fw-bold">Get In</span> Touch</h2>
                     <form method="post">
                         <input type="hidden" id="contactFormToken" name="_token" value="{{ Session::token() }}">
@@ -90,7 +90,7 @@
                 </div>
                 <!-- Left -->
                 <div class="col-lg-3">
-                    <div class="right float-right mt-5">
+                    <div class="float-md-right mt-5">
                         <address>
                             <div class=" d-flex align-items-center m-1">
                                 <i class="bi bi-geo-alt-fill m-1 blue"></i>

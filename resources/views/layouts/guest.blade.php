@@ -71,7 +71,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-4 offset-lg-1">
+                <div class="col-lg-4 offset-lg-1 mt-3">
                     <h2> <span class="pink fw-bold">Get In</span> Touch</h2>
                     <form method="post">
                         <input type="hidden" id="contactFormToken" name="_token" value="{{ Session::token() }}">
@@ -93,7 +93,7 @@
                 </div>
                 <!-- Left -->
                 <div class="col-lg-3">
-                    <div class="right float-right mt-5">
+                    <div class="float-md-right mt-5">
                         <address>
                             <div class=" d-flex align-items-center m-1">
                                 <i class="bi bi-geo-alt-fill m-1 blue"></i>
@@ -112,16 +112,15 @@
                             </div>
 
                             <a class="m-1" href="https://www.facebook.com/kyfame">
-                                <i class="bi bi-facebook fs-3"></i>
+                                <i class="bi bi-facebook fs-3 dark"></i>
 
                             </a>
                             <a class="m-1" href="https://twitter.com/kyfameamt?lang=en">
-                                <i class="bi bi-twitter fs-3"></i>
+                                <i class="bi bi-twitter fs-3 dark"></i>
                             </a>
                         </address>
 
                         <button class="btn btn-block btn-pink" id="contactFormBtn" type="btn">Send Now!</button>
-
 
                     </div>
                 </div>
@@ -131,7 +130,6 @@
     <div class="p-2 bg-dark">
         <p class="text-white text-center">&copy; Copyright 2021 GLKYFAME</p>
     </div>
-
 </body>
 
 </html>

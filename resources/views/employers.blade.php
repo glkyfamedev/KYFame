@@ -24,9 +24,9 @@
     <div class="container mt-4 border-bottom">
         <div class="row mx-lg-n5">
             <div class="col-md py-3 px-lg-3">
-                <img src="assets/images/page-images/cityHat.png" style="border:transparent 1px; border-bottom-right-radius: 70%;" class="h-100 float-end" /> </div>
+                <img src="assets/images/page-images/cityHat.png" style="border:transparent 1px; border-bottom-right-radius: 70%;" class="float-end" /> </div>
 
-            <div class="col-md py-3 px-lg-3">
+            <div class="col-md-7 py-3 px-lg-3">
                 <div class="row">
                     <h5 class="mt-lg-2 fs-4"><span class="mint fw-bold">WHY</span> </h5>
                     <p class="p-lg-2">Initiates investment in your company and
@@ -56,7 +56,7 @@
         </div>
 
         <div class="row mx-lg-n5">
-            <div class="col-md px-lg-3 my-auto">
+            <div class="col-md-7 px-lg-3 my-auto order-2 order-md-1">
                 <h2 class=" text-center align-bottom "><Span class=" pink">DEVELOP</span> THE WORKFORCE OF <span class="pink">TOMORROW</span> TODAY</h2>
                 <p class="t">The <span class=" pink">Greater Louisville chapter</span>
                     The of the Kentucky Federation for Advanced Manufacturing Education
@@ -88,8 +88,8 @@
                     Management, Lean Manufacturing, Problem
                 </P>
             </div>
-            <div class="col-md py-3 px-lg-3">
-                <img src="assets/images/page-images/suit.png" style="border:transparent 1px; border-top-left-radius: 70%;" class="h-100 ml-10" alt="" />
+            <div class="col-md py-3 px-lg-3 order-1 order-md-2">
+                <img src="assets/images/page-images/suit.png" style="border:transparent 1px; border-top-left-radius: 70%;" class="ml-10" alt="" />
             </div>
         </div>
     </div>
@@ -119,7 +119,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5 class="pink">Greater Louisville Chapter</h5>
-                            <p class="text-right blue">Date</p>
+                            <p class="text-right blue"></p>
                         </div>
                         <p>
                             The Greater Louisville Chapter
@@ -131,7 +131,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5 class="pink">Expanded</h5>
-                            <p class="text-right blue">Date</p>
+                            <p class="text-right blue"></p>
                         </div>
                         <p>Since its inception FAME has expanded to include chapters across manufacturing
                             sectors and the country, training hundreds of <span class="pink">
@@ -141,7 +141,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5 class="pink">Nations Premeir</h5>
-                            <p class="text-right blue">Date</p>
+                            <p class="text-right blue"></p>
                         </div>
                         <p>
                             Today <span class="pink">FAME is the nation’s premier </span>
@@ -153,7 +153,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5 class="pink">Solutions</h5>
-                            <p class="text-right blue">Date</p>
+                            <p class="text-right blue"></p>
                         </div>
                         <p>Over the last decade, the FAME organization has become a
                             <span class="pink">trusted employer-led talent solution</span>
@@ -164,7 +164,7 @@
                     <li>
                         <div class="row row row-cols-2">
                             <h5 class="pink">Partnerships</h5>
-                            <p class="text-right blue">Date</p>
+                            <p class="text-right blue"></p>
                         </div>
                         <p>With our <span class="pink">college partners </span> the FAME
                             program is a conduit between industry and
@@ -318,7 +318,7 @@
 
     <div class="container p-4">
         <div class="row p-lg-4">
-            <div class="col my-lg-auto">
+            <div class="col-lg my-lg-auto">
                 <p> Employers make a 2 year commitment to students.
                     Most of our students go into full time position with their sponsoring company
                     after graduation.<br>
@@ -328,8 +328,8 @@
                     them through what they need to do to be successful and is an asset for the employer as well.
                 </p>
             </div>
-            <div class="col my-lg-auto">
-                <img src="assets/images/page-images/triangles.png" style="" class="h-50 float-end" />
+            <div class="col-lg my-lg-auto">
+                <img src="assets/images/page-images/triangles.png" style="" class="float-md-end" />
             </div>
         </div>
     </div>

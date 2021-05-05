@@ -52,10 +52,12 @@
 .btn-navy {
     background-color: #235085 !important;
     color: #fff !important;
+    padding: 5px !important;
 }
 
 .btn-navy:hover {
-    color: #d32d69 !important;
+    background-color: #8caac8 !important;
+    color: #fff !important;
 }
 
 .border-navy {
@@ -278,6 +280,18 @@
 /**********************
 /***** HomePage *******
 /*********************/
+#header-background {
+
+    background: url('/assets/home-nav-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: fixed;
+    height: 70vh;
+    width: 100%;
+
+
+}
+
 span.bg-main {
     color: #008ba3;
 }
@@ -416,9 +430,9 @@ span.bg-main {
 
 /*student page*/
 
-.student-thumbnail {
+/* .student-thumbnail {
     height: 80vh;
-}
+} */
 
 .student-masthead {
     background: url("../assets/studentBG.png") no-repeat center center;
@@ -940,10 +954,6 @@ footer.footer {
         object-fit: cover;
     }
 
-    .navbar-toggler {
-        display: none !important;
-    }
-
     #main {
         display: block;
     }
@@ -982,10 +992,6 @@ footer.footer {
 
     section#marketplace img {
         object-fit: cover;
-    }
-
-    .navbar-toggler {
-        display: none !important;
     }
 
     #main {

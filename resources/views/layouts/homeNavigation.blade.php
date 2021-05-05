@@ -1,9 +1,7 @@
-<section style="background-image: url('assets/home-nav-bg.png'); background-repeat: no-repeat; background-size: cover;height: 530px;">
-
-    <div class="container-fluid" style="background: rgba(255, 255, 255, 0.64);">
+<header class="" id="header-background">
+    <div class=" container-fluid" style="background: rgba(255, 255, 255, 0.64);">
         <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-
                 <a href="{{ URL('/') }}" class="navbar-brand">
                     <img class="h-8 w-auto sm:h-10" src="{{URL::to('assets/logo.png') }}" style="height: 50px;" />
                 </a>
@@ -51,8 +49,4 @@
             </div>
         </nav>
     </div>
-
-
-
-
-</section>
+</header>
