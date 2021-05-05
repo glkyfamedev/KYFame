@@ -1,0 +1,6 @@
+{
+    "git.ignoreLimitWarning": true,
+    "workbench.preferredLightColorTheme": "Material Theme High Contrast",
+    "php.validate.executablePath": "",
+    
+}

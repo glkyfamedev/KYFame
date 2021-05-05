@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\database",
+    "\\database\\migrations",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\components"
+  ],
+  "SelectedNode": "\\resources\\views\\components\\dropdown.blade.php",
+  "PreviewInSolutionExplorer": false
+}
