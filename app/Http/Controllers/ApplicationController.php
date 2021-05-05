@@ -22,10 +22,9 @@ class ApplicationController extends Controller
         $this->middleware('auth');
     }
 
+    //Get all application data for the user 
     public function index(Request $request)
     {
-        // $user = Auth::user();
-
         $appId = 1;
          try {
             $application = StudentApplication::where('id', $appId)->with(
@@ -42,25 +41,9 @@ class ApplicationController extends Controller
          return view('application', ['application' => $application]);
          } catch (Exception $e) {
             return null;
-         }
-
-        // try {
-        //     $application = StudentApplication::where('user_id', $user->id)->with(
-        //         'contactApp',
-        //         'statusApp',
-        //         'employmentApp',
-        //         'assesmentApp'
-        //     )
-        //     ->firstOrFail();
-
-        //     session(['application' => $application]);
-
-        //     return view('application', ['application' => $application]);
-        // } catch (Exception $e) {
-        //     return null;
-        // }
+         }    
     }
-
+    //Process the application status section
     public function formStatus(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
@@ -69,9 +52,7 @@ class ApplicationController extends Controller
 
         if ($request->ajax()) {
             try {
-
                 $status = statusApp::where('student_application_id', $application->id)->first() ?? new StatusApp();
-
                 $status->under_18 = $request->under_18;
                 $status->authorizedInUS = $request->authorizedInUS;
                 $status->levelOfEducation = $request->levelOfEducation;
@@ -86,23 +67,18 @@ class ApplicationController extends Controller
                 $application->save();
                 $application->refresh();
 
-
-
-                //save application to session $session['application'] = $application
-
                 return response()->json(['success' => true]);
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
             }
         }
     }
-
+//Process the employment section of the application
+//There can be up to three employers so it needs to process as an array
     public function formEmployment(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
-
         $employerArrays = $request->employerArray;
-
         if ($request->ajax()) {
             try {
                 $employmentModel =
@@ -125,8 +101,6 @@ class ApplicationController extends Controller
                 $application->currentSection = $request->currentSection;
                 $application->save();
 
-
-
                 return response()->json(['success' => true]);
             } catch (Exception $e) {
                 return response()->json(['success' => false]);
@@ -134,10 +108,11 @@ class ApplicationController extends Controller
         }
     }
 
+    //process Assesment section of application
+    //Sets a column in the database that determines the email sent based on the ACT scores entered
     public function formAssesments(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
-
         if ($request->ajax()) {
             try {
                 $assesments = AssesmentApp::where('student_application_id', $application->id)->first() ?? new AssesmentApp();
@@ -177,12 +152,9 @@ class ApplicationController extends Controller
 
                 $assesments->save();
 
-                $application->application_action = $request->app_action;
+                $application->application_action = $request->app_action; //Determines the Confirmation email when they complete the application.
                 $application->currentSection = $request->currentSection;
                 $application->save();
-
-
-
 
                 return response()->json(['success' => true]);
             } catch (Exception $e) {
@@ -191,10 +163,10 @@ class ApplicationController extends Controller
         }
     }
 
+    //Essay portion of the application 
     public function formEssay(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
-
         if ($request->ajax()) {
             try {
                 $user = Auth::user();
@@ -214,7 +186,9 @@ class ApplicationController extends Controller
             }
         }
     }
-
+    
+    //completes the application, sets the Completed date in the database and sends the confirmation email to Cindy and the Applicant
+    //this section will be disabled after completion in the application.
     public function CompleteApplication(Request $request)
     {
         $application = session('application');

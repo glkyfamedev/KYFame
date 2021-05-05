@@ -29,6 +29,8 @@ class ContactController extends Controller
         return view('contact', ['contactData' => $application->contactApp]);
     }
 
+    //Process the Application contact section
+    //filled out outside of the application to make it easier to get to in order to update it but it is part of the overall application 
     public function saveContact(Request $request)
     {
         $application = session('application');
