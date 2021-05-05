@@ -22,10 +22,10 @@
         </div>
     </header>
 
-    <div class="container testimonials px-lg-5" id="">
+    <div class="container px-lg-5" id="">
         <div class="row mx-lg-n5">
             <div class="col-md py-3 px-lg-5">
-                <img src="assets/2.png" class=" img-thumbnail student-thumbnail shadow-box" alt="" />
+                <img src="assets/2.png" class="img-thumbnail shadow-box" alt="" />
 
             </div>
             <div class="col py-3 px-lg-5">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="row mx-lg-n5">
-            <div class="col-md py-3 px-lg-5">
+            <div class="col-md py-3 px-lg-5 order-2 order-md-1">
                 <h3 class="robo mint fw-bold">HOW DO I GET <span class="bg-main">INVOLVED?</span></h3>
                 <h4 class="subheading">Companies and GL KYFAME recruit </h4>
                 <p class="">high achieving
@@ -71,14 +71,14 @@
                 </p>
             </div>
 
-            <div class="col py-3 px-lg-5">
-                <img src="assets/3.png" class="img-fluid img-thumbnail shadow-box student-thumbnail" alt="" />
+            <div class="col py-3 px-lg-5 order-1 order-md-2">
+                <img src="assets/3.png" class="img-fluid img-thumbnail shadow-box" alt="" />
             </div>
         </div>
 
         <div class="row mx-lg-n5">
             <div class="col-md py-3 px-lg-5">
-                <img src="assets/4.png" class="img-fluid img-thumbnail shadow-box student-thumbnail" alt="" />
+                <img src="assets/4.png" class="img-fluid img-thumbnail shadow-box" alt="" />
 
 
             </div>
@@ -104,10 +104,10 @@
         </div>
     </div>
 
-    <div class="container p-md-4 border-bottom">
+    <div class="container p-4 border-bottom bg-light-grey">
         <div class="row mx-lg-n5 mx-auto">
             <h2 class="text-center"><span class="bg-main">Additional</span> training</h2>
-            <div class="col-7 py-3 px-lg-5 text-center">
+            <div class="col-lg-7 py-3 px-lg-5 text-center">
                 <p>Along with our standard training programs,
                     The students are also taught soft skills which include, work ethics and communication.<br>
                     KYFAME also ensures that each company
@@ -115,7 +115,7 @@
                     in a manufacturing and engeering enviroment.</p>
             </div>
 
-            <div class="col py-3 px-lg-5 navy d-inline-flex">
+            <div class="col-lg py-3 px-lg-5 navy d-inline-flex">
                 <ul class="list-group" style="list-style:none" ;>
                     <li class="" style="list-style:none" ;><i class="bi bi-cone-striped yellow"></i> Safety</li>
                     <li class="" style="list-style:none" ;><i class="bi bi-cone-striped yellow"></i> Visual workplace organization</li>

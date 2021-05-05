@@ -66,9 +66,9 @@
                             </div>
                             <p class="m-auto"> Email or Upload your Transcripts
                             </p>
-                            {{-- <div class="  put Trancsript icon here "> 
-                                <i class="bi bi-person-lines-fill" style="font-size: 3em; margin-top:-20px;"></i>
-                            </div> --}}
+                            <div class="m-auto">
+                                <i class="bi bi-file-earmark-arrow-up-fill" style="font-size: 3em; margin-top:-20px;"></i>
+                            </div>
                             <div class="m-auto">
                                 <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
                             </div>
@@ -91,9 +91,9 @@
                             </div>
                             <p class="m-auto"> Continue to update your application
                             </p>
-                            {{-- <div class="m-auto">
-                                <i class="Put application Icon herel" style="font-size: 3em; margin-top:-20px;"></i>
-                            </div> --}}
+                            <div class="m-auto">
+                                <i class="bi bi-card-checklist" style="font-size: 3em; margin-top:-20px;"></i>
+                            </div>
                             <div class="m-auto">
                                 <i class="bi bi-check2" style="color: green; font-size: 4em;"></i>
                             </div>

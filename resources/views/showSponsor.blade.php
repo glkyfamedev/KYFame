@@ -41,12 +41,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mx-auto" id="body-container">
-                <div class="col-lg-5 p-4" id="specialContent">
-                    <img class="img-fluid card-img-top" src="{{asset($specialContent) }}" />
-                </div>
-
                 <div class="col-lg-6 p-4 my-lg-auto" id="bodyText">
                     <div class="row">
                         <h5>{{ $missionText }}.</h5>
@@ -61,8 +56,11 @@
                         <div class="col-6">
                             <a href="{{$webSiteUrl}}" class="nav-link pink">Visit Website</a>
                         </div>
-
                     </div>
+                </div>
+
+                <div class="col-lg-5 p-4" id="specialContent">
+                    <img class="img-fluid card-img-top" src="{{asset($specialContent) }}" />
                 </div>
             </div>
         </div>
