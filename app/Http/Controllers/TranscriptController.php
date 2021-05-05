@@ -1,19 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\EmailController;
-use App\Mail\Gmail;
-use App\Models\AssesmentApp;
-use App\Models\ContactApp;
-use App\Models\EmploymentApp;
-use App\Models\StatusApp;
 use App\Models\StudentApplication;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +15,7 @@ class TranscriptController extends Controller
     {
         $this->middleware('auth');
     }
-
+//Show transcript page
     public function index(Request $request)
     {
         $application = session("application");
@@ -31,6 +23,7 @@ class TranscriptController extends Controller
         return view('transcript', ['application' => $application]);
     }
 
+    // Upload and save transcript convert to base64
     public function saveTranscript(Request $request)
     {
         $user = Auth::user();

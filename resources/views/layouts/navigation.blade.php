@@ -1,3 +1,5 @@
+{{-- Navigation for guest views except homePage --}}
+
 <div class="container-fluid" style="">
     <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -44,8 +46,6 @@
                         </x-nav-link>
                     </li>
                 </ul>
-
-
             </div>
         </div>
     </nav>

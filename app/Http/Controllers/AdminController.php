@@ -79,7 +79,7 @@ class AdminController extends Controller
                      
         return view('admin\viewApplication', ['application' => $application]);
     }    
-
+    //Call the php page to process the transcript download
     public function downloadTranscript(Request $request, $id){  
          
         

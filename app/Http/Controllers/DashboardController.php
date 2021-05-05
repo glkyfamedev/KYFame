@@ -14,7 +14,7 @@ class DashboardController extends Controller
         // $this->middleware('auth');
         // $this->middleware('verified');
     }
-
+//Create a new application for a user with a user_id and start date 
     public function index()
     {
         $user = Auth::user();
@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
         return view('dashboard', ['application' => $application]);
     }
-
+    //This updates the Contact section and transcripts.... I dont think we need this here anymore honestly they were separated into their own controllers.
     public function updateProfile(Request $request): \Illuminate\Http\JsonResponse
     {
         $application = session('application');
@@ -52,19 +52,14 @@ class DashboardController extends Controller
                 $contactModel->preferedContactMethod = $request->preferedContactMethod;
                 $contactModel->otherEmail = $request->otherEmail;
                 $contactModel->student_application_id = $application->id;
-
-
                 $contactModel->save();
                 $application->currentSection = $request->currentSection;
 
                 if ($application->start_date === null) {
                     $application->start_date = new DateTime('NOW');
                 }
-
-
                 $application->save();
                 $application->refresh();
-
                 $session['application'] = $application;
 
                 return response()->json(['success' => true]);
